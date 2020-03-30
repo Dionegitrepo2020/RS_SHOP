@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="RS_SHOP_Dev.Views.PopupViews.EditCountryPop">
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+                      PositionIn="Center"
+                      PositionOut="Center"
+                      ScaleIn="1.2"
+                      ScaleOut="0.8"
+                      DurationIn="400"
+                      DurationOut="300"
+                      EasingIn="SinOut"
+                      EasingOut="SinIn"
+      HasBackgroundAnimation="False"/>
+    </pages:PopupPage.Animation>
+    <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="15" Margin="20" BackgroundColor="White" HasShadow="True" >
+        <StackLayout Padding="5">
+            <Label Text="Country/City" TextColor="{StaticResource TextColor}" FontSize="20" FontAttributes="Bold" />
+            <!--
+            <Entry Placeholder="Country" PlaceholderColor="{StaticResource TextColor}" 
+                   TextColor="{StaticResource TextColor}"/>
+            <Image Source="location.png" HeightRequest="10"  WidthRequest="10" HorizontalOptions="EndAndExpand"  />
+           <Picker Title="{Binding CountryName}" TitleColor="{StaticResource TextColor}" TextColor="{StaticResource TextColor}"/>
+            -->
+
+            <Picker x:Name="PkrCountry" Title="Select Country" TitleColor="{StaticResource TextColor}" ItemsSource="{Binding List}"
+                    ItemDisplayBinding="{Binding country.COUNTRY_NAME}" SelectedItem="{Binding SelectedCountry}" SelectedIndexChanged="Picker_SelectedIndexChanged" TextColor="{StaticResource TextColor}"/>
+            
+           
+            <Picker x:Name="PkrCity" Title="Select City" TitleColor="{StaticResource TextColor}" ItemsSource="{Binding CityList}"
+                    ItemDisplayBinding="{Binding city.CITY_NAME}" SelectedItem="{Binding SelectedCity}" TextColor="{StaticResource TextColor}"/>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Cancel" Clicked="Handle_Country_Cancel" TextColor="{StaticResource TextColor}" BackgroundColor="White" HorizontalOptions="StartAndExpand" />
+                <Button Text="OK" Clicked="Button_Clicked" TextColor="{StaticResource TextColor}" BackgroundColor="White" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

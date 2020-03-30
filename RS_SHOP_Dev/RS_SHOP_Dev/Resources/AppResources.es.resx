@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Advantage_Document" xml:space="preserve">
+    <value>Este documento presenta los detalles del proceso y posibles</value>
+  </data>
+  <data name="Advantage_Experience" xml:space="preserve">
+    <value>ÚLTIMAS EXPERIENCIAS</value>
+  </data>
+  <data name="Advantage_FindPalyer" xml:space="preserve">
+    <value>ENCUENTRE SU JUGADOR FAVORITO</value>
+  </data>
+  <data name="Advantage_Title" xml:space="preserve">
+    <value>VENTAJAS</value>
+  </data>
+  <data name="AgeValidationLabel" xml:space="preserve">
+    <value>Los usuarios menores de 14 años necesitan autorización de los padres. por favor completa todos los campos requeridos</value>
+  </data>
+  <data name="AuthMessage" xml:space="preserve">
+    <value>Debes registrarte para disfrutar de todas las funciones de la aplicación</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Número de tarjeta</value>
+  </data>
+  <data name="CartButtonConfirm" xml:space="preserve">
+    <value>CONFIRMAR</value>
+  </data>
+  <data name="CartButtonEliminate" xml:space="preserve">
+    <value>ELIMINAR</value>
+  </data>
+  <data name="CartButtonSave" xml:space="preserve">
+    <value>GUARDAR PARA MÁS ADELANTE</value>
+  </data>
+  <data name="CartLblShip" xml:space="preserve">
+    <value>Envío :</value>
+  </data>
+  <data name="CartLblSubTotal" xml:space="preserve">
+    <value>Total:</value>
+  </data>
+  <data name="CartLblTotal" xml:space="preserve">
+    <value>Subtotal:</value>
+  </data>
+  <data name="CartTitle" xml:space="preserve">
+    <value>CARRITO DE COMPRAS</value>
+  </data>
+  <data name="DOB" xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
+  <data name="EditCountryPop_CityAlert" xml:space="preserve">
+    <value>Por favor seleccione ciudad</value>
+  </data>
+  <data name="EditCountryPop_CountryAlert" xml:space="preserve">
+    <value>Por favor seleccione país</value>
+  </data>
+  <data name="FilterHeader" xml:space="preserve">
+    <value>FILTRAR</value>
+  </data>
+  <data name="FilterPriceRange" xml:space="preserve">
+    <value>RANGO DE PRECIOS</value>
+  </data>
+  <data name="Filter_ApplyButton" xml:space="preserve">
+    <value>APLICAR</value>
+  </data>
+  <data name="Filter_Type" xml:space="preserve">
+    <value>TIPO</value>
+  </data>
+  <data name="FoodDrinkCheckout_PayDetails" xml:space="preserve">
+    <value>DETALLES DEL PAGO</value>
+  </data>
+  <data name="FoodDrinkCheckout_PickAstore" xml:space="preserve">
+    <value>Recoger en la tienda "A"</value>
+  </data>
+  <data name="FoodDrinkCheckout_PickBstore" xml:space="preserve">
+    <value>Recoger en la tienda "B"</value>
+  </data>
+  <data name="FoodDrinkCheckout_PickCstore" xml:space="preserve">
+    <value>Recoger en la tienda "C"</value>
+  </data>
+  <data name="FoodDrinkCheckout_PickOrder" xml:space="preserve">
+    <value>Recoge tu pedido</value>
+  </data>
+  <data name="FoodDrinkCheckout_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="FoodSearch" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="Gender_Female" xml:space="preserve">
+    <value>Hembra</value>
+  </data>
+  <data name="Gender_Male" xml:space="preserve">
+    <value>Masculina</value>
+  </data>
+  <data name="Gender_Other" xml:space="preserve">
+    <value>No quiero especificar</value>
+  </data>
+  <data name="IntroButtonText" xml:space="preserve">
+    <value>Empecemos</value>
+  </data>
+  <data name="IntroDesc" xml:space="preserve">
+    <value>Lorem ipsum dolor zanahorias, mejoradas las rebajas, pero lo hacen de una especie.</value>
+  </data>
+  <data name="IntroMainTitle" xml:space="preserve">
+    <value>Titulo principal</value>
+  </data>
+  <data name="IntroSnackInternet" xml:space="preserve">
+    <value>Acceso a Internet</value>
+  </data>
+  <data name="IntroSnackNoInternet" xml:space="preserve">
+    <value>Sin conexión a Internet</value>
+  </data>
+  <data name="IntroTitle" xml:space="preserve">
+    <value>INDUCCIÓN</value>
+    <comment>Title for the introduction screen</comment>
+  </data>
+  <data name="LoadingText" xml:space="preserve">
+    <value>Cargando</value>
+  </data>
+  <data name="LoginConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Vuelva a escribir la contraseña</value>
+  </data>
+  <data name="LoginContinue" xml:space="preserve">
+    <value>SEGUIR</value>
+  </data>
+  <data name="LoginCreateAnAcoount" xml:space="preserve">
+    <value>Crea una cuenta</value>
+  </data>
+  <data name="LoginEmailError" xml:space="preserve">
+    <value>Formato de correo electrónico incorrecto</value>
+  </data>
+  <data name="LoginEmailPlaceholder" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LoginForgotPassword" xml:space="preserve">
+    <value>¿SE TE OLVIDÓ TU CONTRASEÑA?</value>
+  </data>
+  <data name="LoginGuest" xml:space="preserve">
+    <value>UTILIZAR COMO INVITADO</value>
+  </data>
+  <data name="LoginNamePlaceholder" xml:space="preserve">
+    <value>Nombre completo</value>
+  </data>
+  <data name="LoginPasswordPlaceholder" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>INICIAR SESIÓN</value>
+  </data>
+  <data name="MerchCheckout_1Day" xml:space="preserve">
+    <value>Premium (1 día)</value>
+  </data>
+  <data name="MerchCheckout_2Days" xml:space="preserve">
+    <value>Express (2 días)</value>
+  </data>
+  <data name="MerchCheckout_7Days" xml:space="preserve">
+    <value>Estándar (7 días)</value>
+  </data>
+  <data name="MerchCheckout_Delivery" xml:space="preserve">
+    <value>ENTREGA</value>
+  </data>
+  <data name="MerchCheckout_PickStore" xml:space="preserve">
+    <value>Recogida en la tienda.</value>
+  </data>
+  <data name="MerchCheckout_ShipTo" xml:space="preserve">
+    <value>EMBARCAR HACIA</value>
+  </data>
+  <data name="MessageTitle" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notificación</value>
+  </data>
+  <data name="OrderGetQR" xml:space="preserve">
+    <value>OBTENER QR</value>
+  </data>
+  <data name="OrderPopup_CheckStatusButton" xml:space="preserve">
+    <value>COMPROBAR ESTADO</value>
+  </data>
+  <data name="OrderPopup_KeepShopButton" xml:space="preserve">
+    <value>SEGUIR COMPRANDO</value>
+  </data>
+  <data name="OrderPopup_Weldone" xml:space="preserve">
+    <value>Bien hecho</value>
+  </data>
+  <data name="OrderTrack" xml:space="preserve">
+    <value>RASTREO</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Detalles del pago</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Método de pago</value>
+  </data>
+  <data name="Preferred" xml:space="preserve">
+    <value>Privilegiada</value>
+  </data>
+  <data name="ProdDetailBtnBack" xml:space="preserve">
+    <value>atrás</value>
+  </data>
+  <data name="ProdDetailBtnCart" xml:space="preserve">
+    <value>AÑADIR AL CARRITO</value>
+  </data>
+  <data name="ProdDetailFreeShip" xml:space="preserve">
+    <value>Envío gratis</value>
+  </data>
+  <data name="ProdDetailPrice" xml:space="preserve">
+    <value>PRECIO</value>
+  </data>
+  <data name="ProfileBirthdayPlaceholder" xml:space="preserve">
+    <value>Cumpleaños</value>
+  </data>
+  <data name="ProfileContactPlaceholder" xml:space="preserve">
+    <value>Nombre de contacto</value>
+  </data>
+  <data name="ProfileCountryPlaceholder" xml:space="preserve">
+    <value>País Ciudad</value>
+  </data>
+  <data name="ProfileGenderPlaceholder" xml:space="preserve">
+    <value>Género</value>
+  </data>
+  <data name="ProfilePhotoPlaceholder" xml:space="preserve">
+    <value>Foto</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="Profile_EditButton" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Profile_NotificationButton" xml:space="preserve">
+    <value>Notificación</value>
+  </data>
+  <data name="Profile_OrdersButton" xml:space="preserve">
+    <value>Pedidos</value>
+  </data>
+  <data name="Profile_PayMethodButton" xml:space="preserve">
+    <value>Método de pago</value>
+  </data>
+  <data name="Profile_QAButton" xml:space="preserve">
+    <value>Preguntas y respuestas</value>
+  </data>
+  <data name="Profile_ShipAddressButton" xml:space="preserve">
+    <value>Dirección de Envío</value>
+  </data>
+  <data name="Profile_WishListButton" xml:space="preserve">
+    <value>Lista de deseos</value>
+  </data>
+  <data name="Promotion_TabCoupons" xml:space="preserve">
+    <value>CUPONES</value>
+  </data>
+  <data name="Promotion_TabOrder" xml:space="preserve">
+    <value>PEDIDOS</value>
+  </data>
+  <data name="Promotion_TabUseExp" xml:space="preserve">
+    <value>USO Y EXP</value>
+  </data>
+  <data name="Settings_LangLabel" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Settings_LegalInfoLabel" xml:space="preserve">
+    <value>Información legal</value>
+  </data>
+  <data name="Settings_NotificationLabel" xml:space="preserve">
+    <value>Notificaciones</value>
+  </data>
+  <data name="Settings_OrderLabel" xml:space="preserve">
+    <value>Pedidos</value>
+  </data>
+  <data name="Settings_PrivacyLabel" xml:space="preserve">
+    <value>Política de privacidad</value>
+  </data>
+  <data name="Settings_ProfileLabel" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="Settings_SignoutButton" xml:space="preserve">
+    <value>desconectar</value>
+  </data>
+  <data name="Settings_SwitchGeo" xml:space="preserve">
+    <value>Geo Location</value>
+  </data>
+  <data name="Settings_SwitchWifi" xml:space="preserve">
+    <value>Ubicación Wifi</value>
+  </data>
+  <data name="Settings_VersionLabel" xml:space="preserve">
+    <value>Versión</value>
+  </data>
+  <data name="SettingTitle" xml:space="preserve">
+    <value>Configuraciones</value>
+  </data>
+  <data name="ShippingAddress" xml:space="preserve">
+    <value>Dirección de envío</value>
+  </data>
+  <data name="Ship_AddAddress" xml:space="preserve">
+    <value>Añadir dirección</value>
+  </data>
+  <data name="Ship_Default" xml:space="preserve">
+    <value>Predeterminado</value>
+  </data>
+  <data name="Ship_ShippingTo" xml:space="preserve">
+    <value>Envío a</value>
+  </data>
+  <data name="ShopTitleFood" xml:space="preserve">
+    <value>Alimentos &amp; bebidas</value>
+  </data>
+  <data name="ShopTitleMerch" xml:space="preserve">
+    <value>PRODUCTOS</value>
+  </data>
+  <data name="ShopTitleTicket" xml:space="preserve">
+    <value>ENTRADAS</value>
+  </data>
+  <data name="SignUpCondition_1" xml:space="preserve">
+    <value>Autorizo ​​el registro del niño</value>
+  </data>
+  <data name="SignUpCondition_2" xml:space="preserve">
+    <value>Autorizo ​​la recepción de comunicaciones del equipo o de terceros.</value>
+  </data>
+  <data name="SignUpCondition_3" xml:space="preserve">
+    <value>Acepto las condiciones del procesamiento de datos de fan en línea</value>
+  </data>
+  <data name="SignUpDOB" xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
+  <data name="SignupParentIDPlaceholder" xml:space="preserve">
+    <value>Identificación de los padres</value>
+  </data>
+  <data name="SignupParentNamePlaceholder" xml:space="preserve">
+    <value>Nombre del padre</value>
+  </data>
+  <data name="SignupTitle" xml:space="preserve">
+    <value>REGÍSTRATE</value>
+  </data>
+  <data name="Signup_DateAlert" xml:space="preserve">
+    <value>Por favor seleccione fecha válida</value>
+  </data>
+  <data name="Signup_ParentAlert" xml:space="preserve">
+    <value>El nombre del padre y la identificación del padre no pueden estar en blanco</value>
+  </data>
+  <data name="Wallet_Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Wallet_Order" xml:space="preserve">
+    <value>Orden</value>
+  </data>
+  <data name="Wallet_PickupAt" xml:space="preserve">
+    <value>Recoger en</value>
+  </data>
+  <data name="Wallet_Time" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="Wallet_User" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
+</root>

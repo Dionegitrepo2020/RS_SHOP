@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="RS_SHOP_Dev.Views.Forgot">
+
+
+    <StackLayout RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+        <Label Text="LOGIN" FontAttributes="Bold" FontSize="Large" TextColor="{StaticResource TextColor}" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Margin="20"/>
+
+        <StackLayout x:Name="login" VerticalOptions="CenterAndExpand">
+            <!--Prakash-->
+            <Label Text="{Binding Message}" 
+                IsVisible="False" TextColor="Red"/>
+            <local:CustomEntry x:Name="txt_Password" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" 
+                        Margin="10"
+                        Image="lock"
+                        IsPassword="True"
+                        Placeholder="Enter your new password" 
+                        HorizontalOptions="FillAndExpand"/>
+
+
+
+            <local:CustomEntry x:Name="txt_ConfirmPassword" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" 
+                        Margin="10"
+                        Image="lock"
+                        IsPassword="True"
+                        Placeholder="Re-type your new password" 
+                        HorizontalOptions="FillAndExpand"/>
+            <Button x:Name="ChangePassword_Button" Clicked="ChangePassword_Button_Clicked" CornerRadius="7" BackgroundColor="{StaticResource TextColor}" HorizontalOptions="FillAndExpand" Text="SEND" TextColor="White" Margin="10" />
+            <!--Prakash-->
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
+        

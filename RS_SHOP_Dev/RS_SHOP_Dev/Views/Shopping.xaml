@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<forms:TopTabbedPage
+    xmlns:forms="clr-namespace:Naxam.Controls.Forms;assembly=Naxam.TopTabbedPage.Forms" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:views="clr-namespace:RS_SHOP_Dev.Views"
+            mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+            xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+            xmlns:views1="clr-namespace:RS_SHOP_Dev.Views.Merchandise"
+            x:Class="RS_SHOP_Dev.Views.Shopping" BarBackgroundColor="White" BarTextColor="{StaticResource TextColor}">
+
+    <views:Tickets Title="{tr:Translate ShopTitleTicket}" WidthRequest="20" HeightRequest="20"/>
+    <NavigationPage Title="{tr:Translate ShopTitleMerch}"  WidthRequest="10" HeightRequest="20">
+        <x:Arguments>
+            <views1:Merchandising />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="{tr:Translate ShopTitleFood}"  WidthRequest="50" HeightRequest="20">
+        <x:Arguments>
+            <views:FoodandDrinks />
+        </x:Arguments>
+    </NavigationPage>
+</forms:TopTabbedPage>

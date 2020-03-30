@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="facebook_app_name">RS_SHOP_AUTH</string>
+  <string name="facebook_app_id">175711657032141</string>
+  <string name="fb_login_protocol_scheme">fb175711657032141</string>
+</resources>

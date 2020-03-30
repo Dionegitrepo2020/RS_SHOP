@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RS_SHOP_Dev.Views.Message">
+    <StackLayout BackgroundColor="White">
+        <ListView x:Name="messageList" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" CornerRadius="10" Margin="5">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="Start">
+                                    <Image Source="{Binding userImage}" HeightRequest="80" WidthRequest="80"/>
+                                </StackLayout>
+                                <StackLayout VerticalOptions="CenterAndExpand">
+                                    <Label TextColor="#3897f0" Text="{Binding Name}"/>
+                                    <Label TextColor="#3897f0" Text="{Binding LastMessage}"/>
+
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand">
+                                    <Label TextColor="#3897f0" Text="{Binding timing}" VerticalOptions="CenterAndExpand"/>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

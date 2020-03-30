@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RS_SHOP_Dev.Views.FPNotificationPopupView">
+    <StackLayout Margin="12"
+                 Padding="34"
+                 Spacing="24"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        <Label
+             Text="We have sent you a password recovery email" VerticalOptions="Center" HorizontalOptions="Center" TextColor="{StaticResource TextColor}" FontSize="Small" FontAttributes="Italic"/>
+       
+        <Button Text="Ok" Clicked="Handle_FPNotification_Clicked" TextColor="{StaticResource TextColor}" FontSize="Small" FontAttributes="Italic"/>
+
+    </StackLayout>
+</pages:PopupPage>

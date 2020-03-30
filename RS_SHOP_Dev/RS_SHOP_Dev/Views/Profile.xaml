@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:custom1="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:converters="clr-namespace:RS_SHOP_Dev.Views.ValueConverters"
+             x:Class="RS_SHOP_Dev.Views.Profile">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ButtonTextConverter x:Key="buttonTextConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Spacing="-6">
+        <Frame BackgroundColor="LightBlue" HasShadow="False" HeightRequest="150">
+            <StackLayout HorizontalOptions="Center" Padding="0,20,0,-6" >
+                 <!--<Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png"  HeightRequest="70" WidthRequest="70"   />-->
+                <custom1:CircleImage x:Name="FileImage" Source="{Binding Image}"  HeightRequest="70" WidthRequest="70"/>
+            </StackLayout>
+        </Frame>
+        <StackLayout Orientation="Horizontal" BackgroundColor="#f5feff" HeightRequest="130">
+            <StackLayout Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Text="{Binding Name}" TextColor="{StaticResource TextColor}" FontSize="Large" FontAttributes="Bold"/>
+                <Label Text="{Binding Email}" TextColor="{StaticResource TextColor}" FontSize="Medium"/>
+            </StackLayout>
+
+            <StackLayout  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Button Text="{tr:Translate Profile_EditButton}" FontAttributes="Bold" Clicked="Profile_Edit_Handeled" TextColor="White" BackgroundColor="#3897f0" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+        
+        <StackLayout Padding="10" BackgroundColor="White">
+            <TableView Intent="Settings" HasUnevenRows="true" >
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"  >
+                                <Image Source="orders.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Clicked="Click_Orders" BackgroundColor="White" Text="{tr:Translate Profile_OrdersButton}" FontAttributes="Bold" 
+                                        FontSize="Small" Padding="10" TextColor="{StaticResource TextColor}" />
+                            </StackLayout>
+                        </ViewCell>
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="location.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Text="{tr:Translate Profile_ShipAddressButton}" FontAttributes="Bold" FontSize="Small" Padding="10"
+                                 TextColor="{StaticResource TextColor}" Clicked="Handle_ShippingAddress" BackgroundColor="white"/>
+                            </StackLayout>
+                        </ViewCell>
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="payment.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Text="{tr:Translate Profile_PayMethodButton}" FontAttributes="Bold" FontSize="Small" Padding="10"
+                                 TextColor="{StaticResource TextColor}" Clicked="Handle_Payment" BackgroundColor="white"/>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="notification.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Text="{tr:Translate Profile_NotificationButton}" FontAttributes="Bold" FontSize="Small" Padding="10"
+                                 TextColor="{StaticResource TextColor}" Clicked="Handle_Notification" BackgroundColor="white"/>
+                                
+                            </StackLayout>
+                        </ViewCell>
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="qanda.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Text="{tr:Translate Profile_QAButton}" FontAttributes="Bold" FontSize="Small" Padding="10"
+                                TextColor="{StaticResource TextColor}" BackgroundColor="white"/>
+                            </StackLayout>
+                        </ViewCell>
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="wishlist.png" HeightRequest="20" WidthRequest="20" />
+                                <Button Text="{tr:Translate Profile_WishListButton}" FontAttributes="Bold" FontSize="Small" Padding="10"
+                                 TextColor="{StaticResource TextColor}" BackgroundColor="white"/>
+                            </StackLayout>
+                        </ViewCell>
+
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

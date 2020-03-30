@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="RS_SHOP_Dev.Views.Merchandise.MerchCheckout"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="{StaticResource BgColor}" Margin="10">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{tr:Translate MerchCheckout_ShipTo}" TextColor="{StaticResource TextColor}" Margin="10" Opacity="0.5" HorizontalOptions="Start" />
+                    <ImageButton Source="https://www.iconsdb.com/icons/preview/black/edit-xxl.png" HeightRequest="25" WidthRequest="25" BackgroundColor="Transparent" Clicked="ImageButton_Clicked" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Label Text="{Binding CardNumber}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" />
+            </StackLayout>
+            <StackLayout BackgroundColor="{StaticResource BgColor}" Margin="10">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{tr:Translate FoodDrinkCheckout_PayDetails}" TextColor="{StaticResource TextColor}" Margin="10" Opacity="0.5" HorizontalOptions="Start" />
+                    <ImageButton Source="https://www.iconsdb.com/icons/preview/black/edit-xxl.png" HeightRequest="25" WidthRequest="25" BackgroundColor="Transparent" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <!--<Label Text="{Binding CardNumber}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" />-->
+                <Picker Title="Select Card" ItemsSource="{Binding PaymentList}" TextColor="{StaticResource TextColor}" ItemDisplayBinding="{Binding CARD_NUMBER}" SelectedItem="{Binding SelectedCard}" />
+            </StackLayout>
+            <StackLayout BackgroundColor="{StaticResource BgColor}" Margin="10">
+                <Label Text="{tr:Translate MerchCheckout_Delivery}" Margin="10" TextColor="{StaticResource TextColor}" Opacity="0.5" HorizontalOptions="Start" />
+                <StackLayout Margin="10">
+                    <input:RadioButtonGroupView x:Name="radioGroup" SelectedItem="{Binding SelectedStore, Mode=TwoWay}">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <input:RadioButton Text="{tr:Translate MerchCheckout_7Days}" Value="10" IsChecked="True" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                            <Label Text="Free" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" FontSize="15"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <input:RadioButton Text="{tr:Translate MerchCheckout_2Days}" Value="11" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                            <Label Text="EUR 5.00" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="15"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <input:RadioButton Text="{tr:Translate MerchCheckout_1Day}" Value="12" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                            <Label Text="EUR 10.00" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="15"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <input:RadioButton Text="{tr:Translate MerchCheckout_PickStore}" Value="12" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                            <Label Text="Free" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="15"/>
+                        </StackLayout>
+                    </input:RadioButtonGroupView>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand" Orientation="Horizontal" Margin="10">
+                <Label Text="{tr:Translate FoodDrinkCheckout_Total}" TextColor="{StaticResource TextColor}" HorizontalOptions="Start"/>
+                <Label Text="{Binding Currency}" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand"/>
+                <Label x:Name="Total" TextColor="{StaticResource TextColor}"/>
+            </StackLayout>
+            <Button TextColor="White" x:Name="ConfirmOrderButton" Text="{tr:Translate CartButtonConfirm}" CornerRadius="7" BackgroundColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Small" Clicked="ConfirmOrderButton_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

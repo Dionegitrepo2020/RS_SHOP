@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+            x:Class="RS_SHOP_Dev.Views.Notification">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="LoginTitle" Text="{tr:Translate Notification}" FontAttributes="Bold" FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <StackLayout Padding="20" BackgroundColor="White">
+        <TableView Intent="Settings" HasUnevenRows="true">
+            <TableRoot>
+                <TableSection>
+
+                    <ViewCell x:Name="ss">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Notification" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}"  YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="ssSwitch" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+                    <ViewCell x:Name="ss1">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Notification 1" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}" YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="ssSwitch1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+                    <ViewCell x:Name="ss2">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Notification 2" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}" YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="ssSwitch2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+                    <ViewCell x:Name="ss3">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Notification 3" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}"  YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="ssSwitch3" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </StackLayout>
+</ContentPage>

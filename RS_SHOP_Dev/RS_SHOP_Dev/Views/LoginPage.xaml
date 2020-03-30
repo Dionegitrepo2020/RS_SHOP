@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:local1="clr-namespace:RS_SHOP_Dev.Behaviors"
+             x:Class="RS_SHOP_Dev.Views.LoginPage"
+             BackgroundColor="White"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls"
+             NavigationPage.BackButtonTitle="Back">
+    
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label x:Name="LoginSignupTitle" Text="{tr:Translate LoginTitle}" FontAttributes="Bold" FontSize="Large" TextColor="{StaticResource TextColor}" HorizontalOptions="CenterAndExpand"/>
+            <!--<Label x:Name="SignupTitle" Text="{tr:Translate SignupTitle}" FontAttributes="Bold" FontSize="Large" TextColor="{StaticResource TextColor}" HorizontalOptions="CenterAndExpand"/>-->
+            <Image HeightRequest="30" WidthRequest="50"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <StackLayout RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <view:SnackBar  x:Name="SnackB" HeightRequest="50" FontSize="{OnPlatform iOS=12, Android=13, UWP=15}" 
+                             BackgroundColor="#323232" 
+                             TextColor="White"
+                             IsOpen="False"
+                             VerticalOptions="Start"
+                             Message="."
+                             ButtonTextColor="Orange" AbsoluteLayout.LayoutBounds=".5,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"/>
+        </AbsoluteLayout>
+
+        <ScrollView x:Name="SignupScroll">
+            <StackLayout>
+                <StackLayout x:Name="login" VerticalOptions="CenterAndExpand">
+            <local:CustomEntry TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" 
+                        Margin="10,10,10,0"
+                        Image="mail" 
+                        Placeholder="{tr:Translate LoginEmailPlaceholder}" 
+                        Text="{Binding LoginModel.Email}"
+                        HorizontalOptions="FillAndExpand"/>
+
+            <Label x:Name="LoginModel_EmailError" IsVisible="False" TextColor="Red"  
+                        Margin="10,0,10,0" />
+
+            <local:CustomEntry TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" 
+                        Margin="10,10,10,0"
+                        Image="lock" 
+                        IsPassword="True"
+                        Placeholder="{tr:Translate LoginPasswordPlaceholder}" 
+                        Text="{Binding LoginModel.Password}"
+                        HorizontalOptions="FillAndExpand"/>
+
+            <Label x:Name="LoginModel_PasswordError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0" />
+
+            <Button CornerRadius="7" BackgroundColor="{StaticResource TextColor}" HorizontalOptions="FillAndExpand" Text="{tr:Translate LoginContinue}" TextColor="White" Margin="10" 
+                    Command="{Binding LoginInCommand}"/>
+
+            <Button Text="{tr:Translate LoginForgotPassword}" BackgroundColor="White" TextColor="{StaticResource TextColor}" Clicked="ForgotPass_clicked"  FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <ImageButton BackgroundColor="White" BorderColor="{StaticResource TextColor}" Source="fb" Padding="15" BorderWidth="1" CornerRadius="50" HeightRequest="50" WidthRequest="50"
+                    Command="{Binding OnLoginWithFacebookCommand}"/>
+                <ImageButton BackgroundColor="White" BorderColor="{StaticResource TextColor}" Source="tw" Padding="15" BorderWidth="1" CornerRadius="50" HeightRequest="50" WidthRequest="50" />
+                <ImageButton BackgroundColor="White" BorderColor="{StaticResource TextColor}" Source="gp" Padding="15" BorderWidth="1" CornerRadius="50" HeightRequest="50" WidthRequest="50" 
+                     Command="{Binding OnLoginWithGoogleCommand}"/>
+            </StackLayout>
+            <Button Text="{tr:Translate LoginGuest}" BackgroundColor="White" TextColor="{StaticResource TextColor}" Clicked="Button_Clicked"  FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+
+        <!--Signup-->
+        <StackLayout x:Name="signup" IsVisible="False">
+            
+            <Label Margin="10,0,0,0" Text="{tr:Translate LoginCreateAnAcoount}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Large"/>
+            
+            <local:BoxedEntry Margin="10,10,10,0"
+                                CornerRadius="-6"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Placeholder="{tr:Translate LoginNamePlaceholder}"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                Text="{Binding SignupModel.FullName}"
+                                TextColor="{StaticResource TextColor}"/>
+
+            <Label x:Name="SignupModel_FullNameError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0" />
+
+            <local:BoxedEntry Margin="10,10,10,0"
+                                CornerRadius="-6"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Keyboard="Email"
+                                Placeholder="{tr:Translate LoginEmailPlaceholder}"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                Text="{Binding SignupModel.UserEmail}"
+                                TextColor="{StaticResource TextColor}"/>
+                    <Label x:Name="SignupModel_UserEmailError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0"/>
+
+            <local:BoxedEntry Margin="10,10,10,0"
+                               CornerRadius="-6"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Placeholder="{tr:Translate LoginPasswordPlaceholder}"
+                                IsPassword="True"
+                                x:Name="txtpassword"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                Text="{Binding SignupModel.Password}"
+                                TextColor="{StaticResource TextColor}">
+                <local:BoxedEntry.Behaviors>
+                    <local1:PasswordValidationBehavior />
+                </local:BoxedEntry.Behaviors>
+            </local:BoxedEntry>
+
+            <Label x:Name="SignupModel_PasswordError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0" />
+
+            <local:BoxedEntry Margin="10,10,10,0"
+                              CornerRadius="-6"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Placeholder="{tr:Translate LoginConfirmPasswordPlaceholder}"
+                                IsPassword="True"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                Text="{Binding SignupModel.ConfirmPassword}"
+                                TextColor="{StaticResource TextColor}">
+                <local:BoxedEntry.Behaviors>
+                    <local1:PasswordValidationBehavior />
+                    <local1:CompareValidationBehavior BindingContext="{x:Reference txtpassword}" Text="{Binding Text}"/>
+                </local:BoxedEntry.Behaviors>
+            </local:BoxedEntry>
+
+            <Label x:Name="SignupModel_ConfirmPasswordError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0"  />
+
+            <!--Signup Modification-->
+   
+                 <local:DatePickerEntry Margin="10,10,10,0"
+                                   Format="dd/MM/yyyy"
+                                   x:Name="MainDatePicker"
+                                   CornerRadius="-6"
+                                   Placeholder="{tr:Translate DOB}"
+                                   DateSelected="MainDatePicker_DateSelected"
+                                   Date="{Binding SignupModel.DOB, StringFormat='{}{0:dd-MM-yyyy}'}"
+                                   BorderColor="{StaticResource TextColor}" 
+                                   HeightRequest="50"
+                                   TextColor="{StaticResource TextColor}">
+                 </local:DatePickerEntry>
+
+                <!--<Label Text="Age" x:Name="MainLabel" Margin="10,0,10,0" TextColor="{StaticResource TextColor}"/>-->
+
+                <StackLayout x:Name="ParentDetails" Orientation="Vertical" IsVisible="False">
+
+                <Label Text="{tr:Translate AgeValidationLabel}" TextColor="{StaticResource TextColor}" Margin="10,0,10,0" 
+                        HorizontalOptions="CenterAndExpand"/>
+
+                <local:BoxedEntry Margin="10,10,10,0"
+                                CornerRadius="-6"
+                                x:Name="ParentName"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Placeholder="{tr:Translate SignupParentNamePlaceholder}"
+                                Text="{Binding ParentName}"  
+                                PlaceholderColor="{StaticResource TextColor}"
+                                TextColor="{StaticResource TextColor}"/>
+                    
+                <!--<Label x:Name="SignupModel_ParentNameError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0"  />
+                    Text="{Binding SignupModel.ParentName}"-->
+                
+                <local:BoxedEntry Margin="10,10,10,0"
+                                CornerRadius="-6"
+                                x:Name="ParentID"  
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="50"
+                                Text="{Binding ParentID}" 
+                                Placeholder="{tr:Translate SignupParentIDPlaceholder}"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                TextColor="{StaticResource TextColor}"/>
+                    
+                <!--<Label x:Name="SignupModel_ParentIDError" IsVisible="False" TextColor="Red" 
+                        Margin="10,0,10,0"  />
+                    Text="{Binding SignupModel.ParentID}"
+                    -->
+
+                <!--Need to Update-->
+                <input:RadioButtonGroupView x:Name="radioGroupCond" SelectedItem="{Binding ConditionId, Mode=TwoWay}">
+                    <input:RadioButton Padding="5" Text="{tr:Translate SignUpCondition_1}" Value="1" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" x:Name="rdb3" />
+                    <input:RadioButton Padding="5" Text="{tr:Translate SignUpCondition_2}" Value="2" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                    <input:RadioButton Padding="5" Text="{tr:Translate SignUpCondition_3}" Value="3" TextColor="{StaticResource TextColor}" CircleColor="{StaticResource TextColor}" Color="{StaticResource TextColor}" TextFontSize="15" />
+                </input:RadioButtonGroupView>
+
+            </StackLayout>
+            
+             <!--<ImageButton Source="arrow.png " Command="{Binding SignUpCommand}" CornerRadius="7"  BackgroundColor="#00c3ff"  VerticalOptions="End" Margin="10,40,10,10" Padding="10" 
+                         />-->
+
+                    <ImageButton Source="arrow.png " Clicked="BtnSignup_Clicked1" CornerRadius="7"  BackgroundColor="#00c3ff"  VerticalOptions="End" Margin="10,40,10,10" Padding="10" 
+                         />
+                </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="-6" AbsoluteLayout.LayoutBounds="0,1,0,0" AbsoluteLayout.LayoutFlags="All">
+            <Button x:Name="btnLogin" Text="{tr:Translate LoginTitle}" BackgroundColor="{StaticResource DarkBgColor}" HorizontalOptions="FillAndExpand" TextColor="{StaticResource TextColor}" Clicked="BtnLogin_Clicked" />
+            <Button x:Name="btnSignup" Text="{tr:Translate SignupTitle}" BackgroundColor="{StaticResource BgColor}" HorizontalOptions="FillAndExpand" TextColor="{StaticResource TextColor}" Clicked="BtnSignup_Clicked" />
+        </StackLayout>
+    </StackLayout>
+
+
+</ContentPage>

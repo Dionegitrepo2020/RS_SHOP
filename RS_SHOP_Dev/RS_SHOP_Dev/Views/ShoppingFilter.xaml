@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RS_SHOP_Dev.Views.ShoppingFilter">
+    <ContentPage.Content>
+        <StackLayout Spacing="0" Margin="20">
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Label Text="FILTERS" TextColor="#3897f0" Margin="5,10,0,5" FontSize="18" FontAttributes="Bold" VerticalOptions="Start"
+                HorizontalOptions="Start"/>
+                <Image Source="Cancel.png" Aspect="Fill" Margin="30,0,0,10" VerticalOptions="EndAndExpand" WidthRequest="25" HeightRequest="25"
+                HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <!--<StackLayout Orientation="Horizontal" Margin="10">
+
+                <Label Text="PRICE RANGE" TextColor="#3897f0" FontSize="15" FontAttributes="Bold" Margin="5,20,0,5" />
+                <Image Source="Cancel.png" Aspect="Fill" VerticalOptions="End" HorizontalOptions="End" WidthRequest="15" HeightRequest="15"/>
+            </StackLayout>-->
+
+            <Label Text="PRICE RANGE" TextColor="#3897f0" FontSize="15" FontAttributes="Bold" Margin="5,20,0,5" />
+            <ProgressBar Margin="10,10,0,13" FlowDirection="RightToLeft">
+            </ProgressBar>
+            <Label Text="TYPE" TextColor="#3897f0" FontSize="15" FontAttributes="Bold" Margin="10" />
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Button Text="DRINKS" TextColor="White" FontSize="12" BackgroundColor="#3897f0" FontAttributes="Bold" HeightRequest="40" WidthRequest="120" VerticalOptions="Start"
+                HorizontalOptions="Start"/>
+                <Button Text="Hamburguers" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" HeightRequest="40" WidthRequest="120"
+                HorizontalOptions="Center"/>
+                <Button Text="Snacks" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" VerticalOptions="End" HeightRequest="40" WidthRequest="120"
+                HorizontalOptions="End"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="10">
+                <Button Text="Sweets" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" HeightRequest="40" WidthRequest="120" VerticalOptions="Start"
+                HorizontalOptions="Start"/>
+                <Button Text="Beers" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" VerticalOptions="Center" HeightRequest="40" WidthRequest="120"
+                HorizontalOptions="Center"/>
+                <Button Text="Combos" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" VerticalOptions="End" HeightRequest="40" WidthRequest="120"
+                HorizontalOptions="End"/>
+            </StackLayout>
+            <Label Text="RECENT" TextColor="#3897f0" FontSize="15" FontAttributes="Bold" Margin="10,20,10,10" />
+            <ScrollView Orientation="Horizontal" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding productList}" Spacing="15" VerticalOptions="Start">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Start" WidthRequest="220">
+                                <Frame Padding="0" HasShadow="False" HorizontalOptions="Start" VerticalOptions="Start" CornerRadius="10" HeightRequest="90" WidthRequest="70">
+                                    <Image Source="{Binding productImage}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Frame>
+                                <StackLayout Margin="0,12,0,0">
+                                    <Label Text="{Binding productName}" TextColor="Black" FontSize="15" />
+                                    <Label Text="{Binding productAmount}" Margin="0,-7,0,0" TextColor="#62153B" FontSize="12" FontFamily="{StaticResource BoldFont}"/>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+            <Button Text="APPLY FILTERS" TextColor="White" BackgroundColor="#3897f0" FontSize="12" FontAttributes="Bold" VerticalOptions="EndAndExpand" HeightRequest="40" WidthRequest="120" CornerRadius="20"
+                HorizontalOptions="CenterAndExpand"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

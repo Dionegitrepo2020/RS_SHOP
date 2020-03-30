@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"    
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls"
+             x:Class="RS_SHOP_Dev.Views.IntroPage"
+             NavigationPage.HasBackButton="True">
+    <NavigationPage.TitleView>
+        <Label Text="{tr:Translate IntroTitle}" FontAttributes="Bold" FontSize="Large" TextColor="{StaticResource TextColor}" HorizontalOptions="CenterAndExpand"/>
+    </NavigationPage.TitleView>
+    <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <view:SnackBar  x:Name="SnackB" HeightRequest="30" FontSize="{OnPlatform iOS=12, Android=13, UWP=15}" 
+                             BackgroundColor="#323232" 
+                             TextColor="White"
+                             IsOpen="False"
+                             VerticalOptions="Start"
+                             Message="."
+                             ButtonTextColor="Orange"
+                             CloseButtonText="Exit" AbsoluteLayout.LayoutBounds=".5,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"/>
+        </AbsoluteLayout>
+        <CarouselView x:Name="TheCarousel" PeekAreaInsets="100">
+            <CarouselView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Hey...</x:String>
+                    <x:String>Psssst...!</x:String>
+                    <x:String>Did you check out...</x:String>
+                </x:Array>
+            </CarouselView.ItemsSource>
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame Margin="8" HasShadow="False" BackgroundColor="#e3faff" HeightRequest="250" CornerRadius="10" VerticalOptions="CenterAndExpand">
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HeightRequest="150" WidthRequest="150"/>
+                                <Label Text="{Binding .}" HorizontalTextAlignment="Center" FontSize="Title" IsVisible="False" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <Label Text="{tr:Translate IntroMainTitle}" TextColor="#00c3ff" FontAttributes="Bold" FontSize="Large" Margin="10" HorizontalOptions="CenterAndExpand" />
+        <Label Text="{tr:Translate IntroDesc}" TextColor="#00c3ff" Margin="10" HorizontalOptions="CenterAndExpand" />
+        <Button x:Name="btnStart" Text="{tr:Translate IntroButtonText}" Command="{Binding ButtonClicked}" CornerRadius="7" BackgroundColor="#00c3ff" TextColor="White" FontAttributes="Bold" VerticalOptions="End" Margin="10" Clicked="BtnStart_Clicked" />
+    </StackLayout>
+</ContentPage>

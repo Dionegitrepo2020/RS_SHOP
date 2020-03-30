@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="254e08ae780b4e43898a8f76e90ab1a0" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="ECOMM_DEVModel.sysdiagram" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_ACTIVITY_STATE" Width="1.5" PointX="9.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_ADDRESS" Width="2" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_CART_ITEM" Width="2.25" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_CATEGORY" Width="2" PointX="1.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_CITY" Width="1.875" PointX="10" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_COUNTRY" Width="1.5" PointX="7.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_COUPON" Width="2" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_DELIVERY_TYPE" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_ORDER" Width="2.125" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM" Width="1.875" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_PICKUP_STORES" Width="2.25" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_PRODUCT" Width="2.375" PointX="2.625" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS" Width="2.125" PointX="5.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY" Width="2" PointX="0.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_USERS" Width="2" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_USERS_ROLES" Width="2" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_Table_1_TB_ECOMM_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_USERS_TB_USERS_ROLES" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_SIGNUP_CONDITION_MASTER" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_USERS_TB_ECOMM_USERS" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_CARD_DETAILS" Width="1.5" PointX="12.375" PointY="0.75" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS" />
+        <EntityTypeShape EntityType="ECOMM_DEVModel.TB_ECOMM_PAYMENT_STATUS_DETAILS" Width="1.5" PointX="5.75" PointY="29.25" />
+        <AssociationConnector Association="ECOMM_DEVModel.FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

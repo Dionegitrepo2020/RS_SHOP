@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:RS_SHOP_Dev.Views"
+             xmlns:views1="clr-namespace:RS_SHOP_Dev.Views.CartPages"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+       xmlns:views11="clr-namespace:RS_SHOP_Dev.Views.Merchandise"
+       x:Class="RS_SHOP_Dev.Views.TabPages.AppHomeShell">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ThemeColor">#FFFFFF</Color>
+            <Color x:Key="GrayColor">#e6e6e6</Color>
+            <Color x:Key="BgColor">#0EA1F0</Color>
+            <Color x:Key="TopUnselectedColor">#d7f0f7</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource BgColor}"/>
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="Shell.TitleColor" Value="{StaticResource BgColor}"/>
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BgColor}"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource ThemeColor}"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar Route="main">
+        <Tab Icon="hometab">
+            <ShellContent ContentTemplate="{DataTemplate views:Advantage}" Icon="user.png" Title="Profile"/>
+        </Tab>
+        <Tab Icon="ticket" Shell.NavBarIsVisible="False" Shell.BackgroundColor="White" Shell.UnselectedColor="{StaticResource TopUnselectedColor}">
+            <ShellContent ContentTemplate="{DataTemplate views:Orders}" Title="{tr:Translate Promotion_TabOrder}" />
+            <ShellContent ContentTemplate="{DataTemplate views:Coupons}" Title="{tr:Translate Promotion_TabCoupons}"/>
+            <ShellContent ContentTemplate="{DataTemplate views:Advantage}" Title="{tr:Translate Promotion_TabUseExp}"/>
+        </Tab>
+        <Tab Icon="Home.png" Shell.NavBarIsVisible="False" Shell.BackgroundColor="White" Shell.UnselectedColor="{StaticResource TopUnselectedColor}">
+            <ShellContent ContentTemplate="{DataTemplate views:Tickets}" Title="{tr:Translate ShopTitleTicket}" />
+            <ShellContent ContentTemplate="{DataTemplate views11:Merchandising}" Title="{tr:Translate ShopTitleMerch}" />
+            <ShellContent ContentTemplate="{DataTemplate views:FoodandDrinks}" Title="{tr:Translate ShopTitleFood}" />
+        </Tab>
+        <Tab Icon="cart.png" Shell.BackgroundColor="White" >
+            <ShellContent ContentTemplate="{DataTemplate views1:ProductCartPage}" />
+        </Tab>
+        <Tab Icon="User.png" Shell.NavBarIsVisible="False" Shell.BackgroundColor="White" Shell.UnselectedColor="{StaticResource TopUnselectedColor}">
+            <ShellContent ContentTemplate="{DataTemplate views:Profile}" Title="{tr:Translate ProfileTitle}" />
+            <ShellContent ContentTemplate="{DataTemplate views:Message}" Title="{tr:Translate MessageTitle}" />
+            <ShellContent ContentTemplate="{DataTemplate views:Settings}" Title="{tr:Translate SettingTitle}" />
+        </Tab>
+    </TabBar>
+</Shell>

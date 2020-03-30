@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:views="clr-namespace:RS_SHOP_Dev.Views"
+             x:Class="RS_SHOP_Dev.Views.ProfileTabbed"
+            BarBackgroundColor="White" BarTextColor="{StaticResource TextColor}">
+
+    <views:Profile Title="{tr:Translate ProfileTitle}" WidthRequest="20" HeightRequest="20"/>
+    <views:Message Title="{tr:Translate MessageTitle}" WidthRequest="10" HeightRequest="20"/>
+    <views:Settings Title="{tr:Translate SettingTitle}" WidthRequest="30" HeightRequest="20"/>
+</TabbedPage>

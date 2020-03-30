@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             x:Class="RS_SHOP_Dev.Views.Settings">
+    <StackLayout Padding="20" BackgroundColor="White">
+        <TableView Intent="Settings" HasUnevenRows="true">
+            <TableRoot>
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal"  >
+                            <Label BackgroundColor="White" Text="{tr:Translate Settings_ProfileLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Settings" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Settings_LangLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}" />
+                            <Picker x:Name="picker" HorizontalOptions="EndAndExpand"
+                                 TextColor="{StaticResource TextColor}" SelectedIndexChanged="picker_SelectedIndexChanged" />
+                            <!--<Label Text="English" FontAttributes="Bold" FontSize="Small" Padding="20" HorizontalOptions="EndAndExpand"
+                                 TextColor="#3897f0" />-->
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Settings_OrderLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Orders" />
+                                </Label.GestureRecognizers> 
+                            </Label>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Settings_NotificationLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_Notification" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <ViewCell x:Name="geoSwitch">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}" Text="Geo Location" YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="gSwitch" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+                    <ViewCell x:Name="wifiSwitch">
+                        <Grid VerticalOptions="CenterAndExpand" Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}" Text="Wifi Location" YAlign="Center" XAlign="Center" />
+                            <Switch x:Name="wSwitch" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </Grid>
+                    </ViewCell>
+
+
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Settings_PrivacyLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </ViewCell>
+                    
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+
+                            <Label Text="{tr:Translate Settings_LegalInfoLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}" />
+                        </StackLayout>
+                    </ViewCell>
+                    
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+
+                            <Label Text="{tr:Translate Settings_VersionLabel}" FontAttributes="Bold" FontSize="Small" Padding="20"
+                                 TextColor="{StaticResource TextColor}" />
+                            <Label Text="{Binding Version}" FontAttributes="Bold" FontSize="Small" Padding="20" HorizontalOptions="EndAndExpand"
+                                 TextColor="{StaticResource TextColor}" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button Text="{tr:Translate Settings_SignoutButton}" Clicked="Button_Clicked" FontAttributes="Bold" TextColor="White" Margin="30" CornerRadius="10" BackgroundColor="{StaticResource TextColor}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+
+    </StackLayout>
+</ContentPage>

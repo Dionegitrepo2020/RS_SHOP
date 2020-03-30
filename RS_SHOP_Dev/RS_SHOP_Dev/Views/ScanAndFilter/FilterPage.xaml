@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:forms="clr-namespace:Xamarin.RangeSlider.Forms;assembly=Xamarin.RangeSlider.Forms"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="RS_SHOP_Dev.Views.ScanAndFilter.FilterPage">
+    <ContentPage.Resources>
+        <Style x:Key="SelectionViewStyle" TargetType="input:SelectionView" ApplyToDerivedTypes="True">
+            <Setter Property="Style" Value="0"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="10" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{tr:Translate FilterHeader}" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource TextColor}" />
+                <ImageButton x:Name="closeBtn" Source="close" HorizontalOptions="EndAndExpand" BackgroundColor="Transparent" HeightRequest="30" WidthRequest="20" Clicked="closeBtn_Clicked" />
+            </StackLayout>
+            <Label Text="{tr:Translate FilterPriceRange}" FontSize="Medium" TextColor="{StaticResource TextColor}" />
+            <forms:RangeSlider x:Name="RangeSlider" MinimumValue="1" MaximumValue="{Binding MaxPrice}" LowerValue="{Binding LowerPrice, Mode=TwoWay}" UpperValue="{Binding UpperPrice, Mode=TwoWay}" StepValue="1" StepValueContinuously="False" VerticalOptions="Center" TextSize="15"
+                               ShowTextAboveThumbs="True" />
+            <Label Text="{tr:Translate Filter_Type}" FontSize="Medium" TextColor="{StaticResource TextColor}" />
+            <input:SelectionView x:Name="selectionView" ItemsSource="{Binding FilterData}" ItemDisplayBinding="{Binding subcateg}" SelectedItem="{Binding subcateg, Mode=TwoWay}" ColumnSpacing="5" RowSpacing="5" ColumnNumber="3" SelectionType="Button" Color="{StaticResource TextColor}" />
+            <Button Text="{tr:Translate Filter_ApplyButton}" CornerRadius="25" Padding="100,0,100,0" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource TextColor}"
+                    Command="{Binding ApplyFilter}" CommandParameter="{Binding .}" VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

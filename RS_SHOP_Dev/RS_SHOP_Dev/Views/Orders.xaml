@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
+             xmlns:customControls="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:converters="clr-namespace:RS_SHOP_Dev.Views.ValueConverters"
+             x:Class="RS_SHOP_Dev.Views.Orders">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="OrderTitle" Text="Orders" FontAttributes="Bold" FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ButtonTextConverter x:Key="buttonTextConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+        <!--need to bind with API-->
+        <StackLayout>
+        <ListView x:Name="productList" ItemsSource="{Binding OrdersList}" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" BackgroundColor="{StaticResource BgColor}" Margin="30,10,30,10" Padding="10">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="Start">
+                                        <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HeightRequest="80" WidthRequest="80"/>
+                                    </StackLayout>
+                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                        <Label Text="{Binding orderm.ORDER_ID, StringFormat='Order {0}'}" TextColor="{StaticResource TextColor}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding orderm.PICKUP_STORE_ID, StringFormat='Pickup Store {0}'}" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" VerticalOptions="Center" />
+                                        <Label Text="{Binding orderm.ORDER_AMOUNT, StringFormat='EUR {0}'}" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout  Orientation="Horizontal">
+                                    <Button x:Name="btnDet" TextColor="White" Text="{Binding orderm.ORDER_REF_NO, Converter={StaticResource buttonTextConverter}}" CommandParameter="{Binding .}" Clicked="Button_Clicked" VerticalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="{StaticResource DarkBgColor}" HeightRequest="40" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

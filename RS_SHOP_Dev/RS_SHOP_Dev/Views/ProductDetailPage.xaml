@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
+             x:Class="RS_SHOP_Dev.Views.ProductDetailPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Frame Margin="8" HasShadow="False" BackgroundColor="{StaticResource BgColor}" HorizontalOptions="FillAndExpand" >
+                <StackLayout HorizontalOptions="FillAndExpand">
+                    <Label x:Name="prodName" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" />
+                    <Label x:Name="prodDesc" TextColor="{StaticResource TextColor}" />
+                    <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout VerticalOptions="EndAndExpand" Margin="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="{tr:Translate ProdDetailPrice}" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="StartAndExpand"/>
+                    <Label Text="EUR" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="Price" TextColor="{StaticResource TextColor}" FontAttributes="Bold" HorizontalOptions="End"/>
+                </StackLayout>
+                <Label Text="{tr:Translate ProdDetailFreeShip}" TextColor="{StaticResource TextColor}" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <ctrl:CustomStepper x:Name="Quantity" Text="1" HorizontalOptions="EndAndExpand" PropertyChanged="Quantity_PropertyChanged" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Button Text="{tr:Translate ProdDetailBtnBack}" BackgroundColor="{StaticResource DarkBgColor}" TextColor="White" CornerRadius="5" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked"/>
+                    <Button Text="{tr:Translate ProdDetailBtnCart}" BackgroundColor="{StaticResource DarkBgColor}" TextColor="White" CornerRadius="5" HorizontalOptions="End" Clicked="Button_Clicked_1" IsVisible="False"/>
+                    <ctrl:LoadingButton x:Name="ButtonWithSpinner" Text="{tr:Translate ProdDetailBtnCart}" IsBusy="{Binding IsBusy}" HorizontalOptions="End" Clicked="Button_Clicked_1" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="White"
+             xmlns:local="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:local1="clr-namespace:RS_SHOP_Dev.Behaviors"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:custom1="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls"
+             x:Class="RS_SHOP_Dev.Views.ProfileEdit">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="ProfileTitle" Text="{tr:Translate ProfileTitle}" FontAttributes="Bold" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+       
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal" Margin="20,20,20,10">
+                        <Label 
+                            HeightRequest="50"
+                            FontAttributes="Bold"
+                            WidthRequest="200"
+                            FontSize="Medium" 
+                            Text="{tr:Translate ProfilePhotoPlaceholder}"
+                            HorizontalOptions="StartAndExpand"
+                            TextColor="{StaticResource TextColor}"/>
+
+                        <StackLayout>
+                            <custom1:CircleImage x:Name="FileImage" Source="{Binding Image}"  HeightRequest="40" WidthRequest="40"/>
+                            <StackLayout Orientation="Horizontal">
+                                <ImageButton HorizontalOptions="StartAndExpand" Source="gallery.png" Clicked="PhotoEdit" HeightRequest="30" WidthRequest="30"/>
+                                <ImageButton HorizontalOptions="EndAndExpand" Source="camera3.png" Clicked="CameraEdit" HeightRequest="30" WidthRequest="30"/>
+                            </StackLayout>
+                            <!--<Label x:Name="LocalPathLabel" TextColor="black" FontSize="15" />-->
+                            <!--<StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PhotoEdit" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>-->
+
+                        </StackLayout>
+
+                    </StackLayout>
+                    
+                </StackLayout>
+                
+                
+                <StackLayout Orientation="Horizontal" Margin="20,0,20,10">
+                    <Label 
+                   HeightRequest="50"
+                   WidthRequest="200"
+                   Text="{tr:Translate ProfileContactPlaceholder}"
+                   FontAttributes="Bold"
+                   FontSize="Medium"     
+                   HorizontalOptions="StartAndExpand"
+                   TextColor="{StaticResource TextColor}"
+                   LineBreakMode="NoWrap"/>
+                    <Label  
+                   Margin="20,0,10,0"
+                   HeightRequest="50"
+                   WidthRequest="100"
+                   FontSize="20"
+                   Text="{Binding Name}"
+                   HorizontalOptions="EndAndExpand"
+                   TextColor="{StaticResource TextColor}"
+                   LineBreakMode="TailTruncation"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="ContactUpdate" Tapped="ContactEdit" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label x:Name="ProfileModel_ContactNameError" IsVisible="False" TextColor="Red" Margin="10,0,10,0" />
+
+                <StackLayout Orientation="Horizontal" Margin="20,0,20,10">
+                    <Label 
+                   HeightRequest="50"
+                   FontAttributes="Bold" 
+                   FontSize="Medium" 
+                   WidthRequest="150"
+                   HorizontalOptions="StartAndExpand"
+                   Text="{tr:Translate ProfileCountryPlaceholder}"
+                   TextColor="{StaticResource TextColor}"/>
+                    <Label Margin="0,0,0,0"
+                               HeightRequest="50"
+                               FontSize="20"
+                               HorizontalOptions="EndAndExpand"
+                               Text="{Binding Country}"
+                               TextColor="{StaticResource TextColor}"/>
+                    <Label Text="/"
+                                HeightRequest="50"
+                                FontSize="20"
+                                TextColor="{StaticResource TextColor}"/>
+                    <Label Margin="0,0,10,0"
+                                HeightRequest="50"
+                                FontSize="20"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding City}"
+                                TextColor="{StaticResource TextColor}"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CountryEdit" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+               
+
+                <StackLayout Orientation="Horizontal" Margin="20,0,20,10">
+                    <Label 
+                   HeightRequest="50"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   WidthRequest="200"
+                   HorizontalOptions="StartAndExpand"
+                   Text="{tr:Translate ProfileGenderPlaceholder}"
+                   TextColor="{StaticResource TextColor}"/>
+                    <Label Margin="20,0,10,0"
+                   HeightRequest="50"
+                   FontSize="20"
+                   HorizontalOptions="EndAndExpand"
+                   Text="{Binding Gender}"
+                   TextColor="{StaticResource TextColor}"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GenderEdit" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label x:Name="ProfileModel_GenderError" IsVisible="False" TextColor="Red" Margin="10,0,10,0" />
+
+                <StackLayout Orientation="Horizontal" Margin="20,0,20,10">
+                    <Label 
+                   HeightRequest="50"
+                   FontAttributes="Bold"
+                   FontSize="Medium"  
+                   WidthRequest="100"
+                   HorizontalOptions="StartAndExpand"
+                   Text="{tr:Translate ProfileBirthdayPlaceholder}"
+                   TextColor="{StaticResource TextColor}"/>
+                    <Label Margin="20,0,10,0"
+                   HeightRequest="50"
+                   FontSize="20"
+                   HorizontalOptions="EndAndExpand"
+                   Text="{Binding Path=DOB, StringFormat='{}{0:dd-MM-yyyy}'}"
+                   TextColor="{StaticResource TextColor}"/>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BirthdayEdit" NumberOfTapsRequired="1"/>
+                    </StackLayout.GestureRecognizers>
+ 
+                </StackLayout>
+                <!--Text="{Binding Path=DOB, StringFormat='{}{0:yyyy-MM-dd}'}"-->
+                <Label x:Name="ProfileModel_BirthdayError" IsVisible="False" TextColor="Red" Margin="10,0,10,0" />
+            </StackLayout>
+
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" BackgroundColor="White"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
+             x:Class="RS_SHOP_Dev.Views.Merchandise.MerchCartPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="productList" ItemsSource="{Binding CartProductsList}" HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="{StaticResource BgColor}" Margin="30,10,30,10" Padding="10">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout HorizontalOptions="Start">
+                                            <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HeightRequest="80" WidthRequest="80"/>
+                                        </StackLayout>
+                                        <StackLayout VerticalOptions="CenterAndExpand">
+                                            <Label Text="{Binding cart.TB_ECOMM_PRODUCT.PRODUCT_NAME}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Medium"/>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding cart.CART_ITEM_ID}" IsVisible="False"/>
+                                                <Label Text="{Binding cart.TB_ECOMM_PRODUCT.PRODUCT_PRICE}" IsVisible="False"/>
+                                                <Label Text="{Binding cart.CART_PRICE}" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                                                <ctrl:CustomStepper x:Name="Quantity" Text="{Binding cart.CART_ITEM_QUANTITY}" PropertyChanged="Quantity_PropertyChanged" HorizontalOptions="EndAndExpand" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout  Orientation="Horizontal">
+                                        <Button TextColor="White" Text="{tr:Translate CartButtonEliminate}" CommandParameter="{Binding .}" Clicked="Button_Clicked_1" VerticalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="{StaticResource DarkBgColor}" HeightRequest="40" />
+                                        <Button TextColor="White" Text="{tr:Translate CartButtonSave}" VerticalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="{StaticResource DarkBgColor}" HeightRequest="40"/>
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="30,10,30,0">
+                <Label Text="{tr:Translate CartLblTotal}" TextColor="{StaticResource TextColor}" FontSize="Medium"/>
+                <Label Text="EUR" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="Medium"/>
+                <Label Text="{Binding Total}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" HorizontalOptions="End" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="30,10,30,0">
+                <Label Text="{tr:Translate CartLblShip}" TextColor="{StaticResource TextColor}" FontSize="Medium"/>
+                <Label Text="EUR" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="Medium"/>
+                <Label Text="0,0" TextColor="{StaticResource TextColor}" FontAttributes="Bold" HorizontalOptions="End" FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="30,10,30,0">
+                <Label Text="{tr:Translate CartLblSubTotal}" TextColor="{StaticResource TextColor}" FontSize="Medium"/>
+                <Label Text="EUR" TextColor="{StaticResource TextColor}" HorizontalOptions="EndAndExpand" FontSize="Medium"/>
+                <Label Text="{Binding Total}" x:Name="TotalPrice" TextColor="{StaticResource TextColor}" FontAttributes="Bold" HorizontalOptions="End" FontSize="Medium"/>
+            </StackLayout>
+            <Button TextColor="White" x:Name="btnConfirm" Text="{tr:Translate CartButtonConfirm}" CornerRadius="7" BackgroundColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Small" Margin="20" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

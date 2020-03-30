@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+             xmlns:views="clr-namespace:RS_SHOP_Dev.Views"
+            xmlns:views1="clr-namespace:RS_SHOP_Dev.Views.CartPages"
+            xmlns:local="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+            mc:Ignorable="d" 
+            SelectedTabColor="White"
+             x:Class="RS_SHOP_Dev.Views.Home" BarBackgroundColor="DodgerBlue" NavigationPage.HasNavigationBar="False">
+
+    <TabbedPage.Effects>
+        <local:NoShiftEffect />
+    </TabbedPage.Effects>
+    <NavigationPage Icon="hometab" WidthRequest="20" HeightRequest="20">
+        <x:Arguments>
+            <views:Advantage />
+        </x:Arguments>
+    </NavigationPage>
+
+
+    <NavigationPage Icon="wallet" WidthRequest="20" HeightRequest="20">
+        <x:Arguments>
+            <views:Promotion />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Icon="Home.png" WidthRequest="20" HeightRequest="20">
+        <x:Arguments>
+            <views:Shopping />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Icon="cart.png" WidthRequest="20" HeightRequest="20">
+        <x:Arguments>
+            <views1:ProductCartPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Icon="User" WidthRequest="20" HeightRequest="20">
+        <x:Arguments>
+            <views:ProfileTabbed/>
+        </x:Arguments>
+    </NavigationPage>
+
+
+
+</TabbedPage>

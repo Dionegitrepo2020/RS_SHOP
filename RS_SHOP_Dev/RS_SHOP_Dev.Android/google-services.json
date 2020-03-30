@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "517258432354",
+    "firebase_url": "https://rs-shop-auth.firebaseio.com",
+    "project_id": "rs-shop-auth",
+    "storage_bucket": "rs-shop-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517258432354:android:d2826d002b2f4066c7a63b",
+        "android_client_info": {
+          "package_name": "com.companyname.rs_shop_dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517258432354-f4b6jk2456jsqlip1s5g2ef01bf5fndn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.rs_shop_dev",
+            "certificate_hash": "972fe785103b98b12ef2c896dea0c02fadb6aa38"
+          }
+        },
+        {
+          "client_id": "517258432354-5i3p5qt0tng8i5k6jq3kk3lg9bacomon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9xl9PtRriIXdFcF6z4_omc-T1BGRlcz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517258432354-5i3p5qt0tng8i5k6jq3kk3lg9bacomon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

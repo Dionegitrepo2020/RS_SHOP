@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+             mc:Ignorable="d"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:controls="clr-namespace:RS_SHOP_Dev.Controls"
+             x:Class="RS_SHOP_Dev.Views.Payment.PaymentMainPage">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Margin="10" Spacing="30" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  
+                     AbsoluteLayout.LayoutFlags="All">
+            <StackLayout>
+                <Label Text="CARD NUMBER" TextColor="{StaticResource TextColor}" Padding="0"/>
+                <Entry Placeholder="Card Number" Text="{Binding Number, Mode=TwoWay}" TextColor="{StaticResource TextColor}" HorizontalOptions="FillAndExpand">
+                    <Entry.Behaviors>
+                        <fastEntry:XamarinFastEntryBehaviour Mask="####-####-####-####" MaxLength="19"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="30">
+                <StackLayout>
+                    <Label Text="EXPIRE DATE" TextColor="{StaticResource TextColor}"/>
+                    <Entry Placeholder="mm / yy" Text="{Binding Expdate, Mode=TwoWay}" MaxLength="5" TextColor="{StaticResource TextColor}">
+                        <Entry.Behaviors>
+                            <fastEntry:XamarinFastEntryBehaviour Mask="##/##" MaxLength="19"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="CVV" TextColor="{StaticResource TextColor}"/>
+                    <Entry Placeholder="cvv" WidthRequest="50" Text="{Binding CNumber}" TextColor="{StaticResource TextColor}">
+                        <Entry.Behaviors>
+                            <fastEntry:XamarinFastEntryBehaviour Mask="###" MaxLength="3"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="CARDHOLDER NAME" TextColor="{StaticResource TextColor}"/>
+                <Entry Placeholder="Card Holder Name" Text="{Binding Chname, Mode=TwoWay}" TextColor="{StaticResource TextColor}" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox Color="{StaticResource TextColor}" IsChecked="{Binding IsSaveCard, Mode=TwoWay}" />
+                    <Label Text="Save Card" TextColor="{StaticResource TextColor}" VerticalOptions="Center"/>
+                </StackLayout>
+                <Button TextColor="White" x:Name="btnpay" Text="{tr:Translate CartButtonConfirm}" CornerRadius="7" BackgroundColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Small" Clicked="btnpay_Clicked" CommandParameter="{Binding .}" />
+            </StackLayout>
+        </StackLayout>
+        <controls:LoadingIndicator
+                               IsLoading="{Binding IsBusy, Mode=OneWay}"
+                               LoadingIndicatorColor="{StaticResource TextColor}"
+                               AbsoluteLayout.LayoutFlags="PositionProportional"
+                               AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                               Text="{tr:Translate LoadingText}"
+                               TextColor="{StaticResource TextColor}"
+                               TextFontSize="20" />
+    </AbsoluteLayout>
+</ContentPage>

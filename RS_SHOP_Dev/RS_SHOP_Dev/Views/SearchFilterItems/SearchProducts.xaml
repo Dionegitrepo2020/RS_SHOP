@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customControls="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="RS_SHOP_Dev.Views.SearchFilterItems.SearchProducts">
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" BackgroundColor="{StaticResource BgColor}" ClearButtonVisibility="WhileEditing"
+                                BorderColor="{StaticResource TextColor}"    
+                                HorizontalTextAlignment="Center"
+                                Placeholder="{tr:Translate FoodSearch}"
+                                PlaceholderColor="{StaticResource TextColor}"
+                                TextColor="{StaticResource TextColor}"
+                                TextChanged="BoxedEntry_TextChanged"/>
+            <ListView x:Name="productSearchList" ItemsSource="{Binding SearchList}" HasUnevenRows="True" VerticalOptions="FillAndExpand" ItemTapped="productList_ItemSelected" SeparatorVisibility="None" Margin="30,0,20,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding PRODUCT_ID}" IsVisible="False"/>
+                                <Label Text="{Binding PRODUCT_NAME}" TextColor="{StaticResource TextColor}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                <Image Source="Rarrow" HeightRequest="30" WidthRequest="20" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView x:Name="productList" ItemsSource="{Binding ProductsList}" HasUnevenRows="True" IsVisible="False" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <StackLayout>
+                                <Frame HasShadow="True" BackgroundColor="{StaticResource BgColor}" Margin="30,10,30,10" Padding="10">
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout HorizontalOptions="Start">
+                                                <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HeightRequest="80" WidthRequest="80"/>
+                                            </StackLayout>
+                                            <StackLayout VerticalOptions="CenterAndExpand">
+                                                <Label Text="{Binding product.PRODUCT_NAME}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Medium"/>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                    <Label Text="{Binding product.PRODUCT_PRICE}" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large"/>
+                                                    <ctrl:CustomStepper x:Name="Quantity" Text="{Binding cart.CART_ITEM_QUANTITY}" HorizontalOptions="EndAndExpand" PropertyChanged="Quantity_PropertyChanged" />
+                                                    <Label Text="{Binding product.PRODUCT_PRICE}" IsVisible="False"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout  Orientation="Horizontal">
+                                            <Button TextColor="White" Text="ADD TO CART" VerticalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="{StaticResource DarkBgColor}" HeightRequest="40" Clicked="Button_Clicked" CommandParameter="{Binding .}" />
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                                <StackLayout BackgroundColor="#FFDED7" HorizontalOptions="FillAndExpand" Margin="30,0,30,0" HeightRequest="40">
+                                    <Label Text="SEARCH OR FILTER RELTED PROMO" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

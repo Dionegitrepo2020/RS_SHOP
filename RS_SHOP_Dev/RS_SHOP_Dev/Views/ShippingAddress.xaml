@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+              xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:customControls="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             x:Class="RS_SHOP_Dev.Views.ShippingAddress">
+    
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="AddressTitle" Text="{tr:Translate ShippingAddress}" FontAttributes="Bold" FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="addressList" ItemsSource="{Binding ShipAddressList}" HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <Frame HasShadow="True" BackgroundColor="{StaticResource BgColor}" Margin="30,10,30,10" Padding="10">
+                                <StackLayout Spacing="10">
+                                    <StackLayout Orientation="Horizontal" Opacity="0.2">
+                                        <Label 
+                                            Text="{tr:Translate Ship_ShippingTo}"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="StartAndExpand"
+                                            TextColor="{StaticResource TextColor}"/>
+                                        <ImageButton Source="edit.png"
+                                            Clicked="AddressEdit" CommandParameter="{Binding .}"
+                                            HeightRequest="20"
+                                            WidthRequest="20"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="EndAndExpand"
+                                            />
+                                    </StackLayout>
+
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            Text="{Binding ADDRESS1}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                            <Label
+                                            Text="{Binding ADDRESS2}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            Text="{Binding COUNTRY}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                            <Label
+                                            Text="{Binding CITY}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label
+                                            Text="{Binding PHONE}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                            <Label
+                                            Text="{Binding POST_CODE}"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"     
+                                            TextColor="{StaticResource TextColor}"/>
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" x:Name="Item">
+                                        <Label 
+                                            Text="{tr:Translate Ship_Default}"
+                                            FontAttributes="Bold"    
+                                            HorizontalOptions="StartAndExpand"
+                                            TextColor="{StaticResource TextColor}"/>
+                                        <ImageButton Source="delete.png" BackgroundColor="Transparent"
+                                            Clicked="DeleteAddress" CommandParameter="{Binding .}" Opacity="0.2"         
+                                            HeightRequest="20"
+                                            HorizontalOptions="EndAndExpand"
+                                            />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Margin="10" Text="{tr:Translate Ship_AddAddress}" Clicked="Button_ClickedAsync"/>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

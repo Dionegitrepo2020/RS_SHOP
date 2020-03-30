@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
+             mc:Ignorable="d"
+             x:Class="RS_SHOP_Dev.Views.Wallets.WalletOrderPage">
+    <ContentPage.Content>
+        <Frame CornerRadius="10" BackgroundColor="{StaticResource GrayBgColor}" Margin="20" Padding="0">
+            <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill" >
+                <Frame HeightRequest="40" CornerRadius="10" BackgroundColor="{StaticResource DarkBgColor}" HasShadow="False">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{tr:Translate Wallet_Order}" FontSize="20" TextColor="White" VerticalOptions="Center" />
+                        <Label Text="{Binding OrderId}" FontSize="20" TextColor="White" VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+                <StackLayout BackgroundColor="{StaticResource GrayBgColor}" VerticalOptions="FillAndExpand" Margin="0,-32,0,32">
+                    <StackLayout Margin="10">
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Wallet_Date}" TextColor="{StaticResource BlackTextColor}" />
+                            <Label Text="{Binding Date}" TextColor="{StaticResource BlackTextColor}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Wallet_Time}" TextColor="{StaticResource BlackTextColor}" />
+                            <Label Text="{Binding Time}" TextColor="{StaticResource BlackTextColor}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{tr:Translate Wallet_User}" TextColor="{StaticResource BlackTextColor}" />
+                            <Label Text="{Binding Name}" TextColor="{StaticResource BlackTextColor}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" IsVisible="{Binding isFD}" >
+                            <Label Text="{tr:Translate Wallet_PickupAt}" TextColor="{StaticResource BlackTextColor}" />
+                            <Label Text="{Binding Store}" TextColor="{StaticResource BlackTextColor}" />
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Margin="0,30,0,30">
+                            <zxing:ZXingBarcodeImageView x:Name="codevalue" WidthRequest="200" BarcodeValue="{Binding OrderQR}" HeightRequest="200" BarcodeFormat="QR_CODE">
+                                <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                                    <zxcm:EncodingOptions Width="300" Height="300" />
+                                </zxing:ZXingBarcodeImageView.BarcodeOptions>
+                            </zxing:ZXingBarcodeImageView>
+                            <Label Text="{Binding OrderQR}" TextColor="{StaticResource BlackTextColor}" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="End">
+                        <ImageButton Source="share" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

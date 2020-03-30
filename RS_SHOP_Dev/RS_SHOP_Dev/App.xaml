@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RS_SHOP_Dev.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="TextColor">#00c3ff</Color>
+            <Color x:Key="BlackTextColor">Black</Color>
+            <Color x:Key="BgColor">#e3faff</Color>
+            <Color x:Key="DarkBgColor">#78dfff</Color>
+            <Color x:Key="BarBgColor">White</Color>
+            <Color x:Key="GrayBgColor">#d9d9d9</Color>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

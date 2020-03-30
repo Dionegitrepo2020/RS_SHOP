@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customControls="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="RS_SHOP_Dev.Views.SearchFilterItems.SearchResult">
+    <StackLayout>
+        <ListView x:Name="productList" ItemsSource="{Binding CartProductsList}" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                        <Frame HasShadow="True" BackgroundColor="{StaticResource BgColor}" Margin="30,10,30,10" Padding="10">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout HorizontalOptions="Start">
+                                        <Image Source="https://seeklogo.com/images/X/xamarin-logo-348B1EB629-seeklogo.com.png" HeightRequest="80" WidthRequest="80"/>
+                                    </StackLayout>
+                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                        <Label Text="{Binding cart.TB_ECOMM_PRODUCT.PRODUCT_NAME}" TextColor="{StaticResource TextColor}" FontAttributes="Bold" FontSize="Medium"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding cart.TB_ECOMM_PRODUCT.PRODUCT_PRICE, StringFormat='EUR {0}'}" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large"/>
+                                            <ctrl:CustomStepper x:Name="Quantity" Text="{Binding cart.CART_ITEM_QUANTITY}" HorizontalOptions="EndAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout  Orientation="Horizontal">
+                                    <Button TextColor="White" Text="ADD TO CART" VerticalOptions="CenterAndExpand" CornerRadius="7" BackgroundColor="{StaticResource DarkBgColor}" HeightRequest="40" />
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                    </customControls:ExtendedViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

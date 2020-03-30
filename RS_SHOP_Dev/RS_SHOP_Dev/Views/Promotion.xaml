@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:views="clr-namespace:RS_SHOP_Dev.Views"
+            mc:Ignorable="d"
+            xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+            NavigationPage.HasNavigationBar="False"
+             x:Class="RS_SHOP_Dev.Views.Promotion" BarBackgroundColor="White" BarTextColor="{StaticResource TextColor}">
+
+    <views:Orders Title="{tr:Translate Promotion_TabOrder}" WidthRequest="20" HeightRequest="20"/>
+    <views:Coupons Title="{tr:Translate Promotion_TabCoupons}" WidthRequest="20" HeightRequest="20"/>
+    <views:Advantage Title="{tr:Translate Promotion_TabUseExp}" WidthRequest="20" HeightRequest="20"/>
+    
+</TabbedPage>

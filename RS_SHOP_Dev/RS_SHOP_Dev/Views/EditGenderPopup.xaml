@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:RS_SHOP_Dev.CustomRenderers"
+             xmlns:local1="clr-namespace:RS_SHOP_Dev.Behaviors"
+             xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
+             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls"
+             xmlns:local2="clr-namespace:Sample.InputKit"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="RS_SHOP_Dev.Views.EditGenderPopup">
+    
+    <StackLayout BackgroundColor="White" Margin="30,40,30,0" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Gender" Margin="10" HorizontalOptions="StartAndExpand" TextColor="{StaticResource TextColor}" FontSize="Medium" FontAttributes="Bold"/>
+        <Label Text="{Binding Message}" IsVisible="False" TextColor="Red"/>
+
+        <StackLayout Orientation="Horizontal" Margin="10">
+            <Label Text="Male" HorizontalOptions="StartAndExpand" BackgroundColor="White"  TextColor="{StaticResource TextColor}" FontSize="Small" />
+            <CheckBox IsChecked="True" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Margin="10">
+            <Label Text="Female" HorizontalOptions="StartAndExpand" BackgroundColor="White"  TextColor="{StaticResource TextColor}" FontSize="Small" />
+            <CheckBox IsChecked="False" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Margin="10">
+            <Label Text="I do not want to specify" HorizontalOptions="StartAndExpand" BackgroundColor="White"  TextColor="{StaticResource TextColor}" FontSize="Small" />
+            <CheckBox  HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" HorizontalOptions="StartAndExpand" BackgroundColor="White"  TextColor="{StaticResource TextColor}" FontSize="Small" />
+            <Button Text="Ok" HorizontalOptions="EndAndExpand" BackgroundColor="White"   TextColor="{StaticResource TextColor}" FontSize="Small" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
