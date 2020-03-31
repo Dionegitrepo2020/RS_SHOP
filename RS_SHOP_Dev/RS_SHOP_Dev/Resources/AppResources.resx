@@ -466,6 +466,9 @@
   <data name="Wallet_Time" xml:space="preserve">
     <value>Time</value>
   </data>
+  <data name="Wallet_Title" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
   <data name="Wallet_User" xml:space="preserve">
     <value>User Name</value>
   </data>

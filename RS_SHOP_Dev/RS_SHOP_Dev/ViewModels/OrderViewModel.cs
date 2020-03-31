@@ -1,4 +1,5 @@
-﻿using RS_SHOP_Dev.Helpers;
+﻿using Plugin.Connectivity;
+using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.OrderModels;
 using RS_SHOP_Dev.Resources;
 using RS_SHOP_Dev.Services;
@@ -104,26 +105,32 @@ namespace RS_SHOP_Dev.ViewModels
         
         public async Task LoadOrderProducts(string userId)
         {
-            var OrderProducts = await _apiServices.GetFromOrderService(userId);
-            OrdersList = new List<OrderModel>(OrderProducts);
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                var OrderProducts = await _apiServices.GetFromOrderService(userId);
+                OrdersList = new List<OrderModel>(OrderProducts);
+            }
         }
 
         public async Task LoadOrderByOrderId(string order_Id, string categ_Id)
         {
-            var OrderProducts = await _apiServices.GetOrderByIdService(order_Id);
-            OrdersList = new List<OrderModel>(OrderProducts);
-            foreach(var order in OrdersList)
+            if (CrossConnectivity.Current.IsConnected)
             {
-                Date = order.orderm.CREATED_DATE.Date.ToString("yyyy-MM-dd");
-                Time = order.orderm.CREATED_DATE.ToString("h:mm tt");
-                Name = order.orderm.USER_ID.ToString();
-                OrderId = order.orderm.ORDER_ID.ToString();
-                OrderQR = order.orderm.ORDER_QR_TAG.ToString();
+                var OrderProducts = await _apiServices.GetOrderByIdService(order_Id);
+                OrdersList = new List<OrderModel>(OrderProducts);
+                foreach (var order in OrdersList)
+                {
+                    Date = order.orderm.CREATED_DATE.Date.ToString("yyyy-MM-dd");
+                    Time = order.orderm.CREATED_DATE.ToString("h:mm tt");
+                    Name = order.orderm.USER_ID.ToString();
+                    OrderId = order.orderm.ORDER_ID.ToString();
+                    OrderQR = order.orderm.ORDER_QR_TAG.ToString();
+                }
+                if (categ_Id.Equals("10"))
+                    isFD = true;
+                else
+                    isFD = false;
             }
-            if (categ_Id.Equals("10"))
-                isFD = true;
-            else
-                isFD = false;
         }
     }
 }

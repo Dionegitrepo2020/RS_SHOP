@@ -7,7 +7,8 @@
              mc:Ignorable="d" BackgroundColor="White"
              xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
              xmlns:customControls="clr-namespace:RS_SHOP_Dev.CustomRenderers"
-             x:Class="RS_SHOP_Dev.Views.CartPages.ProductCartPage">
+             x:Class="RS_SHOP_Dev.Views.CartPages.ProductCartPage"
+             NavigationPage.HasNavigationBar="False">
     <NavigationPage.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
             <Label Text="{tr:Translate CartTitle}" FontSize="Large" TextColor="{StaticResource TextColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>

@@ -10,7 +10,7 @@
              x:Class="RS_SHOP_Dev.Views.Merchandise.Merchandising">
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout BackgroundColor="White" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" BackgroundColor="{StaticResource BgColor}" Image="search" ImageAlignment="Right" Focused="SearchBox_Focused"
+            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" Image="search" ImageAlignment="Right" Focused="SearchBox_Focused"
                                 BorderColor="{StaticResource TextColor}"    
                                 HorizontalTextAlignment="Center"
                                 Placeholder="{tr:Translate FoodSearch}"

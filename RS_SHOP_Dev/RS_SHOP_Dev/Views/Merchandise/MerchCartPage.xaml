@@ -6,7 +6,8 @@
              mc:Ignorable="d" BackgroundColor="White"
              xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
              xmlns:ctrl="clr-namespace:RS_SHOP_Dev.Controls"
-             x:Class="RS_SHOP_Dev.Views.Merchandise.MerchCartPage">
+             x:Class="RS_SHOP_Dev.Views.Merchandise.MerchCartPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="productList" ItemsSource="{Binding CartProductsList}" HasUnevenRows="True" SeparatorVisibility="None">

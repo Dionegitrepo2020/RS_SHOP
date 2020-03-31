@@ -32,6 +32,16 @@ namespace RS_SHOP_Dev.Views.Payment
                 (this.BindingContext as PaymentViewModel).LoadScreen(paymentModel);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () => {
+                var result = await this.DisplayAlert("Confirm!", "You will navigate to home screen", "Yes Take Me To Home", "No");
+                if (result) App.Current.MainPage = new NavigationPage(new Home(2)); ;
+            });
+
+            return true;
+        }
+
         private async void btnpay_Clicked(object sender, EventArgs e)
         {
             await (this.BindingContext as PaymentViewModel).PaymentRequest(orderResponses, Categ_Id);

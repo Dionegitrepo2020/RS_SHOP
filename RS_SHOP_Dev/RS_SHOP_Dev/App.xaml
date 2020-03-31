@@ -13,6 +13,9 @@
             <Color x:Key="DarkBgColor">#78dfff</Color>
             <Color x:Key="BarBgColor">White</Color>
             <Color x:Key="GrayBgColor">#d9d9d9</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor">White</Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

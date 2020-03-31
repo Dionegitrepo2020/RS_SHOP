@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.SearchFilterModel;
 using System;
@@ -100,18 +101,21 @@ namespace RS_SHOP_Dev.ViewModels
         public async Task LoadFilterItems(string cat_Id)
         {
             IsBusy = true;
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "filter/get/" + cat_Id + "", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var FilterList = JsonConvert.DeserializeObject<List<FilterModel>>(result);
-                FilterData = new ObservableCollection<FilterModel>(FilterList);
-                foreach (var price in FilterData)
+                using (var client = new HttpClient())
                 {
-                    MaxPrice = Convert.ToInt64(price.maxprice);
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "filter/get/" + cat_Id + "", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var FilterList = JsonConvert.DeserializeObject<List<FilterModel>>(result);
+                    FilterData = new ObservableCollection<FilterModel>(FilterList);
+                    foreach (var price in FilterData)
+                    {
+                        MaxPrice = Convert.ToInt64(price.maxprice);
+                    }
                 }
+                UpperPrice = MaxPrice;
             }
-            UpperPrice = MaxPrice;
             IsBusy = false;
         }
     }

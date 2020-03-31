@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Services;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.OrderModels;
@@ -229,24 +230,29 @@ namespace RS_SHOP_Dev.ViewModels
 
         public async Task RemoveCardData(int cARD_ID)
         {
-            PaymentList = await _apiServicesPayment.RemoveCardAsync(cARD_ID);
+            if (CrossConnectivity.Current.IsConnected)
+                PaymentList = await _apiServicesPayment.RemoveCardAsync(cARD_ID);
         }
 
         private async Task SaveCardAsync()
         {
-            paymentListModel.CARD_NUMBER = Convert.ToInt64(Number);
-            paymentListModel.CARD_HOLDER_NAME = Chname;
-            paymentListModel.CARD_EXP_DATE = SelectedMonth + SelectedYear.Substring(2, 2);
-            var ResultContent = await _apiServicesPayment.SaveCardAsync(paymentListModel);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
-            var Message = jwtDynamic.Value<string>("Message");
-            if (Message.Equals("Card Saved."))
-                await PopupNavigation.Instance.PopAsync();
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                paymentListModel.CARD_NUMBER = Convert.ToInt64(Number);
+                paymentListModel.CARD_HOLDER_NAME = Chname;
+                paymentListModel.CARD_EXP_DATE = SelectedMonth + SelectedYear.Substring(2, 2);
+                var ResultContent = await _apiServicesPayment.SaveCardAsync(paymentListModel);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
+                var Message = jwtDynamic.Value<string>("Message");
+                if (Message.Equals("Card Saved."))
+                    await PopupNavigation.Instance.PopAsync();
+            }
         }
 
         public async Task LoadCards(string userId)
         {
-            PaymentList = await _apiServicesPayment.LoadCardAsync(userId);
+            if (CrossConnectivity.Current.IsConnected)
+                PaymentList = await _apiServicesPayment.LoadCardAsync(userId);
         }
         public void LoadCardsOnPopup(PaymentListModel paymentListModel)
         {
@@ -270,49 +276,52 @@ namespace RS_SHOP_Dev.ViewModels
 
         public async Task PaymentRequest(List<OrderResponse> orderResponses, string categ_Id)
         {
-            IsBusy = true;
-            if (IsSaveCard.Equals(true))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                paymentListModel.CARD_NUMBER = Convert.ToInt64(Number.Replace("-", ""));
-                paymentListModel.CARD_HOLDER_NAME = Chname;
-                paymentListModel.CARD_EXP_DATE = Expdate.Replace("/", "");
-                var save = await _apiServicesPayment.SaveCardAsync(paymentListModel);
-            }
-            
-            foreach (var order in orderResponses)
-            {
-                UserID = order.USER_ID.ToString();
-                OrderId = order.ORDER_REF_NO.ToString();
-                AMOUNT = order.ORDER_AMOUNT.ToString();
-                DATETIME = order.CREATED_DATE.ToString("yyyy-MM-dd HH:mm:ss");
-            }
-            JObject jObject = new JObject();
-            jObject.Add("USER_ID", UserID);
-            jObject.Add("ORDER_REF_NO", OrderId);
-            jObject.Add("CARD_NUMBER", Number.Replace("-", ""));
-            jObject.Add("EXPIRES", Expdate.Replace("/", ""));
-            jObject.Add("CVV_NUM", CNumber);
-            jObject.Add("CH_NAME", Chname);
-            jObject.Add("AMOUNT", Convert.ToInt64(Convert.ToDecimal(AMOUNT) * 100));
-            jObject.Add("DATE_TIME", DATETIME);
-            var ResultContent = await _apiServices.ProcessPayment(jObject);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
-            var ResultStatus = jwtDynamic.Value<string>("STATUS");
-            var ResultMessage = jwtDynamic.Value<string>("Message");
-            IsBusy = false;
-            if (ResultStatus.Equals("00"))
-            {
-                await Application.Current.MainPage.Navigation.PopAsync();
-                var Order_Id = jwtDynamic.Value<string>("ORDER_ID");
-                await PopupNavigation.Instance.PushAsync(new OrderPopUp(Order_Id, categ_Id));
-            }
-            else if (ResultStatus.Equals("101"))
-            {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(ResultMessage));
-            }
-            else
-            {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(ResultMessage));
+                IsBusy = true;
+                if (IsSaveCard.Equals(true))
+                {
+                    paymentListModel.CARD_NUMBER = Convert.ToInt64(Number.Replace("-", ""));
+                    paymentListModel.CARD_HOLDER_NAME = Chname;
+                    paymentListModel.CARD_EXP_DATE = Expdate.Replace("/", "");
+                    var save = await _apiServicesPayment.SaveCardAsync(paymentListModel);
+                }
+
+                foreach (var order in orderResponses)
+                {
+                    UserID = order.USER_ID.ToString();
+                    OrderId = order.ORDER_REF_NO.ToString();
+                    AMOUNT = order.ORDER_AMOUNT.ToString();
+                    DATETIME = order.CREATED_DATE.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                JObject jObject = new JObject();
+                jObject.Add("USER_ID", UserID);
+                jObject.Add("ORDER_REF_NO", OrderId);
+                jObject.Add("CARD_NUMBER", Number.Replace("-", ""));
+                jObject.Add("EXPIRES", Expdate.Replace("/", ""));
+                jObject.Add("CVV_NUM", CNumber);
+                jObject.Add("CH_NAME", Chname);
+                jObject.Add("AMOUNT", Convert.ToInt64(Convert.ToDecimal(AMOUNT) * 100));
+                jObject.Add("DATE_TIME", DATETIME);
+                var ResultContent = await _apiServices.ProcessPayment(jObject);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
+                var ResultStatus = jwtDynamic.Value<string>("STATUS");
+                var ResultMessage = jwtDynamic.Value<string>("Message");
+                IsBusy = false;
+                if (ResultStatus.Equals("00"))
+                {
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                    var Order_Id = jwtDynamic.Value<string>("ORDER_ID");
+                    await PopupNavigation.Instance.PushAsync(new OrderPopUp(Order_Id, categ_Id));
+                }
+                else if (ResultStatus.Equals("101"))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(ResultMessage));
+                }
+                else
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(ResultMessage));
+                }
             }
         }
 

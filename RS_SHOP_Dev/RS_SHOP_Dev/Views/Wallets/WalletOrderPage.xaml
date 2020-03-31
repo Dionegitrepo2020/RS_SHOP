@@ -8,6 +8,14 @@
              xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
              mc:Ignorable="d"
              x:Class="RS_SHOP_Dev.Views.Wallets.WalletOrderPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Label Text="{tr:Translate Wallet_Title}" FontAttributes="Bold" FontSize="Large" TextColor="{StaticResource TextColor}" HorizontalOptions="CenterAndExpand"/>
+            <Image HeightRequest="30" WidthRequest="50"/>
+        </StackLayout>
+
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Frame CornerRadius="10" BackgroundColor="{StaticResource GrayBgColor}" Margin="20" Padding="0">
             <StackLayout VerticalOptions="Fill" HorizontalOptions="Fill" >
