@@ -14,6 +14,13 @@ namespace APIRepository.Models
     
     public partial class TB_ECOMM_PRODUCT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TB_ECOMM_PRODUCT()
+        {
+            this.TB_ECOMM_CART_ITEM = new HashSet<TB_ECOMM_CART_ITEM>();
+            this.TB_ECOMM_ORDER_ITEM = new HashSet<TB_ECOMM_ORDER_ITEM>();
+        }
+    
         public long PRODUCT_ID { get; set; }
         public Nullable<long> SUB_CATEGORY_ID { get; set; }
         public string PRODUCT_NAME { get; set; }
@@ -27,5 +34,9 @@ namespace APIRepository.Models
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
     
         public virtual TB_ECOMM_SUB_CATEGORY TB_ECOMM_SUB_CATEGORY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_ECOMM_CART_ITEM> TB_ECOMM_CART_ITEM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_ECOMM_ORDER_ITEM> TB_ECOMM_ORDER_ITEM { get; set; }
     }
 }

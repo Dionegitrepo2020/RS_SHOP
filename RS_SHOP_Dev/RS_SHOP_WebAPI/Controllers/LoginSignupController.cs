@@ -7,9 +7,6 @@ using APIRepository.Models.Custom;
 using APIRepository.Models.Response;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity.Validation;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -35,7 +32,7 @@ namespace RS_SHOP_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            SignupResponse rs = users.Create(signUp);
+            ApiResponse rs = users.Create(signUp);
             return rs;
         }
 
@@ -51,8 +48,10 @@ namespace RS_SHOP_WebAPI.Controllers
             ApiResponse rs = users.Createsm(smSignUp);
             return rs;
         }
+
         [Route("login")]
         [HttpPost]
+
         public object CheckLogin(TB_ECOMM_USERS login)
         {
             if (!ModelState.IsValid)
@@ -96,12 +95,9 @@ namespace RS_SHOP_WebAPI.Controllers
         [HttpPost]
         public object ForgotPassword(ForgotPass forgotPass)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+
             string message = "";
-            bool status = false;
+           bool status = false;
             var account = entity.TB_ECOMM_USERS.Where(a => a.USER_EMAIL == forgotPass.Email).FirstOrDefault();
             if (account != null)
             {
@@ -128,10 +124,6 @@ namespace RS_SHOP_WebAPI.Controllers
         [System.Web.Mvc.ValidateAntiForgeryToken]
         public object ResetPassword(ResetPasswordModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             string message = "";
             if (ModelState.IsValid)
             {
@@ -166,39 +158,38 @@ namespace RS_SHOP_WebAPI.Controllers
                 TB_ECOMM_USERS user = entity.TB_ECOMM_USERS.Find(ID);
                 if (user != null)
                 {
-                    if (field == "USER_NAME" && value != "null")
+                    if (field == "USER_NAME")
                     {
                         user.USER_NAME = value;
                     }
-                    if (field == "USER_EMAIL" && value != "null")
+                    if (field == "USER_EMAIL")
                     {
                         user.USER_EMAIL = value;
                     }
-                    if (field == "GENDER" && value != "null")
+                    if (field == "GENDER")
                     {
                         user.GENDER = value;
                     }
-                    if (field == "DATE_OF_BIRTH" && value != "null")
+                    if (field == "DATE_OF_BIRTH")
                     {
                         user.DATE_OF_BIRTH = Convert.ToDateTime(value);
                     }
-                    if (field == "COUNTRY" && value != "null")
+                    if (field == "COUNTRY")
                     {
                         user.COUNTRY = value;
                     }
-                    if (field == "CITY" && value != "null")
+                    if (field == "CITY")
                     {
                         user.CITY = value;
                     }
-                    if (field == user.USER_PROFILE_IMAGE && value != "null")
-                    {
-                        user.USER_PROFILE_IMAGE = value;
-                    }
+                    //if (field == user.USER_PROFILE_IMAGE)
+                    //{
+                    //    user.USER_PROFILE_IMAGE = value;
+                    //}
 
 
 
                 }
-                else { return "User does not Exist!!"; }
                 int id = this.entity.SaveChanges();
                 return ID + "-Updated";
             }
@@ -213,14 +204,11 @@ namespace RS_SHOP_WebAPI.Controllers
         [HttpPost]
         public object ActivateAccountlink(ForgotPass forgotPass)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+
             string message = "";
             bool status = false;
-            var account = entity.TB_ECOMM_USERS.Where(a => a.USER_EMAIL == forgotPass.Email).FirstOrDefault();
-            if (forgotPass.Email != null && account != null)
+            //var account = entity.TB_ECOMM_USERS.Where(a => a.USER_EMAIL == forgotPass.Email).FirstOrDefault();
+            if (forgotPass.Email != null)
             {
                 //Send email for reset password
                 //string resetCode = Guid.NewGuid().ToString();
@@ -330,9 +318,9 @@ namespace RS_SHOP_WebAPI.Controllers
             {
                 subject = "Email Varification!";
                 body = "<br/><br/>Thank you for verifying your Email Address: " + emailID +
-                    " Please click here <a href='" + link + "'>" + link + "</a> test";
-                //" Please click here <a href='" + link + "'>" + link + "</a> to activate your account";
-                //" <br/><br/><a href='" + link + "'>" + link + "</a> ";
+                    " Please click here <a href='"+link+ "'>" + link + "</a> test";
+                    //" Please click here <a href='" + link + "'>" + link + "</a> to activate your account";
+                    //" <br/><br/><a href='" + link + "'>" + link + "</a> ";
             }
             else if (emailFor == "ResetPassword")
             {
@@ -402,62 +390,5 @@ namespace RS_SHOP_WebAPI.Controllers
             }
 
         }
-
-        [Route("save/{id}")]
-        [HttpPost]
-        public object Imagepath(long id)
-        {
-            long uid = id;
-            //string foldercreate = @"C:\inetpub\wwwroot\Rsshop1\images";
-            //if (!Directory.Exists(foldercreate))
-            //{
-            //    Directory.CreateDirectory(foldercreate);
-            //}
-            try
-            {
-                var httpRequest = HttpContext.Current.Request;
-
-                if (httpRequest.Files.Count > 0)
-                {
-                    foreach (string file in httpRequest.Files)
-                    {
-                        var postedFile = httpRequest.Files[file];
-
-                        var fileName = postedFile.FileName.Split('\\').LastOrDefault().Split('/').LastOrDefault();
-
-                        var filePath = HttpContext.Current.Server.MapPath("~/images/" + fileName);
-
-                        postedFile.SaveAs(filePath);
-
-                        string imageurl = "http://dionesql.southindia.cloudapp.azure.com/Rsshop1/images/" + fileName;
-
-                        TB_ECOMM_USERS TU = entity.TB_ECOMM_USERS.Find(uid);
-                                        if (TU != null)
-                                        {
-                                            TU.USER_PROFILE_IMAGE = imageurl;
-                                            this.entity.SaveChanges();
-                                        }
-
-                        return new ImageResponse { Path = imageurl }; 
-                    }
-                }
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        throw new Exception("Error" + validationError.ErrorMessage);
-                        //return new ApiResponse { Status = "Error", Message = validationError.ErrorMessage };
-                    }
-                    throw new Exception("Error" + entityValidationErrors.ValidationErrors);
-                }
-                throw new Exception("Error" + ex.Message);
-            }
-            return "No file Selected";
-        }
-
-
     }
 }

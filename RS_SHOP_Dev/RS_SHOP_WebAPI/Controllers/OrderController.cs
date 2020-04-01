@@ -12,52 +12,22 @@ using System.Web.Http;
 
 namespace RS_SHOP_WebAPI.Controllers
 {
-    //Author : Rakshit
-    [RoutePrefix("api/oder")]
-    public class Ordercontroller : ApiController
-    {
-        ECOMM_DEVEntities entity = new ECOMM_DEVEntities();
-        [Route("add")]
-        [HttpPost]
-        public IEnumerable<TB_ECOMM_ORDER> addorder(Order order)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            IOrder iorder = new OrderImpl();
-            IEnumerable<TB_ECOMM_ORDER> rs = iorder.addorder(order);
-            return rs;
+    //[RoutePrefix("api/oder")]
+    //public class OrderController : ApiController
+    //{
+    //    ecomm_deventities entity = new ecomm_deventities();
+    //    [route("add")]
+    //    [httppost]
+    //    public object addorder(order order)
+    //    {
+    //        if (!modelstate.isvalid)
+    //        {
+    //            return badrequest(modelstate);
+    //        }
+    //        iorder iorder = new orderimpl();
+    //        apiresponse rs = iorder.addorder(order);
+    //        return rs;
 
-        }
-
-        [Route("listall/{UID}")]
-        [HttpGet]
-
-        public object GetSAddress(long uid)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IOrder getorders = new OrderImpl();
-            object ud = getorders.Getorders(uid);
-            return ud;
-        }
-
-        [Route("list/{OID}")]
-        [HttpGet]
-
-        public object Getorder(long oid)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IOrder getorders = new OrderImpl();
-            object ud = getorders.Getorder(oid);
-            return ud;
-        }
-
-    }
+    //    }
+    //}
 }

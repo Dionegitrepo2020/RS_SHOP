@@ -31,14 +31,13 @@ namespace APIRepository.Models
         public string ORDER_QR_TAG { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
-        public string ORDER_REF_NO { get; set; }
     
         public virtual TB_ECOMM_ADDRESS TB_ECOMM_ADDRESS { get; set; }
         public virtual TB_ECOMM_COUPON TB_ECOMM_COUPON { get; set; }
         public virtual TB_ECOMM_DELIVERY_TYPE TB_ECOMM_DELIVERY_TYPE { get; set; }
-        public virtual TB_ECOMM_PICKUP_STORES TB_ECOMM_PICKUP_STORES { get; set; }
-        public virtual TB_ECOMM_USERS TB_ECOMM_USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ECOMM_ORDER_ITEM> TB_ECOMM_ORDER_ITEM { get; set; }
+        public virtual TB_ECOMM_PICKUP_STORES TB_ECOMM_PICKUP_STORES { get; set; }
+        public virtual TB_ECOMM_USERS TB_ECOMM_USERS { get; set; }
     }
 }

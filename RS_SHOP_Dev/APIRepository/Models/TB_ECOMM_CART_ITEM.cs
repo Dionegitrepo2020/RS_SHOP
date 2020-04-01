@@ -16,16 +16,14 @@ namespace APIRepository.Models
     {
         public long CART_ITEM_ID { get; set; }
         public Nullable<long> USER_ID { get; set; }
-        public Nullable<long> PRODUCT_ID { get; set; }
         public Nullable<long> PRODUCT_DETAIL_ID { get; set; }
         public Nullable<int> CART_ITEM_QUANTITY { get; set; }
-        public Nullable<decimal> CART_PRICE { get; set; }
         public Nullable<System.DateTime> ADDED_DATE { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
-        public Nullable<long> CATEGORY_ID { get; set; }
-        public Nullable<bool> WISHLIST { get; set; }
+        public Nullable<long> PRODUCT_ID { get; set; }
     
-        public virtual TB_ECOMM_PRODUCT TB_ECOMM_PRODUCT { get; set; }
+        public virtual TB_ECOMM_PRODUCT_DETAILS TB_ECOMM_PRODUCT_DETAILS { get; set; }
         public virtual TB_ECOMM_USERS TB_ECOMM_USERS { get; set; }
+        public virtual TB_ECOMM_PRODUCT TB_ECOMM_PRODUCT { get; set; }
     }
 }

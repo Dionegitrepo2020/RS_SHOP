@@ -20,8 +20,6 @@ namespace APIRepository.Models
             this.TB_ECOMM_ADDRESS = new HashSet<TB_ECOMM_ADDRESS>();
             this.TB_ECOMM_CART_ITEM = new HashSet<TB_ECOMM_CART_ITEM>();
             this.TB_ECOMM_ORDER = new HashSet<TB_ECOMM_ORDER>();
-            this.TB_ECOMM_CARD_DETAILS = new HashSet<TB_ECOMM_CARD_DETAILS>();
-            this.TB_ECOMM_PAYMENT_STATUS_DETAILS = new HashSet<TB_ECOMM_PAYMENT_STATUS_DETAILS>();
         }
     
         public long USER_ID { get; set; }
@@ -40,21 +38,13 @@ namespace APIRepository.Models
         public Nullable<long> ROLE_ID { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
-        public Nullable<long> CONDITION_ID { get; set; }
-        public string PARENT_NAME { get; set; }
-        public string PARENT_ID { get; set; }
     
+        public virtual TB_USERS_ROLES TB_USERS_ROLES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ECOMM_ADDRESS> TB_ECOMM_ADDRESS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ECOMM_CART_ITEM> TB_ECOMM_CART_ITEM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TB_ECOMM_ORDER> TB_ECOMM_ORDER { get; set; }
-        public virtual TB_USERS_ROLES TB_USERS_ROLES { get; set; }
-        public virtual TB_ECOMM_SIGNUP_CONDITION_MASTER TB_ECOMM_SIGNUP_CONDITION_MASTER { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_ECOMM_CARD_DETAILS> TB_ECOMM_CARD_DETAILS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_ECOMM_PAYMENT_STATUS_DETAILS> TB_ECOMM_PAYMENT_STATUS_DETAILS { get; set; }
     }
 }

@@ -31,19 +31,6 @@ namespace RS_SHOP_WebAPI.Controllers
             return ud;
         }
 
-        [Route("listallitem/{pid}")]
-        [HttpGet]
-        public Object Getproduct(long pid)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IItem iitem = new ItemImpl();
-            List<Products> ud = iitem.GetItem(pid);
-            return ud;
-        }
-
         [Route("listallitemdetail/{pid}")]
         [HttpGet]
         public Object Getproductsdetail(long pid)
@@ -72,44 +59,16 @@ namespace RS_SHOP_WebAPI.Controllers
 
         }
 
-        [Route("updatecart")]
-        [HttpPut]
-
-        public object updatecart(TB_ECOMM_CART_ITEM cart)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IItem iitem = new ItemImpl();
-            ApiResponse rs = iitem.updatecart(cart);
-            return rs;
-
-        }
-
-        [Route("listcart/{uid}")]
+        [Route("listcart/{cid}")]
         [HttpGet]
-        public Object Getcart(long uid)
+        public Object Getcart(long cid)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             IItem iitem = new ItemImpl();
-            List<CartItem> ci = iitem.Getcart(uid);
-            return ci;
-        }
-
-        [Route("listcartM/{uid}")]
-        [HttpGet]
-        public Object GetcartM(long uid)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IItem iitem = new ItemImpl();
-            List<CartItem> ci = iitem.GetcartM(uid);
+            object ci = iitem.Getcart(cid);
             return ci;
         }
 
@@ -128,46 +87,16 @@ namespace RS_SHOP_WebAPI.Controllers
 
         }
 
-        [Route("removeallfromcart/{UID}")]
-        [HttpDelete]
-
-        public object deleteallcart(long UID)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IItem iitem = new ItemImpl();
-            object rs = iitem.deleteallcart(UID);
-            return rs;
-
-        }
-
-        [Route("removeallfromcart/{UID}/{catid}")]
-        [HttpDelete]
-
-        public object deleteallcart(long UID, long catid)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            IItem iitem = new ItemImpl();
-            object rs = iitem.deleteallcart(UID,catid);
-            return rs;
-
-        }
-
-        [Route("searchsuggest/{param}/{cat}")]
+        [Route("searchsuggest/{param}")]
         [HttpGet]
-        public Object Autosearch(string param, long cat)
+        public Object Autosearch(string param)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             IItem iitem = new ItemImpl();
-            List<Searchitem> ud = iitem.SearchItem(param,cat);
+            List<Searchitem> ud = iitem.SearchItem(param);
             return ud;
         }
     }

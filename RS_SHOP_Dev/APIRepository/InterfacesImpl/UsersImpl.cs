@@ -15,39 +15,30 @@ namespace APIRepository.InterfacesImpl
     public class UsersImpl : IUsers
     {
         ECOMM_DEVEntities entity = new ECOMM_DEVEntities();
-        public SignupResponse Create(SignUp signUp)
+        public ApiResponse Create(SignUp signUp)
 
         {
             try
             {
-                var chkUser = (from s in entity.TB_ECOMM_USERS where s.USER_EMAIL == signUp.USER_EMAIL select s).FirstOrDefault();
+                var chkUser = (from s in entity.TB_ECOMM_USERS where s.USER_EMAIL == signUp.USER_EMAIL || s.USER_NAME == signUp.USER_NAME select s).FirstOrDefault();
                 if (chkUser == null)
                 {
                     TB_ECOMM_USERS EL = new TB_ECOMM_USERS();
                     if (EL.USER_ID == 0)
                     {
-                        if (signUp.USER_NAME != "null")
-                        {
-                            var keyNew = HelperMethods.GeneratePassword(10);
-                            EL.USER_NAME = signUp.USER_NAME;
-                            EL.USER_EMAIL = signUp.USER_EMAIL;
-                            var User_Password = HelperMethods.EncodePassword(signUp.USER_PASSWORD, keyNew);
-                            EL.USER_PASSWORD = User_Password;
-                            EL.PASSWORD_SALT = keyNew;
-                            EL.DATE_OF_BIRTH = Convert.ToDateTime(signUp.DATE_OF_BIRTH);
-                            EL.CONDITION_ID = signUp.CONDITION_ID;
-                            EL.PARENT_NAME = signUp.PARENT_NAME;
-                            EL.PARENT_ID = signUp.PARENT_ID;
-                            entity.TB_ECOMM_USERS.Add(EL);
-                            entity.SaveChanges();
-                            return new SignupResponse
-                            { Status = "Success", USER_ID = EL.USER_ID.ToString(), Message = "User SuccessFully Saved." };
-                        }
-                        else return new SignupResponse { Status = "Error", Message = "Enter Valid Name!!!" };
-                        
-                        }
+                        var keyNew = HelperMethods.GeneratePassword(10);
+                        EL.USER_NAME = signUp.USER_NAME;
+                        EL.USER_EMAIL = signUp.USER_EMAIL;
+                        var User_Password = HelperMethods.EncodePassword(signUp.USER_PASSWORD, keyNew);
+                        EL.USER_PASSWORD = User_Password;
+                        EL.PASSWORD_SALT = keyNew;
+                        entity.TB_ECOMM_USERS.Add(EL);
+                        entity.SaveChanges();
+                        return new ApiResponse
+                        { Status = "Success", Message = "User SuccessFully Saved." };
+                    }
                 }
-                else return new SignupResponse { Status = "Error", USER_ID = chkUser.USER_ID.ToString(), Message = "User Already Exist!!!" };
+                else return new ApiResponse { Status = "Error", USER_ID=chkUser.USER_ID.ToString(), Message = "User Already Exist!!!" };
             }
             catch (DbEntityValidationException ex)
             {
@@ -55,11 +46,11 @@ namespace APIRepository.InterfacesImpl
                 {
                     foreach (var validationError in entityValidationErrors.ValidationErrors)
                     {
-                        return new SignupResponse { Status = "Error", Message = validationError.ErrorMessage };
+                        return new ApiResponse { Status = "Error", Message = validationError.ErrorMessage };
                     }
                 }
             }
-            return new SignupResponse
+            return new ApiResponse
             { Status = "Error", Message = "Invalid Data." };
         }
 
@@ -117,11 +108,10 @@ namespace APIRepository.InterfacesImpl
                     //Check Login Detail User Name Or Password    
                     var query = (from s in entity.TB_ECOMM_USERS where (s.USER_EMAIL == loginm.USER_EMAIL || s.USER_NAME == loginm.USER_NAME) && s.USER_PASSWORD.Equals(encodingPasswordString) select s).FirstOrDefault();
                     if (query != null)
-                    {
+                    {   
 
                         return new LoginResponse
                         {
-                            Status = "Success",
                             Message = "Login Successfully",
                             User_Name = query.USER_NAME,
                             User_Id = query.USER_ID,
@@ -152,10 +142,9 @@ namespace APIRepository.InterfacesImpl
                     dto.USER_EMAIL = t.USER_EMAIL;
                     dto.USER_NAME = t.USER_NAME;
                     dto.GENDER = t.GENDER;
-                    dto.DATE_OF_BIRTH =t.DATE_OF_BIRTH;
+                    dto.DATE_OF_BIRTH =Convert.ToDateTime(t.DATE_OF_BIRTH);
                     dto.COUNTRY = t.COUNTRY;
                     dto.CITY = t.CITY;
-                    dto.USER_PROFILE_IMAGE = t.USER_PROFILE_IMAGE;
                     dtl.Add(dto);
                 }
                 return dtl;
@@ -170,21 +159,16 @@ namespace APIRepository.InterfacesImpl
         {
             try
             {
-                if (Id !=0)
-                {
-                    TB_ECOMM_USERS user = entity.TB_ECOMM_USERS.Find(Id);
-                    SignUp userDTO = new SignUp();
-                    userDTO.USER_ID = user.USER_ID;
-                    userDTO.USER_EMAIL = user.USER_EMAIL;
-                    userDTO.USER_NAME = user.USER_NAME;
-                    userDTO.GENDER = user.GENDER;
-                    userDTO.DATE_OF_BIRTH = user.DATE_OF_BIRTH;
-                    userDTO.COUNTRY = user.COUNTRY;
-                    userDTO.CITY = user.CITY;
-                    userDTO.USER_PROFILE_IMAGE = user.USER_PROFILE_IMAGE;
-                    return userDTO;
-                }
-                else { return new SignUp(); }
+                TB_ECOMM_USERS user = entity.TB_ECOMM_USERS.Find(Id);
+                SignUp userDTO = new SignUp();
+                userDTO.USER_ID = user.USER_ID;
+                userDTO.USER_EMAIL = user.USER_EMAIL;
+                userDTO.USER_NAME = user.USER_NAME;
+                userDTO.GENDER = user.GENDER;
+                userDTO.DATE_OF_BIRTH = user.DATE_OF_BIRTH;
+                userDTO.COUNTRY = user.COUNTRY;
+                userDTO.CITY = user.CITY;
+                return userDTO;
             }
             catch (Exception ex)
             {

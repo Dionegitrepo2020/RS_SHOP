@@ -33,27 +33,10 @@
           <Property Name="FULL_NAME" Type="nvarchar" MaxLength="250" />
           <Property Name="ADDRESS1" Type="nvarchar" MaxLength="250" />
           <Property Name="ADDRESS2" Type="nvarchar" MaxLength="250" />
-          <Property Name="COUNTRY" Type="nvarchar" MaxLength="100" />
           <Property Name="POST_CODE" Type="nvarchar" MaxLength="20" />
           <Property Name="CITY" Type="nvarchar" MaxLength="250" />
           <Property Name="PHONE" Type="nvarchar" MaxLength="20" />
           <Property Name="IS_DEFAULT" Type="bit" />
-          <Property Name="CREATED_DATE" Type="datetime" />
-          <Property Name="MODIFIED_DATE" Type="datetime" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_CARD_DETAILS">
-          <Key>
-            <PropertyRef Name="CARD_ID" />
-          </Key>
-          <Property Name="CARD_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="USER_ID" Type="bigint" />
-          <Property Name="CARD_NUMBER" Type="bigint" />
-          <Property Name="CARD_HOLDER_NAME" Type="nvarchar" MaxLength="250" />
-          <Property Name="CARD_EXP_DATE" Type="nchar" MaxLength="4" />
-          <Property Name="CARD_TYPE" Type="nvarchar" MaxLength="20" />
-          <Property Name="CARD_CVV" Type="nchar" MaxLength="3" />
-          <Property Name="UDF_1" Type="nchar" MaxLength="10" />
-          <Property Name="CARD_DEFAULT" Type="bit" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
         </EntityType>
@@ -66,9 +49,6 @@
           <Property Name="PRODUCT_ID" Type="bigint" />
           <Property Name="PRODUCT_DETAIL_ID" Type="bigint" />
           <Property Name="CART_ITEM_QUANTITY" Type="int" />
-          <Property Name="CART_PRICE" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="CATEGORY_ID" Type="bigint" />
-          <Property Name="WISHLIST" Type="bit" />
           <Property Name="ADDED_DATE" Type="datetime" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
         </EntityType>
@@ -131,7 +111,6 @@
             <PropertyRef Name="ORDER_ID" />
           </Key>
           <Property Name="ORDER_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ORDER_REF_NO" Type="nvarchar" MaxLength="500" />
           <Property Name="USER_ID" Type="bigint" />
           <Property Name="ADDRESS_ID" Type="bigint" />
           <Property Name="COUPON_ID" Type="bigint" />
@@ -146,38 +125,11 @@
         <EntityType Name="TB_ECOMM_ORDER_ITEM">
           <Key>
             <PropertyRef Name="ORDER_ITEM_ID" />
-            <PropertyRef Name="ORDER_ID" />
           </Key>
           <Property Name="ORDER_ITEM_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ORDER_ID" Type="bigint" Nullable="false" />
+          <Property Name="ORDER_ID" Type="bigint" />
           <Property Name="PRODUCT_ID" Type="bigint" />
           <Property Name="PRODUCT_QUANTITY" Type="bigint" />
-          <Property Name="PRODUCT_AMOUNT" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="CREATED_DATE" Type="datetime" />
-          <Property Name="MODIFIED_DATE" Type="datetime" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_PAYMENT_STATUS_DETAILS">
-          <Key>
-            <PropertyRef Name="PAYMENT_STATUS_ID" />
-          </Key>
-          <Property Name="PAYMENT_STATUS_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="USER_ID" Type="bigint" />
-          <Property Name="TIMESTAMP" Type="nchar" MaxLength="14" />
-          <Property Name="MERCHANT_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="ACCOUNT" Type="nvarchar" MaxLength="30" />
-          <Property Name="ORDER_ID" Type="nvarchar" MaxLength="250" />
-          <Property Name="AUTH_CODE" Type="nchar" MaxLength="10" />
-          <Property Name="RESULT" Type="nvarchar" MaxLength="3" />
-          <Property Name="CVN_RESULT" Type="nchar" MaxLength="1" />
-          <Property Name="AVS_ADDRESS_RESPONSE" Type="nchar" MaxLength="1" />
-          <Property Name="BATCH_ID" Type="nvarchar" MaxLength="10" />
-          <Property Name="MESSAGE" Type="nvarchar" MaxLength="250" />
-          <Property Name="PAYMENT_REF_NUMBER" Type="nvarchar" MaxLength="50" />
-          <Property Name="BANK_NAME" Type="nvarchar" MaxLength="30" />
-          <Property Name="BANK_COUNTRY" Type="nvarchar" MaxLength="30" />
-          <Property Name="COUNTRY_CODE" Type="nchar" MaxLength="2" />
-          <Property Name="REGION" Type="nvarchar" MaxLength="20" />
-          <Property Name="SHA_HASH" Type="nvarchar" MaxLength="40" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
         </EntityType>
@@ -220,13 +172,6 @@
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
         </EntityType>
-        <EntityType Name="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-          <Key>
-            <PropertyRef Name="CONDITION_ID" />
-          </Key>
-          <Property Name="CONDITION_ID" Type="bigint" Nullable="false" />
-          <Property Name="CONDITION" Type="nvarchar" MaxLength="250" />
-        </EntityType>
         <EntityType Name="TB_ECOMM_SUB_CATEGORY">
           <Key>
             <PropertyRef Name="SUB_CATEGORY_ID" />
@@ -255,9 +200,6 @@
           <Property Name="COUNTRY" Type="nvarchar" MaxLength="250" />
           <Property Name="CITY" Type="nvarchar" MaxLength="250" />
           <Property Name="ROLE_ID" Type="bigint" />
-          <Property Name="CONDITION_ID" Type="bigint" />
-          <Property Name="PARENT_NAME" Type="nvarchar" MaxLength="250" />
-          <Property Name="PARENT_ID" Type="nvarchar" MaxLength="20" />
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
         </EntityType>
@@ -294,18 +236,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_CARD_DETAILS" Type="Self.TB_ECOMM_CARD_DETAILS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_CARD_DETAILS">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
           <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="0..1" />
           <End Role="TB_ECOMM_CART_ITEM" Type="Self.TB_ECOMM_CART_ITEM" Multiplicity="*" />
@@ -339,6 +269,18 @@
             </Principal>
             <Dependent Role="TB_ECOMM_CITY">
               <PropertyRef Name="COUNTRY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER">
+          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="0..1" />
+          <End Role="TB_ECOMM_ORDER_ITEM" Type="Self.TB_ECOMM_ORDER_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_ORDER">
+              <PropertyRef Name="ORDER_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_ORDER_ITEM">
+              <PropertyRef Name="ORDER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,18 +356,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_PAYMENT_STATUS_DETAILS" Type="Self.TB_ECOMM_PAYMENT_STATUS_DETAILS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_PAYMENT_STATUS_DETAILS">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
           <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="0..1" />
           <End Role="TB_ECOMM_PRODUCT_DETAILS" Type="Self.TB_ECOMM_PRODUCT_DETAILS" Multiplicity="*" />
@@ -450,18 +380,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_ECOMM_USERS_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_SIGNUP_CONDITION_MASTER" Type="Self.TB_ECOMM_SIGNUP_CONDITION_MASTER" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-              <PropertyRef Name="CONDITION_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_USERS">
-              <PropertyRef Name="CONDITION_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_ECOMM_USERS_TB_USERS_ROLES">
           <End Role="TB_USERS_ROLES" Type="Self.TB_USERS_ROLES" Multiplicity="0..1" />
           <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="*" />
@@ -474,11 +392,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_ITEMSLIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ECOMM_DEVModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_ACTIVITY_STATE" EntityType="Self.TB_ECOMM_ACTIVITY_STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_ADDRESS" EntityType="Self.TB_ECOMM_ADDRESS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_ECOMM_CARD_DETAILS" EntityType="Self.TB_ECOMM_CARD_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_CART_ITEM" EntityType="Self.TB_ECOMM_CART_ITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_CATEGORY" EntityType="Self.TB_ECOMM_CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_CITY" EntityType="Self.TB_ECOMM_CITY" Schema="dbo" store:Type="Tables" />
@@ -487,11 +405,9 @@
           <EntitySet Name="TB_ECOMM_DELIVERY_TYPE" EntityType="Self.TB_ECOMM_DELIVERY_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_ORDER" EntityType="Self.TB_ECOMM_ORDER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_ORDER_ITEM" EntityType="Self.TB_ECOMM_ORDER_ITEM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_ECOMM_PAYMENT_STATUS_DETAILS" EntityType="Self.TB_ECOMM_PAYMENT_STATUS_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_PICKUP_STORES" EntityType="Self.TB_ECOMM_PICKUP_STORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_PRODUCT" EntityType="Self.TB_ECOMM_PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_PRODUCT_DETAILS" EntityType="Self.TB_ECOMM_PRODUCT_DETAILS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_ECOMM_SIGNUP_CONDITION_MASTER" EntityType="Self.TB_ECOMM_SIGNUP_CONDITION_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_SUB_CATEGORY" EntityType="Self.TB_ECOMM_SUB_CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_ECOMM_USERS" EntityType="Self.TB_ECOMM_USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_USERS_ROLES" EntityType="Self.TB_USERS_ROLES" Schema="dbo" store:Type="Tables" />
@@ -502,10 +418,6 @@
           <AssociationSet Name="FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS">
             <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
             <End Role="TB_ECOMM_ADDRESS" EntitySet="TB_ECOMM_ADDRESS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_CARD_DETAILS" EntitySet="TB_ECOMM_CARD_DETAILS" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" Association="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
             <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
@@ -518,6 +430,10 @@
           <AssociationSet Name="FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" Association="Self.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY">
             <End Role="TB_ECOMM_COUNTRY" EntitySet="TB_ECOMM_COUNTRY" />
             <End Role="TB_ECOMM_CITY" EntitySet="TB_ECOMM_CITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" Association="Self.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER">
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
+            <End Role="TB_ECOMM_ORDER_ITEM" EntitySet="TB_ECOMM_ORDER_ITEM" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" Association="Self.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT">
             <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
@@ -543,10 +459,6 @@
             <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
             <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_PAYMENT_STATUS_DETAILS" EntitySet="TB_ECOMM_PAYMENT_STATUS_DETAILS" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" Association="Self.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
             <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
             <End Role="TB_ECOMM_PRODUCT_DETAILS" EntitySet="TB_ECOMM_PRODUCT_DETAILS" />
@@ -554,10 +466,6 @@
           <AssociationSet Name="FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" Association="Self.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY">
             <End Role="TB_ECOMM_SUB_CATEGORY" EntitySet="TB_ECOMM_SUB_CATEGORY" />
             <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_USERS_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_USERS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_SIGNUP_CONDITION_MASTER" EntitySet="TB_ECOMM_SIGNUP_CONDITION_MASTER" />
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_USERS_TB_USERS_ROLES" Association="Self.FK_TB_ECOMM_USERS_TB_USERS_ROLES">
             <End Role="TB_USERS_ROLES" EntitySet="TB_USERS_ROLES" />
@@ -587,190 +495,6 @@
           <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="TB_ECOMM_ADDRESS">
-          <Key>
-            <PropertyRef Name="ADDRESS_ID" />
-          </Key>
-          <Property Name="ADDRESS_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="FULL_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ADDRESS1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ADDRESS2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="COUNTRY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="POST_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CITY" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IS_DEFAULT" Type="Boolean" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="Self.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" FromRole="TB_ECOMM_ADDRESS" ToRole="TB_ECOMM_USERS" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" FromRole="TB_ECOMM_ADDRESS" ToRole="TB_ECOMM_ORDER" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_CART_ITEM">
-          <Key>
-            <PropertyRef Name="CART_ITEM_ID" />
-          </Key>
-          <Property Name="CART_ITEM_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="PRODUCT_ID" Type="Int64" />
-          <Property Name="PRODUCT_DETAIL_ID" Type="Int64" />
-          <Property Name="CART_ITEM_QUANTITY" Type="Int32" />
-          <Property Name="CART_PRICE" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" FromRole="TB_ECOMM_CART_ITEM" ToRole="TB_ECOMM_PRODUCT" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" FromRole="TB_ECOMM_CART_ITEM" ToRole="TB_ECOMM_USERS" />
-          <Property Name="CATEGORY_ID" Type="Int64" />
-          <Property Name="WISHLIST" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_CATEGORY">
-          <Key>
-            <PropertyRef Name="CATEGORY_ID" />
-          </Key>
-          <Property Name="CATEGORY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_CITY">
-          <Key>
-            <PropertyRef Name="CITY_ID" />
-          </Key>
-          <Property Name="CITY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COUNTRY_ID" Type="Int64" />
-          <Property Name="CITY_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_COUNTRY" Relationship="Self.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" FromRole="TB_ECOMM_CITY" ToRole="TB_ECOMM_COUNTRY" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_COUNTRY">
-          <Key>
-            <PropertyRef Name="COUNTRY_ID" />
-          </Key>
-          <Property Name="COUNTRY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COUNTRY_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_COUPON">
-          <Key>
-            <PropertyRef Name="COUPON_ID" />
-          </Key>
-          <Property Name="COUPON_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COUPON_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="COUPON_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="COUPON_DISCOUNT" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="COUPON_VALID" Type="Boolean" />
-          <Property Name="COUPON_QUANTITY" Type="Int64" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="EXPIRE_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" FromRole="TB_ECOMM_COUPON" ToRole="TB_ECOMM_ORDER" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_DELIVERY_TYPE">
-          <Key>
-            <PropertyRef Name="DELIVERY_TYPE_ID" />
-          </Key>
-          <Property Name="DELIVERY_TYPE_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DELIVERY_TYPE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="DELIVERY_TYPE_COST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="STORE_ADDRESS1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="STORE_ADDRESS2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" FromRole="TB_ECOMM_DELIVERY_TYPE" ToRole="TB_ECOMM_ORDER" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_ORDER">
-          <Key>
-            <PropertyRef Name="ORDER_ID" />
-          </Key>
-          <Property Name="ORDER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="ADDRESS_ID" Type="Int64" />
-          <Property Name="COUPON_ID" Type="Int64" />
-          <Property Name="PICKUP_STORE_ID" Type="Int64" />
-          <Property Name="DELIVERY_TYPE_ID" Type="Int64" />
-          <Property Name="ORDER_AMOUNT" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ORDER_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ORDER_QR_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_ADDRESS" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_ADDRESS" />
-          <NavigationProperty Name="TB_ECOMM_COUPON" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_COUPON" />
-          <NavigationProperty Name="TB_ECOMM_DELIVERY_TYPE" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_DELIVERY_TYPE" />
-          <NavigationProperty Name="TB_ECOMM_PICKUP_STORES" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_PICKUP_STORES" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_USERS" />
-          <NavigationProperty Name="TB_ECOMM_ORDER_ITEM" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_ORDER_ITEM" />
-          <Property Name="ORDER_REF_NO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_ORDER_ITEM">
-          <Key>
-            <PropertyRef Name="ORDER_ITEM_ID" />
-            <PropertyRef Name="ORDER_ID" />
-          </Key>
-          <Property Name="ORDER_ITEM_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ORDER_ID" Type="Int64" Nullable="false" />
-          <Property Name="PRODUCT_ID" Type="Int64" />
-          <Property Name="PRODUCT_QUANTITY" Type="Int64" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="Self.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" FromRole="TB_ECOMM_ORDER_ITEM" ToRole="TB_ECOMM_PRODUCT" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" FromRole="TB_ECOMM_ORDER_ITEM" ToRole="TB_ECOMM_ORDER" />
-          <Property Name="PRODUCT_AMOUNT" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_PICKUP_STORES">
-          <Key>
-            <PropertyRef Name="PICKUP_STORE_ID" />
-          </Key>
-          <Property Name="PICKUP_STORE_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PICKUP_STORE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PICKUP_STORE_ADDRESS1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PICKUP_STORE_ADDRESS2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" FromRole="TB_ECOMM_PICKUP_STORES" ToRole="TB_ECOMM_ORDER" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_PRODUCT">
-          <Key>
-            <PropertyRef Name="PRODUCT_ID" />
-          </Key>
-          <Property Name="PRODUCT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SUB_CATEGORY_ID" Type="Int64" />
-          <Property Name="PRODUCT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_IMAGE1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_IMAGE2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_IMAGE3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_IMAGE4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_SUB_CATEGORY" Relationship="Self.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" FromRole="TB_ECOMM_PRODUCT" ToRole="TB_ECOMM_SUB_CATEGORY" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_PRODUCT_DETAILS">
-          <Key>
-            <PropertyRef Name="PRODUCT_DETAIL_ID" />
-          </Key>
-          <Property Name="PRODUCT_DETAIL_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PRODUCT_ID" Type="Int64" />
-          <Property Name="PRODUCT_SIZE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PRODUCT_QR_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="Self.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" FromRole="TB_ECOMM_PRODUCT_DETAILS" ToRole="TB_ECOMM_PRODUCT" />
-        </EntityType>
-        <EntityType Name="TB_ECOMM_SUB_CATEGORY">
-          <Key>
-            <PropertyRef Name="SUB_CATEGORY_ID" />
-          </Key>
-          <Property Name="SUB_CATEGORY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CATEGORY_ID" Type="Int64" />
-          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_CATEGORY" Relationship="Self.FK_Table_1_TB_ECOMM_CATEGORY" FromRole="TB_ECOMM_SUB_CATEGORY" ToRole="TB_ECOMM_CATEGORY" />
-        </EntityType>
         <EntityType Name="TB_ECOMM_USERS">
           <Key>
             <PropertyRef Name="USER_ID" />
@@ -791,16 +515,10 @@
           <Property Name="ROLE_ID" Type="Int64" />
           <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_ADDRESS" Relationship="Self.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_ADDRESS" />
-          <NavigationProperty Name="TB_ECOMM_CART_ITEM" Relationship="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_CART_ITEM" />
-          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_ORDER" />
           <NavigationProperty Name="TB_USERS_ROLES" Relationship="Self.FK_TB_ECOMM_USERS_TB_USERS_ROLES" FromRole="TB_ECOMM_USERS" ToRole="TB_USERS_ROLES" />
-          <Property Name="CONDITION_ID" Type="Int64" />
-          <Property Name="PARENT_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PARENT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TB_ECOMM_SIGNUP_CONDITION_MASTER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_USERS_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_SIGNUP_CONDITION_MASTER" />
-          <NavigationProperty Name="TB_ECOMM_CARD_DETAILS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_CARD_DETAILS" />
-          <NavigationProperty Name="TB_ECOMM_PAYMENT_STATUS_DETAILS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_PAYMENT_STATUS_DETAILS" />
+          <NavigationProperty Name="TB_ECOMM_ADDRESS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_ADDRESS" />
+          <NavigationProperty Name="TB_ECOMM_CART_ITEM" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_CART_ITEM" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" FromRole="TB_ECOMM_USERS" ToRole="TB_ECOMM_ORDER" />
         </EntityType>
         <EntityType Name="TB_USERS_ROLES">
           <Key>
@@ -811,162 +529,6 @@
           <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ADDRESS" Type="Self.TB_ECOMM_ADDRESS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ADDRESS">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS">
-          <End Role="TB_ECOMM_ADDRESS" Type="Self.TB_ECOMM_ADDRESS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_ADDRESS">
-              <PropertyRef Name="ADDRESS_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER">
-              <PropertyRef Name="ADDRESS_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
-          <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_CART_ITEM" Type="Self.TB_ECOMM_CART_ITEM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_CART_ITEM">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_CART_ITEM" Type="Self.TB_ECOMM_CART_ITEM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_CART_ITEM">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Table_1_TB_ECOMM_CATEGORY">
-          <End Role="TB_ECOMM_CATEGORY" Type="Self.TB_ECOMM_CATEGORY" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_SUB_CATEGORY" Type="Self.TB_ECOMM_SUB_CATEGORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_CATEGORY">
-              <PropertyRef Name="CATEGORY_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_SUB_CATEGORY">
-              <PropertyRef Name="CATEGORY_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY">
-          <End Role="TB_ECOMM_COUNTRY" Type="Self.TB_ECOMM_COUNTRY" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_CITY" Type="Self.TB_ECOMM_CITY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_COUNTRY">
-              <PropertyRef Name="COUNTRY_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_CITY">
-              <PropertyRef Name="COUNTRY_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON">
-          <End Role="TB_ECOMM_COUPON" Type="Self.TB_ECOMM_COUPON" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_COUPON">
-              <PropertyRef Name="COUPON_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER">
-              <PropertyRef Name="COUPON_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE">
-          <End Role="TB_ECOMM_DELIVERY_TYPE" Type="Self.TB_ECOMM_DELIVERY_TYPE" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_DELIVERY_TYPE">
-              <PropertyRef Name="DELIVERY_TYPE_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER">
-              <PropertyRef Name="DELIVERY_TYPE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES">
-          <End Role="TB_ECOMM_PICKUP_STORES" Type="Self.TB_ECOMM_PICKUP_STORES" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_PICKUP_STORES">
-              <PropertyRef Name="PICKUP_STORE_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER">
-              <PropertyRef Name="PICKUP_STORE_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_USERS">
-          <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER" Type="Self.TB_ECOMM_ORDER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER">
-              <PropertyRef Name="USER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT">
-          <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_ORDER_ITEM" Type="Self.TB_ECOMM_ORDER_ITEM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_ORDER_ITEM">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
-          <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_PRODUCT_DETAILS" Type="Self.TB_ECOMM_PRODUCT_DETAILS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_PRODUCT">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_PRODUCT_DETAILS">
-              <PropertyRef Name="PRODUCT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY">
-          <End Role="TB_ECOMM_SUB_CATEGORY" Type="Self.TB_ECOMM_SUB_CATEGORY" Multiplicity="0..1" />
-          <End Role="TB_ECOMM_PRODUCT" Type="Self.TB_ECOMM_PRODUCT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_SUB_CATEGORY">
-              <PropertyRef Name="SUB_CATEGORY_ID" />
-            </Principal>
-            <Dependent Role="TB_ECOMM_PRODUCT">
-              <PropertyRef Name="SUB_CATEGORY_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_ECOMM_USERS_TB_USERS_ROLES">
           <End Role="TB_USERS_ROLES" Type="Self.TB_USERS_ROLES" Multiplicity="0..1" />
           <End Role="TB_ECOMM_USERS" Type="Self.TB_ECOMM_USERS" Multiplicity="*" />
@@ -982,99 +544,431 @@
         <EntityContainer Name="ECOMM_DEVEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TB_ECOMM_ACTIVITY_STATE" EntityType="Self.TB_ECOMM_ACTIVITY_STATE" />
-          <EntitySet Name="TB_ECOMM_ADDRESS" EntityType="Self.TB_ECOMM_ADDRESS" />
-          <EntitySet Name="TB_ECOMM_CART_ITEM" EntityType="Self.TB_ECOMM_CART_ITEM" />
-          <EntitySet Name="TB_ECOMM_CATEGORY" EntityType="Self.TB_ECOMM_CATEGORY" />
-          <EntitySet Name="TB_ECOMM_CITY" EntityType="Self.TB_ECOMM_CITY" />
-          <EntitySet Name="TB_ECOMM_COUNTRY" EntityType="Self.TB_ECOMM_COUNTRY" />
-          <EntitySet Name="TB_ECOMM_COUPON" EntityType="Self.TB_ECOMM_COUPON" />
-          <EntitySet Name="TB_ECOMM_DELIVERY_TYPE" EntityType="Self.TB_ECOMM_DELIVERY_TYPE" />
-          <EntitySet Name="TB_ECOMM_ORDER" EntityType="Self.TB_ECOMM_ORDER" />
-          <EntitySet Name="TB_ECOMM_ORDER_ITEM" EntityType="Self.TB_ECOMM_ORDER_ITEM" />
-          <EntitySet Name="TB_ECOMM_PICKUP_STORES" EntityType="Self.TB_ECOMM_PICKUP_STORES" />
-          <EntitySet Name="TB_ECOMM_PRODUCT" EntityType="Self.TB_ECOMM_PRODUCT" />
-          <EntitySet Name="TB_ECOMM_PRODUCT_DETAILS" EntityType="Self.TB_ECOMM_PRODUCT_DETAILS" />
-          <EntitySet Name="TB_ECOMM_SUB_CATEGORY" EntityType="Self.TB_ECOMM_SUB_CATEGORY" />
           <EntitySet Name="TB_ECOMM_USERS" EntityType="Self.TB_ECOMM_USERS" />
           <EntitySet Name="TB_USERS_ROLES" EntityType="Self.TB_USERS_ROLES" />
-          <AssociationSet Name="FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_ADDRESS" EntitySet="TB_ECOMM_ADDRESS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" Association="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS">
-            <End Role="TB_ECOMM_ADDRESS" EntitySet="TB_ECOMM_ADDRESS" />
-            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" Association="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
-            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
-            <End Role="TB_ECOMM_CART_ITEM" EntitySet="TB_ECOMM_CART_ITEM" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_CART_ITEM" EntitySet="TB_ECOMM_CART_ITEM" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Table_1_TB_ECOMM_CATEGORY" Association="Self.FK_Table_1_TB_ECOMM_CATEGORY">
-            <End Role="TB_ECOMM_CATEGORY" EntitySet="TB_ECOMM_CATEGORY" />
-            <End Role="TB_ECOMM_SUB_CATEGORY" EntitySet="TB_ECOMM_SUB_CATEGORY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" Association="Self.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY">
-            <End Role="TB_ECOMM_COUNTRY" EntitySet="TB_ECOMM_COUNTRY" />
-            <End Role="TB_ECOMM_CITY" EntitySet="TB_ECOMM_CITY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" Association="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON">
-            <End Role="TB_ECOMM_COUPON" EntitySet="TB_ECOMM_COUPON" />
-            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" Association="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE">
-            <End Role="TB_ECOMM_DELIVERY_TYPE" EntitySet="TB_ECOMM_DELIVERY_TYPE" />
-            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" Association="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES">
-            <End Role="TB_ECOMM_PICKUP_STORES" EntitySet="TB_ECOMM_PICKUP_STORES" />
-            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" Association="Self.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" Association="Self.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT">
-            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
-            <End Role="TB_ECOMM_ORDER_ITEM" EntitySet="TB_ECOMM_ORDER_ITEM" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" Association="Self.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
-            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
-            <End Role="TB_ECOMM_PRODUCT_DETAILS" EntitySet="TB_ECOMM_PRODUCT_DETAILS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" Association="Self.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY">
-            <End Role="TB_ECOMM_SUB_CATEGORY" EntitySet="TB_ECOMM_SUB_CATEGORY" />
-            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_USERS_TB_USERS_ROLES" Association="Self.FK_TB_ECOMM_USERS_TB_USERS_ROLES">
             <End Role="TB_USERS_ROLES" EntitySet="TB_USERS_ROLES" />
             <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
+          </AssociationSet>
+          <EntitySet Name="TB_ECOMM_ADDRESS" EntityType="ECOMM_DEVModel.TB_ECOMM_ADDRESS" />
+          <EntitySet Name="TB_ECOMM_CART_ITEM" EntityType="ECOMM_DEVModel.TB_ECOMM_CART_ITEM" />
+          <EntitySet Name="TB_ECOMM_CATEGORY" EntityType="ECOMM_DEVModel.TB_ECOMM_CATEGORY" />
+          <EntitySet Name="TB_ECOMM_COUPON" EntityType="ECOMM_DEVModel.TB_ECOMM_COUPON" />
+          <EntitySet Name="TB_ECOMM_PRODUCT" EntityType="ECOMM_DEVModel.TB_ECOMM_PRODUCT" />
+          <EntitySet Name="TB_ECOMM_PRODUCT_DETAILS" EntityType="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS" />
+          <EntitySet Name="TB_ECOMM_SUB_CATEGORY" EntityType="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY" />
+          <AssociationSet Name="FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS">
+            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
+            <End Role="TB_ECOMM_ADDRESS" EntitySet="TB_ECOMM_ADDRESS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" Association="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
+            <End Role="TB_ECOMM_PRODUCT_DETAILS" EntitySet="TB_ECOMM_PRODUCT_DETAILS" />
+            <End Role="TB_ECOMM_CART_ITEM" EntitySet="TB_ECOMM_CART_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS">
+            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
+            <End Role="TB_ECOMM_CART_ITEM" EntitySet="TB_ECOMM_CART_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_TB_ECOMM_CATEGORY" Association="ECOMM_DEVModel.FK_Table_1_TB_ECOMM_CATEGORY">
+            <End Role="TB_ECOMM_CATEGORY" EntitySet="TB_ECOMM_CATEGORY" />
+            <End Role="TB_ECOMM_SUB_CATEGORY" EntitySet="TB_ECOMM_SUB_CATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" Association="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
+            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
+            <End Role="TB_ECOMM_PRODUCT_DETAILS" EntitySet="TB_ECOMM_PRODUCT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" Association="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY">
+            <End Role="TB_ECOMM_SUB_CATEGORY" EntitySet="TB_ECOMM_SUB_CATEGORY" />
+            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
+          </AssociationSet>
+          <FunctionImport Name="SP_ITEMSLIST" ReturnType="Collection(ECOMM_DEVModel.SP_ITEMSLIST_Result)">
+          </FunctionImport>
+          <AssociationSet Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS1" Association="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS1">
+            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
+            <End Role="TB_ECOMM_CART_ITEM" EntitySet="TB_ECOMM_CART_ITEM" />
+          </AssociationSet>
+          <EntitySet Name="TB_ECOMM_CITY" EntityType="ECOMM_DEVModel.TB_ECOMM_CITY" />
+          <EntitySet Name="TB_ECOMM_COUNTRY" EntityType="ECOMM_DEVModel.TB_ECOMM_COUNTRY" />
+          <AssociationSet Name="FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" Association="ECOMM_DEVModel.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY">
+            <End Role="TB_ECOMM_COUNTRY" EntitySet="TB_ECOMM_COUNTRY" />
+            <End Role="TB_ECOMM_CITY" EntitySet="TB_ECOMM_CITY" />
+          </AssociationSet>
+          <EntitySet Name="TB_ECOMM_DELIVERY_TYPE" EntityType="ECOMM_DEVModel.TB_ECOMM_DELIVERY_TYPE" />
+          <EntitySet Name="TB_ECOMM_ORDER" EntityType="ECOMM_DEVModel.TB_ECOMM_ORDER" />
+          <EntitySet Name="TB_ECOMM_ORDER_ITEM" EntityType="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM" />
+          <EntitySet Name="TB_ECOMM_PICKUP_STORES" EntityType="ECOMM_DEVModel.TB_ECOMM_PICKUP_STORES" />
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS">
+            <End Role="TB_ECOMM_ADDRESS" EntitySet="TB_ECOMM_ADDRESS" />
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON">
+            <End Role="TB_ECOMM_COUPON" EntitySet="TB_ECOMM_COUPON" />
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE">
+            <End Role="TB_ECOMM_DELIVERY_TYPE" EntitySet="TB_ECOMM_DELIVERY_TYPE" />
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER">
             <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
             <End Role="TB_ECOMM_ORDER_ITEM" EntitySet="TB_ECOMM_ORDER_ITEM" />
           </AssociationSet>
-          <EntitySet Name="TB_ECOMM_SIGNUP_CONDITION_MASTER" EntityType="ECOMM_DEVModel.TB_ECOMM_SIGNUP_CONDITION_MASTER" />
-          <AssociationSet Name="FK_TB_ECOMM_USERS_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_USERS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_SIGNUP_CONDITION_MASTER" EntitySet="TB_ECOMM_SIGNUP_CONDITION_MASTER" />
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES">
+            <End Role="TB_ECOMM_PICKUP_STORES" EntitySet="TB_ECOMM_PICKUP_STORES" />
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
           </AssociationSet>
-          <EntitySet Name="TB_ECOMM_CARD_DETAILS" EntityType="ECOMM_DEVModel.TB_ECOMM_CARD_DETAILS" />
-          <AssociationSet Name="FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS">
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS">
             <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_CARD_DETAILS" EntitySet="TB_ECOMM_CARD_DETAILS" />
+            <End Role="TB_ECOMM_ORDER" EntitySet="TB_ECOMM_ORDER" />
           </AssociationSet>
-          <EntitySet Name="TB_ECOMM_PAYMENT_STATUS_DETAILS" EntityType="ECOMM_DEVModel.TB_ECOMM_PAYMENT_STATUS_DETAILS" />
-          <AssociationSet Name="FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS" Association="ECOMM_DEVModel.FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS">
-            <End Role="TB_ECOMM_USERS" EntitySet="TB_ECOMM_USERS" />
-            <End Role="TB_ECOMM_PAYMENT_STATUS_DETAILS" EntitySet="TB_ECOMM_PAYMENT_STATUS_DETAILS" />
+          <AssociationSet Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" Association="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT">
+            <End Role="TB_ECOMM_PRODUCT" EntitySet="TB_ECOMM_PRODUCT" />
+            <End Role="TB_ECOMM_ORDER_ITEM" EntitySet="TB_ECOMM_ORDER_ITEM" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TB_ECOMM_ADDRESS">
+          <Key>
+            <PropertyRef Name="ADDRESS_ID" />
+          </Key>
+          <Property Name="ADDRESS_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="FULL_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="POST_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CITY" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IS_DEFAULT" Type="Boolean" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS" FromRole="TB_ECOMM_ADDRESS" ToRole="TB_ECOMM_USERS" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" FromRole="TB_ECOMM_ADDRESS" ToRole="TB_ECOMM_ORDER" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_CART_ITEM">
+          <Key>
+            <PropertyRef Name="CART_ITEM_ID" />
+          </Key>
+          <Property Name="CART_ITEM_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="PRODUCT_DETAIL_ID" Type="Int64" />
+          <Property Name="CART_ITEM_QUANTITY" Type="Int32" />
+          <Property Name="ADDED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_PRODUCT_DETAILS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS" FromRole="TB_ECOMM_CART_ITEM" ToRole="TB_ECOMM_PRODUCT_DETAILS" />
+          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS" FromRole="TB_ECOMM_CART_ITEM" ToRole="TB_ECOMM_USERS" />
+          <Property Name="PRODUCT_ID" Type="Int64" />
+          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS1" FromRole="TB_ECOMM_CART_ITEM" ToRole="TB_ECOMM_PRODUCT" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_COUPON">
+          <Key>
+            <PropertyRef Name="COUPON_ID" />
+          </Key>
+          <Property Name="COUPON_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COUPON_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="COUPON_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COUPON_DISCOUNT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="COUPON_VALID" Type="Boolean" />
+          <Property Name="COUPON_QUANTITY" Type="Int64" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="EXPIRE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" FromRole="TB_ECOMM_COUPON" ToRole="TB_ECOMM_ORDER" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUB_CATEGORY_ID" Type="Int64" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_IMAGE4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_SUB_CATEGORY" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY" FromRole="TB_ECOMM_PRODUCT" ToRole="TB_ECOMM_SUB_CATEGORY" />
+          <NavigationProperty Name="TB_ECOMM_CART_ITEM" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS1" FromRole="TB_ECOMM_PRODUCT" ToRole="TB_ECOMM_CART_ITEM" />
+          <NavigationProperty Name="TB_ECOMM_ORDER_ITEM" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" FromRole="TB_ECOMM_PRODUCT" ToRole="TB_ECOMM_ORDER_ITEM" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_PRODUCT_DETAILS">
+          <Key>
+            <PropertyRef Name="PRODUCT_DETAIL_ID" />
+          </Key>
+          <Property Name="PRODUCT_DETAIL_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_ID" Type="Int64" />
+          <Property Name="PRODUCT_SIZE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_QR_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT" FromRole="TB_ECOMM_PRODUCT_DETAILS" ToRole="TB_ECOMM_PRODUCT" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_SUB_CATEGORY">
+          <Key>
+            <PropertyRef Name="SUB_CATEGORY_ID" />
+          </Key>
+          <Property Name="SUB_CATEGORY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_ID" Type="Int64" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_CATEGORY" Relationship="ECOMM_DEVModel.FK_Table_1_TB_ECOMM_CATEGORY" FromRole="TB_ECOMM_SUB_CATEGORY" ToRole="TB_ECOMM_CATEGORY" />
+        </EntityType>
+        <Association Name="FK_TB_ECOMM_ADDRESS_TB_ECOMM_USERS">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_USERS" Role="TB_ECOMM_USERS" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ADDRESS" Role="TB_ECOMM_ADDRESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_ADDRESS">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS" Role="TB_ECOMM_PRODUCT_DETAILS" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_CART_ITEM" Role="TB_ECOMM_CART_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_PRODUCT_DETAILS">
+              <PropertyRef Name="PRODUCT_DETAIL_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_CART_ITEM">
+              <PropertyRef Name="PRODUCT_DETAIL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_USERS">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_USERS" Role="TB_ECOMM_USERS" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_CART_ITEM" Role="TB_ECOMM_CART_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_CART_ITEM">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_TB_ECOMM_CATEGORY">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_CATEGORY" Role="TB_ECOMM_CATEGORY" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY" Role="TB_ECOMM_SUB_CATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_SUB_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_PRODUCT_DETAILS_TB_ECOMM_PRODUCT">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT" Role="TB_ECOMM_PRODUCT" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS" Role="TB_ECOMM_PRODUCT_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_PRODUCT_DETAILS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_PRODUCT_TB_ECOMM_SUB_CATEGORY">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY" Role="TB_ECOMM_SUB_CATEGORY" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT" Role="TB_ECOMM_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_SUB_CATEGORY">
+              <PropertyRef Name="SUB_CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_PRODUCT">
+              <PropertyRef Name="SUB_CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_ITEMSLIST_Result">
+          <Property Type="Int64" Name="CATEGORY_ID" Nullable="false" />
+          <Property Type="String" Name="CATEGORY_NAME" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CREATED_DATE" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="MODIFIED_DATE" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="SUB_CATEGORY_ID" Nullable="false" />
+          <Property Type="Int64" Name="CATEGORY_ID1" Nullable="true" />
+          <Property Type="String" Name="CATEGORY_NAME1" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CREATED_DATE1" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="MODIFIED_DATE1" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="PRODUCT_ID" Nullable="false" />
+          <Property Type="Int64" Name="SUB_CATEGORY_ID1" Nullable="true" />
+          <Property Type="String" Name="PRODUCT_NAME" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PRODUCT_DESCRIPTION" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PRODUCT_IMAGE1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PRODUCT_IMAGE2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PRODUCT_IMAGE3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PRODUCT_IMAGE4" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="PRODUCT_PRICE" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="CREATED_DATE2" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="MODIFIED_DATE2" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="PRODUCT_DETAIL_ID" Nullable="false" />
+          <Property Type="Int64" Name="PRODUCT_ID1" Nullable="true" />
+          <Property Type="String" Name="PRODUCT_SIZE" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PRODUCT_COLOR" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PRODUCT_QR_TAG" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CREATED_DATE3" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="MODIFIED_DATE3" Nullable="true" Precision="23" />
+        </ComplexType>
+        <Association Name="FK_TB_ECOMM_CART_ITEM_TB_ECOMM_PRODUCT_DETAILS1">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT" Role="TB_ECOMM_PRODUCT" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_CART_ITEM" Role="TB_ECOMM_CART_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_CART_ITEM">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_ECOMM_CITY">
+          <Key>
+            <PropertyRef Name="CITY_ID" />
+          </Key>
+          <Property Name="CITY_ID" Type="Int64" Nullable="false" />
+          <Property Name="COUNTRY_ID" Type="Int64" />
+          <Property Name="CITY_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_COUNTRY" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY" FromRole="TB_ECOMM_CITY" ToRole="TB_ECOMM_COUNTRY" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_COUNTRY">
+          <Key>
+            <PropertyRef Name="COUNTRY_ID" />
+          </Key>
+          <Property Name="COUNTRY_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COUNTRY_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_TB_ECOMM_CITY_TB_ECOMM_COUNTRY">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_COUNTRY" Role="TB_ECOMM_COUNTRY" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_CITY" Role="TB_ECOMM_CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_COUNTRY">
+              <PropertyRef Name="COUNTRY_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_CITY">
+              <PropertyRef Name="COUNTRY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_ECOMM_DELIVERY_TYPE">
+          <Key>
+            <PropertyRef Name="DELIVERY_TYPE_ID" />
+          </Key>
+          <Property Name="DELIVERY_TYPE_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DELIVERY_TYPE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DELIVERY_TYPE_COST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="STORE_ADDRESS1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="STORE_ADDRESS2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" FromRole="TB_ECOMM_DELIVERY_TYPE" ToRole="TB_ECOMM_ORDER" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_ORDER">
+          <Key>
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="ORDER_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int64" />
+          <Property Name="ADDRESS_ID" Type="Int64" />
+          <Property Name="COUPON_ID" Type="Int64" />
+          <Property Name="PICKUP_STORE_ID" Type="Int64" />
+          <Property Name="DELIVERY_TYPE_ID" Type="Int64" />
+          <Property Name="ORDER_AMOUNT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ORDER_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORDER_QR_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_ADDRESS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_ADDRESS" />
+          <NavigationProperty Name="TB_ECOMM_COUPON" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_COUPON" />
+          <NavigationProperty Name="TB_ECOMM_DELIVERY_TYPE" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_DELIVERY_TYPE" />
+          <NavigationProperty Name="TB_ECOMM_ORDER_ITEM" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_ORDER_ITEM" />
+          <NavigationProperty Name="TB_ECOMM_PICKUP_STORES" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_PICKUP_STORES" />
+          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_USERS" FromRole="TB_ECOMM_ORDER" ToRole="TB_ECOMM_USERS" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_ORDER_ITEM">
+          <Key>
+            <PropertyRef Name="ORDER_ITEM_ID" />
+          </Key>
+          <Property Name="ORDER_ITEM_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORDER_ID" Type="Int64" />
+          <Property Name="PRODUCT_ID" Type="Int64" />
+          <Property Name="PRODUCT_QUANTITY" Type="Int64" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER" FromRole="TB_ECOMM_ORDER_ITEM" ToRole="TB_ECOMM_ORDER" />
+          <NavigationProperty Name="TB_ECOMM_PRODUCT" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT" FromRole="TB_ECOMM_ORDER_ITEM" ToRole="TB_ECOMM_PRODUCT" />
+        </EntityType>
+        <EntityType Name="TB_ECOMM_PICKUP_STORES">
+          <Key>
+            <PropertyRef Name="PICKUP_STORE_ID" />
+          </Key>
+          <Property Name="PICKUP_STORE_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PICKUP_STORE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PICKUP_STORE_ADDRESS1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PICKUP_STORE_ADDRESS2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TB_ECOMM_ORDER" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES" FromRole="TB_ECOMM_PICKUP_STORES" ToRole="TB_ECOMM_ORDER" />
+        </EntityType>
+        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_ADDRESS">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ADDRESS" Role="TB_ECOMM_ADDRESS" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_ADDRESS">
+              <PropertyRef Name="ADDRESS_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_ORDER">
+              <PropertyRef Name="ADDRESS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_COUPON">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_COUPON" Role="TB_ECOMM_COUPON" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_COUPON">
+              <PropertyRef Name="COUPON_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_ORDER">
+              <PropertyRef Name="COUPON_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_DELIVERY_TYPE">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_DELIVERY_TYPE" Role="TB_ECOMM_DELIVERY_TYPE" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_ECOMM_DELIVERY_TYPE">
+              <PropertyRef Name="DELIVERY_TYPE_ID" />
+            </Principal>
+            <Dependent Role="TB_ECOMM_ORDER">
+              <PropertyRef Name="DELIVERY_TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_ORDER">
-          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="0..1" />
           <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM" Role="TB_ECOMM_ORDER_ITEM" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ECOMM_ORDER">
@@ -1085,90 +979,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-          <Key>
-            <PropertyRef Name="CONDITION_ID" />
-          </Key>
-          <Property Name="CONDITION_ID" Type="Int64" Nullable="false" />
-          <Property Name="CONDITION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_USERS_TB_ECOMM_USERS" FromRole="TB_ECOMM_SIGNUP_CONDITION_MASTER" ToRole="TB_ECOMM_USERS" />
-        </EntityType>
-        <Association Name="FK_TB_ECOMM_USERS_TB_ECOMM_USERS">
-          <End Type="ECOMM_DEVModel.TB_ECOMM_SIGNUP_CONDITION_MASTER" Role="TB_ECOMM_SIGNUP_CONDITION_MASTER" Multiplicity="0..1" />
-          <End Type="ECOMM_DEVModel.TB_ECOMM_USERS" Role="TB_ECOMM_USERS" Multiplicity="*" />
+        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_PICKUP_STORES">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PICKUP_STORES" Role="TB_ECOMM_PICKUP_STORES" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-              <PropertyRef Name="CONDITION_ID" />
+            <Principal Role="TB_ECOMM_PICKUP_STORES">
+              <PropertyRef Name="PICKUP_STORE_ID" />
             </Principal>
-            <Dependent Role="TB_ECOMM_USERS">
-              <PropertyRef Name="CONDITION_ID" />
+            <Dependent Role="TB_ECOMM_ORDER">
+              <PropertyRef Name="PICKUP_STORE_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TB_ECOMM_CARD_DETAILS">
-          <Key>
-            <PropertyRef Name="CARD_ID" />
-          </Key>
-          <Property Name="CARD_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CARD_NUMBER" Type="Int64" />
-          <Property Name="CARD_HOLDER_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CARD_EXP_DATE" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
-          <Property Name="CARD_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CARD_CVV" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="UDF_1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="CARD_DEFAULT" Type="Boolean" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS" FromRole="TB_ECOMM_CARD_DETAILS" ToRole="TB_ECOMM_USERS" />
-        </EntityType>
-        <Association Name="FK_TB_ECOMM_CARD_DETAILS_TB_ECOMM_USERS">
+        <Association Name="FK_TB_ECOMM_ORDER_TB_ECOMM_USERS">
           <End Type="ECOMM_DEVModel.TB_ECOMM_USERS" Role="TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Type="ECOMM_DEVModel.TB_ECOMM_CARD_DETAILS" Role="TB_ECOMM_CARD_DETAILS" Multiplicity="*" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER" Role="TB_ECOMM_ORDER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_ECOMM_USERS">
               <PropertyRef Name="USER_ID" />
             </Principal>
-            <Dependent Role="TB_ECOMM_CARD_DETAILS">
+            <Dependent Role="TB_ECOMM_ORDER">
               <PropertyRef Name="USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TB_ECOMM_PAYMENT_STATUS_DETAILS">
-          <Key>
-            <PropertyRef Name="PAYMENT_STATUS_ID" />
-          </Key>
-          <Property Name="PAYMENT_STATUS_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USER_ID" Type="Int64" />
-          <Property Name="TIMESTAMP" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="MERCHANT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ACCOUNT" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ORDER_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AUTH_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="RESULT" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="CVN_RESULT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="AVS_ADDRESS_RESPONSE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BATCH_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="MESSAGE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PAYMENT_REF_NUMBER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BANK_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BANK_COUNTRY" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="COUNTRY_CODE" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="REGION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="SHA_HASH" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TB_ECOMM_USERS" Relationship="ECOMM_DEVModel.FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS" FromRole="TB_ECOMM_PAYMENT_STATUS_DETAILS" ToRole="TB_ECOMM_USERS" />
-        </EntityType>
-        <Association Name="FK_TB_ECOMM_PAYMENT_STATUS_DETAILS_TB_ECOMM_USERS">
-          <End Type="ECOMM_DEVModel.TB_ECOMM_USERS" Role="TB_ECOMM_USERS" Multiplicity="0..1" />
-          <End Type="ECOMM_DEVModel.TB_ECOMM_PAYMENT_STATUS_DETAILS" Role="TB_ECOMM_PAYMENT_STATUS_DETAILS" Multiplicity="*" />
+        <Association Name="FK_TB_ECOMM_ORDER_ITEM_TB_ECOMM_PRODUCT">
+          <End Type="ECOMM_DEVModel.TB_ECOMM_PRODUCT" Role="TB_ECOMM_PRODUCT" Multiplicity="0..1" />
+          <End Type="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM" Role="TB_ECOMM_ORDER_ITEM" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TB_ECOMM_USERS">
-              <PropertyRef Name="USER_ID" />
+            <Principal Role="TB_ECOMM_PRODUCT">
+              <PropertyRef Name="PRODUCT_ID" />
             </Principal>
-            <Dependent Role="TB_ECOMM_PAYMENT_STATUS_DETAILS">
-              <PropertyRef Name="USER_ID" />
+            <Dependent Role="TB_ECOMM_ORDER_ITEM">
+              <PropertyRef Name="PRODUCT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1199,189 +1042,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_ADDRESS">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ADDRESS">
-              <MappingFragment StoreEntitySet="TB_ECOMM_ADDRESS">
-                <ScalarProperty Name="ADDRESS_ID" ColumnName="ADDRESS_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="FULL_NAME" ColumnName="FULL_NAME" />
-                <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
-                <ScalarProperty Name="ADDRESS2" ColumnName="ADDRESS2" />
-                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
-                <ScalarProperty Name="POST_CODE" ColumnName="POST_CODE" />
-                <ScalarProperty Name="CITY" ColumnName="CITY" />
-                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
-                <ScalarProperty Name="IS_DEFAULT" ColumnName="IS_DEFAULT" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_CART_ITEM">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CART_ITEM">
-              <MappingFragment StoreEntitySet="TB_ECOMM_CART_ITEM">
-                <ScalarProperty Name="WISHLIST" ColumnName="WISHLIST" />
-                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
-                <ScalarProperty Name="CART_ITEM_ID" ColumnName="CART_ITEM_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="PRODUCT_DETAIL_ID" ColumnName="PRODUCT_DETAIL_ID" />
-                <ScalarProperty Name="CART_ITEM_QUANTITY" ColumnName="CART_ITEM_QUANTITY" />
-                <ScalarProperty Name="CART_PRICE" ColumnName="CART_PRICE" />
-                <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_CATEGORY">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CATEGORY">
-              <MappingFragment StoreEntitySet="TB_ECOMM_CATEGORY">
-                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
-                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_CITY">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CITY">
-              <MappingFragment StoreEntitySet="TB_ECOMM_CITY">
-                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
-                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
-                <ScalarProperty Name="CITY_NAME" ColumnName="CITY_NAME" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_COUNTRY">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_COUNTRY">
-              <MappingFragment StoreEntitySet="TB_ECOMM_COUNTRY">
-                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
-                <ScalarProperty Name="COUNTRY_NAME" ColumnName="COUNTRY_NAME" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_COUPON">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_COUPON">
-              <MappingFragment StoreEntitySet="TB_ECOMM_COUPON">
-                <ScalarProperty Name="COUPON_ID" ColumnName="COUPON_ID" />
-                <ScalarProperty Name="COUPON_NAME" ColumnName="COUPON_NAME" />
-                <ScalarProperty Name="COUPON_TYPE" ColumnName="COUPON_TYPE" />
-                <ScalarProperty Name="COUPON_DISCOUNT" ColumnName="COUPON_DISCOUNT" />
-                <ScalarProperty Name="COUPON_VALID" ColumnName="COUPON_VALID" />
-                <ScalarProperty Name="COUPON_QUANTITY" ColumnName="COUPON_QUANTITY" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="EXPIRE_DATE" ColumnName="EXPIRE_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_DELIVERY_TYPE">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_DELIVERY_TYPE">
-              <MappingFragment StoreEntitySet="TB_ECOMM_DELIVERY_TYPE">
-                <ScalarProperty Name="DELIVERY_TYPE_ID" ColumnName="DELIVERY_TYPE_ID" />
-                <ScalarProperty Name="DELIVERY_TYPE_NAME" ColumnName="DELIVERY_TYPE_NAME" />
-                <ScalarProperty Name="DELIVERY_TYPE_COST" ColumnName="DELIVERY_TYPE_COST" />
-                <ScalarProperty Name="STORE_ADDRESS1" ColumnName="STORE_ADDRESS1" />
-                <ScalarProperty Name="STORE_ADDRESS2" ColumnName="STORE_ADDRESS2" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_ORDER">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ORDER">
-              <MappingFragment StoreEntitySet="TB_ECOMM_ORDER">
-                <ScalarProperty Name="ORDER_REF_NO" ColumnName="ORDER_REF_NO" />
-                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="ADDRESS_ID" ColumnName="ADDRESS_ID" />
-                <ScalarProperty Name="COUPON_ID" ColumnName="COUPON_ID" />
-                <ScalarProperty Name="PICKUP_STORE_ID" ColumnName="PICKUP_STORE_ID" />
-                <ScalarProperty Name="DELIVERY_TYPE_ID" ColumnName="DELIVERY_TYPE_ID" />
-                <ScalarProperty Name="ORDER_AMOUNT" ColumnName="ORDER_AMOUNT" />
-                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
-                <ScalarProperty Name="ORDER_QR_TAG" ColumnName="ORDER_QR_TAG" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_ORDER_ITEM">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM">
-              <MappingFragment StoreEntitySet="TB_ECOMM_ORDER_ITEM">
-                <ScalarProperty Name="PRODUCT_AMOUNT" ColumnName="PRODUCT_AMOUNT" />
-                <ScalarProperty Name="ORDER_ITEM_ID" ColumnName="ORDER_ITEM_ID" />
-                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="PRODUCT_QUANTITY" ColumnName="PRODUCT_QUANTITY" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_PICKUP_STORES">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PICKUP_STORES">
-              <MappingFragment StoreEntitySet="TB_ECOMM_PICKUP_STORES">
-                <ScalarProperty Name="PICKUP_STORE_ID" ColumnName="PICKUP_STORE_ID" />
-                <ScalarProperty Name="PICKUP_STORE_NAME" ColumnName="PICKUP_STORE_NAME" />
-                <ScalarProperty Name="PICKUP_STORE_ADDRESS1" ColumnName="PICKUP_STORE_ADDRESS1" />
-                <ScalarProperty Name="PICKUP_STORE_ADDRESS2" ColumnName="PICKUP_STORE_ADDRESS2" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_PRODUCT">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PRODUCT">
-              <MappingFragment StoreEntitySet="TB_ECOMM_PRODUCT">
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="SUB_CATEGORY_ID" ColumnName="SUB_CATEGORY_ID" />
-                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
-                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
-                <ScalarProperty Name="PRODUCT_IMAGE1" ColumnName="PRODUCT_IMAGE1" />
-                <ScalarProperty Name="PRODUCT_IMAGE2" ColumnName="PRODUCT_IMAGE2" />
-                <ScalarProperty Name="PRODUCT_IMAGE3" ColumnName="PRODUCT_IMAGE3" />
-                <ScalarProperty Name="PRODUCT_IMAGE4" ColumnName="PRODUCT_IMAGE4" />
-                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_PRODUCT_DETAILS">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS">
-              <MappingFragment StoreEntitySet="TB_ECOMM_PRODUCT_DETAILS">
-                <ScalarProperty Name="PRODUCT_DETAIL_ID" ColumnName="PRODUCT_DETAIL_ID" />
-                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
-                <ScalarProperty Name="PRODUCT_SIZE" ColumnName="PRODUCT_SIZE" />
-                <ScalarProperty Name="PRODUCT_COLOR" ColumnName="PRODUCT_COLOR" />
-                <ScalarProperty Name="PRODUCT_QR_TAG" ColumnName="PRODUCT_QR_TAG" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_SUB_CATEGORY">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY">
-              <MappingFragment StoreEntitySet="TB_ECOMM_SUB_CATEGORY">
-                <ScalarProperty Name="SUB_CATEGORY_ID" ColumnName="SUB_CATEGORY_ID" />
-                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
-                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_ECOMM_USERS">
             <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_USERS">
               <MappingFragment StoreEntitySet="TB_ECOMM_USERS">
-                <ScalarProperty Name="PARENT_ID" ColumnName="PARENT_ID" />
-                <ScalarProperty Name="PARENT_NAME" ColumnName="PARENT_NAME" />
-                <ScalarProperty Name="CONDITION_ID" ColumnName="CONDITION_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
@@ -1411,54 +1074,207 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_SIGNUP_CONDITION_MASTER">
-              <MappingFragment StoreEntitySet="TB_ECOMM_SIGNUP_CONDITION_MASTER">
-                <ScalarProperty Name="CONDITION" ColumnName="CONDITION" />
-                <ScalarProperty Name="CONDITION_ID" ColumnName="CONDITION_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_CARD_DETAILS">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CARD_DETAILS">
-              <MappingFragment StoreEntitySet="TB_ECOMM_CARD_DETAILS">
-                <ScalarProperty Name="CARD_DEFAULT" ColumnName="CARD_DEFAULT" />
+          <EntitySetMapping Name="TB_ECOMM_ADDRESS">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ADDRESS">
+              <MappingFragment StoreEntitySet="TB_ECOMM_ADDRESS">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="IS_DEFAULT" ColumnName="IS_DEFAULT" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="POST_CODE" ColumnName="POST_CODE" />
+                <ScalarProperty Name="ADDRESS2" ColumnName="ADDRESS2" />
+                <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+                <ScalarProperty Name="FULL_NAME" ColumnName="FULL_NAME" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
-                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="UDF_1" ColumnName="UDF_1" />
-                <ScalarProperty Name="CARD_CVV" ColumnName="CARD_CVV" />
-                <ScalarProperty Name="CARD_TYPE" ColumnName="CARD_TYPE" />
-                <ScalarProperty Name="CARD_EXP_DATE" ColumnName="CARD_EXP_DATE" />
-                <ScalarProperty Name="CARD_HOLDER_NAME" ColumnName="CARD_HOLDER_NAME" />
-                <ScalarProperty Name="CARD_NUMBER" ColumnName="CARD_NUMBER" />
-                <ScalarProperty Name="CARD_ID" ColumnName="CARD_ID" />
+                <ScalarProperty Name="ADDRESS_ID" ColumnName="ADDRESS_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TB_ECOMM_PAYMENT_STATUS_DETAILS">
-            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PAYMENT_STATUS_DETAILS">
-              <MappingFragment StoreEntitySet="TB_ECOMM_PAYMENT_STATUS_DETAILS">
+          <EntitySetMapping Name="TB_ECOMM_CART_ITEM">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CART_ITEM">
+              <MappingFragment StoreEntitySet="TB_ECOMM_CART_ITEM">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="ADDED_DATE" ColumnName="ADDED_DATE" />
+                <ScalarProperty Name="CART_ITEM_QUANTITY" ColumnName="CART_ITEM_QUANTITY" />
+                <ScalarProperty Name="PRODUCT_DETAIL_ID" ColumnName="PRODUCT_DETAIL_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="CART_ITEM_ID" ColumnName="CART_ITEM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_CATEGORY">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CATEGORY">
+              <MappingFragment StoreEntitySet="TB_ECOMM_CATEGORY">
                 <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
                 <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
-                <ScalarProperty Name="SHA_HASH" ColumnName="SHA_HASH" />
-                <ScalarProperty Name="REGION" ColumnName="REGION" />
-                <ScalarProperty Name="COUNTRY_CODE" ColumnName="COUNTRY_CODE" />
-                <ScalarProperty Name="BANK_COUNTRY" ColumnName="BANK_COUNTRY" />
-                <ScalarProperty Name="BANK_NAME" ColumnName="BANK_NAME" />
-                <ScalarProperty Name="PAYMENT_REF_NUMBER" ColumnName="PAYMENT_REF_NUMBER" />
-                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
-                <ScalarProperty Name="BATCH_ID" ColumnName="BATCH_ID" />
-                <ScalarProperty Name="AVS_ADDRESS_RESPONSE" ColumnName="AVS_ADDRESS_RESPONSE" />
-                <ScalarProperty Name="CVN_RESULT" ColumnName="CVN_RESULT" />
-                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
-                <ScalarProperty Name="AUTH_CODE" ColumnName="AUTH_CODE" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_COUPON">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_COUPON">
+              <MappingFragment StoreEntitySet="TB_ECOMM_COUPON">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="EXPIRE_DATE" ColumnName="EXPIRE_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="COUPON_QUANTITY" ColumnName="COUPON_QUANTITY" />
+                <ScalarProperty Name="COUPON_VALID" ColumnName="COUPON_VALID" />
+                <ScalarProperty Name="COUPON_DISCOUNT" ColumnName="COUPON_DISCOUNT" />
+                <ScalarProperty Name="COUPON_TYPE" ColumnName="COUPON_TYPE" />
+                <ScalarProperty Name="COUPON_NAME" ColumnName="COUPON_NAME" />
+                <ScalarProperty Name="COUPON_ID" ColumnName="COUPON_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_PRODUCT">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PRODUCT">
+              <MappingFragment StoreEntitySet="TB_ECOMM_PRODUCT">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
+                <ScalarProperty Name="PRODUCT_IMAGE4" ColumnName="PRODUCT_IMAGE4" />
+                <ScalarProperty Name="PRODUCT_IMAGE3" ColumnName="PRODUCT_IMAGE3" />
+                <ScalarProperty Name="PRODUCT_IMAGE2" ColumnName="PRODUCT_IMAGE2" />
+                <ScalarProperty Name="PRODUCT_IMAGE1" ColumnName="PRODUCT_IMAGE1" />
+                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="SUB_CATEGORY_ID" ColumnName="SUB_CATEGORY_ID" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_PRODUCT_DETAILS">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PRODUCT_DETAILS">
+              <MappingFragment StoreEntitySet="TB_ECOMM_PRODUCT_DETAILS">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="PRODUCT_QR_TAG" ColumnName="PRODUCT_QR_TAG" />
+                <ScalarProperty Name="PRODUCT_COLOR" ColumnName="PRODUCT_COLOR" />
+                <ScalarProperty Name="PRODUCT_SIZE" ColumnName="PRODUCT_SIZE" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCT_DETAIL_ID" ColumnName="PRODUCT_DETAIL_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_SUB_CATEGORY">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_SUB_CATEGORY">
+              <MappingFragment StoreEntitySet="TB_ECOMM_SUB_CATEGORY">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="SUB_CATEGORY_ID" ColumnName="SUB_CATEGORY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ITEMSLIST" FunctionName="ECOMM_DEVModel.Store.SP_ITEMSLIST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ECOMM_DEVModel.SP_ITEMSLIST_Result">
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="SUB_CATEGORY_ID" ColumnName="SUB_CATEGORY_ID" />
+                <ScalarProperty Name="CATEGORY_ID1" ColumnName="CATEGORY_ID1" />
+                <ScalarProperty Name="CATEGORY_NAME1" ColumnName="CATEGORY_NAME1" />
+                <ScalarProperty Name="CREATED_DATE1" ColumnName="CREATED_DATE1" />
+                <ScalarProperty Name="MODIFIED_DATE1" ColumnName="MODIFIED_DATE1" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="SUB_CATEGORY_ID1" ColumnName="SUB_CATEGORY_ID1" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_IMAGE1" ColumnName="PRODUCT_IMAGE1" />
+                <ScalarProperty Name="PRODUCT_IMAGE2" ColumnName="PRODUCT_IMAGE2" />
+                <ScalarProperty Name="PRODUCT_IMAGE3" ColumnName="PRODUCT_IMAGE3" />
+                <ScalarProperty Name="PRODUCT_IMAGE4" ColumnName="PRODUCT_IMAGE4" />
+                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
+                <ScalarProperty Name="CREATED_DATE2" ColumnName="CREATED_DATE2" />
+                <ScalarProperty Name="MODIFIED_DATE2" ColumnName="MODIFIED_DATE2" />
+                <ScalarProperty Name="PRODUCT_DETAIL_ID" ColumnName="PRODUCT_DETAIL_ID" />
+                <ScalarProperty Name="PRODUCT_ID1" ColumnName="PRODUCT_ID1" />
+                <ScalarProperty Name="PRODUCT_SIZE" ColumnName="PRODUCT_SIZE" />
+                <ScalarProperty Name="PRODUCT_COLOR" ColumnName="PRODUCT_COLOR" />
+                <ScalarProperty Name="PRODUCT_QR_TAG" ColumnName="PRODUCT_QR_TAG" />
+                <ScalarProperty Name="CREATED_DATE3" ColumnName="CREATED_DATE3" />
+                <ScalarProperty Name="MODIFIED_DATE3" ColumnName="MODIFIED_DATE3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TB_ECOMM_CITY">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_CITY">
+              <MappingFragment StoreEntitySet="TB_ECOMM_CITY">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CITY_NAME" ColumnName="CITY_NAME" />
+                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
+                <ScalarProperty Name="CITY_ID" ColumnName="CITY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_COUNTRY">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_COUNTRY">
+              <MappingFragment StoreEntitySet="TB_ECOMM_COUNTRY">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="COUNTRY_NAME" ColumnName="COUNTRY_NAME" />
+                <ScalarProperty Name="COUNTRY_ID" ColumnName="COUNTRY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_DELIVERY_TYPE">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_DELIVERY_TYPE">
+              <MappingFragment StoreEntitySet="TB_ECOMM_DELIVERY_TYPE">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="STORE_ADDRESS2" ColumnName="STORE_ADDRESS2" />
+                <ScalarProperty Name="STORE_ADDRESS1" ColumnName="STORE_ADDRESS1" />
+                <ScalarProperty Name="DELIVERY_TYPE_COST" ColumnName="DELIVERY_TYPE_COST" />
+                <ScalarProperty Name="DELIVERY_TYPE_NAME" ColumnName="DELIVERY_TYPE_NAME" />
+                <ScalarProperty Name="DELIVERY_TYPE_ID" ColumnName="DELIVERY_TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_ORDER">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ORDER">
+              <MappingFragment StoreEntitySet="TB_ECOMM_ORDER">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="ORDER_QR_TAG" ColumnName="ORDER_QR_TAG" />
+                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
+                <ScalarProperty Name="ORDER_AMOUNT" ColumnName="ORDER_AMOUNT" />
+                <ScalarProperty Name="DELIVERY_TYPE_ID" ColumnName="DELIVERY_TYPE_ID" />
+                <ScalarProperty Name="PICKUP_STORE_ID" ColumnName="PICKUP_STORE_ID" />
+                <ScalarProperty Name="COUPON_ID" ColumnName="COUPON_ID" />
+                <ScalarProperty Name="ADDRESS_ID" ColumnName="ADDRESS_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
-                <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
-                <ScalarProperty Name="MERCHANT_ID" ColumnName="MERCHANT_ID" />
-                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="PAYMENT_STATUS_ID" ColumnName="PAYMENT_STATUS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_ORDER_ITEM">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_ORDER_ITEM">
+              <MappingFragment StoreEntitySet="TB_ECOMM_ORDER_ITEM">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="PRODUCT_QUANTITY" ColumnName="PRODUCT_QUANTITY" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="ORDER_ID" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ORDER_ITEM_ID" ColumnName="ORDER_ITEM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_ECOMM_PICKUP_STORES">
+            <EntityTypeMapping TypeName="ECOMM_DEVModel.TB_ECOMM_PICKUP_STORES">
+              <MappingFragment StoreEntitySet="TB_ECOMM_PICKUP_STORES">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="PICKUP_STORE_ADDRESS2" ColumnName="PICKUP_STORE_ADDRESS2" />
+                <ScalarProperty Name="PICKUP_STORE_ADDRESS1" ColumnName="PICKUP_STORE_ADDRESS1" />
+                <ScalarProperty Name="PICKUP_STORE_NAME" ColumnName="PICKUP_STORE_NAME" />
+                <ScalarProperty Name="PICKUP_STORE_ID" ColumnName="PICKUP_STORE_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

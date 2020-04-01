@@ -11,13 +11,15 @@ using System.Web;
 
 namespace APIRepository.InterfacesImpl
 {
-    //Aouthor Rakshit B
+    //Aouthor Rakshit
     public class ItemImpl : IItem
     {
         ECOMM_DEVEntities entity = new ECOMM_DEVEntities();
         public List<Products> GetItems(long categ, long subcateg, decimal pfrom, decimal pto)
         {
             List<TB_ECOMM_PRODUCT> products = entity.TB_ECOMM_PRODUCT.ToList();
+            List<TB_ECOMM_PRODUCT_DETAILS> productDetails = entity.TB_ECOMM_PRODUCT_DETAILS.ToList();
+            List<TB_ECOMM_CATEGORY> categories = entity.TB_ECOMM_CATEGORY.ToList();
             List<TB_ECOMM_SUB_CATEGORY> subcategories = entity.TB_ECOMM_SUB_CATEGORY.ToList();
             try
             {
@@ -84,87 +86,21 @@ namespace APIRepository.InterfacesImpl
             }
         }
 
-        public List<Products> GetItem(long pid)
-        {
-            List<TB_ECOMM_PRODUCT> product = entity.TB_ECOMM_PRODUCT.ToList();
-            try
-            {
-                entity.Configuration.LazyLoadingEnabled = false;
-                IEnumerable<Products> query = from p in product
-                                              where p.PRODUCT_ID == pid
-                                              select new Products
-                                              {
-                                                  product = p,
-                                              };
-                return query.ToList();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        throw new Exception("Error" + validationError.ErrorMessage);
-                        //return new ApiResponse { Status = "Error", Message = validationError.ErrorMessage };
-                    }
-                    throw new Exception("Error" + entityValidationErrors.ValidationErrors);
-                }
-                throw new Exception("Error" + ex.Message);
-            }
-        }
-
-        public List<CartItem> Getcart(long uid)
+        public object Getcart(long cid)
         {
             List<TB_ECOMM_CART_ITEM> cartitem = entity.TB_ECOMM_CART_ITEM.ToList();
             List<TB_ECOMM_PRODUCT> product = entity.TB_ECOMM_PRODUCT.ToList();
-
             try
             {
-                entity.Configuration.LazyLoadingEnabled = false;
-                IEnumerable<CartItem> query = from cp in cartitem
-                                              join p in product on cp.PRODUCT_ID equals p.PRODUCT_ID 
-                                              where cp.USER_ID == uid
-                                              where cp.CATEGORY_ID==10
-                                              where cp.WISHLIST==false
-                                              select new CartItem
-                                              {
-                                                  cart = cp,
-                                              };
-                return query.ToList();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        throw new Exception("Error" + validationError.ErrorMessage);
-                        //return new ApiResponse { Status = "Error", Message = validationError.ErrorMessage };
-                    }
-                    throw new Exception("Error" + entityValidationErrors.ValidationErrors);
-                }
-                throw new Exception("Error" + ex.Message);
-            }
-        }
-
-        public List<CartItem> GetcartM(long uid)
-        {
-            List<TB_ECOMM_CART_ITEM> cartitem = entity.TB_ECOMM_CART_ITEM.ToList();
-            List<TB_ECOMM_PRODUCT> product = entity.TB_ECOMM_PRODUCT.ToList();
-
-            try
-            {
-                entity.Configuration.LazyLoadingEnabled = false;
+                //entity.Configuration.LazyLoadingEnabled = false;
                 IEnumerable<CartItem> query = from cp in cartitem
                                               join p in product on cp.PRODUCT_ID equals p.PRODUCT_ID
-                                              where cp.USER_ID == uid
-                                              where cp.CATEGORY_ID == 11
-                                              where cp.WISHLIST == false
+                                              where cp.USER_ID == cid
                                               select new CartItem
                                               {
                                                   cart = cp,
                                               };
-                return query.ToList();
+                return query;
             }
             catch (DbEntityValidationException ex)
             {
@@ -180,26 +116,21 @@ namespace APIRepository.InterfacesImpl
                 throw new Exception("Error" + ex.Message);
             }
         }
-        public List<Searchitem> SearchItem(string param, long cat)
+        public List<Searchitem> SearchItem(string param)
         {
             try
             {
                 List<Searchitem> ud = new List<Searchitem>();
-                string sConnString = "Data Source=dionesql;Persist Security Info=False;" +
-                    "Initial Catalog=ECOMM_DEV;User Id=prashanth;Password=WMPrashanth!;Connect Timeout=60;";
-                //string sConnString = "Data Source=RAKSHIT;Persist Security Info=False;" +
-                //    "Initial Catalog=ECOMM_DEV;User Id=sa;Password=sa@123;Connect Timeout=60;";
+                string sConnString = "Data Source=RAKSHIT;Persist Security Info=False;" +
+                    "Initial Catalog=ECOMM_DEV;User Id=sa;Password=sa@123;Connect Timeout=30;";
 
                 SqlConnection myConn = new SqlConnection(sConnString);
 
-                SqlCommand objComm = new SqlCommand("SELECT PRODUCT_ID,PRODUCT_NAME FROM dbo.TB_ECOMM_PRODUCT as a " +
-                    "inner join dbo.TB_ECOMM_SUB_CATEGORY as b on a.SUB_CATEGORY_ID=b.SUB_CATEGORY_ID " +
-                    "inner join dbo.TB_ECOMM_CATEGORY as c on c.CATEGORY_ID=b.CATEGORY_ID " +
-                    "WHERE c.CATEGORY_ID=@cat and PRODUCT_NAME LIKE @param+'%'", myConn);
+                SqlCommand objComm = new SqlCommand("SELECT PRODUCT_ID,PRODUCT_NAME FROM dbo.TB_ECOMM_PRODUCT " +
+                    "WHERE PRODUCT_NAME LIKE @param+'%'", myConn);
                 myConn.Open();
 
                 objComm.Parameters.AddWithValue("@param", param);
-                objComm.Parameters.AddWithValue("@cat", cat);
                 SqlDataReader reader = objComm.ExecuteReader();
 
                 while (reader.Read())
@@ -232,7 +163,6 @@ namespace APIRepository.InterfacesImpl
         {
             try
             {
-                var prod = entity.TB_ECOMM_PRODUCT.Find(cart.PRODUCT_ID);
             var chkUser = (from s in entity.TB_ECOMM_CART_ITEM where s.USER_ID == cart.USER_ID && s.PRODUCT_ID==cart.PRODUCT_ID select s).FirstOrDefault();
             if (chkUser == null)
             {
@@ -243,9 +173,6 @@ namespace APIRepository.InterfacesImpl
                         CI.USER_ID = cart.USER_ID;
                         CI.PRODUCT_ID = cart.PRODUCT_ID;
                         CI.CART_ITEM_QUANTITY = cart.CART_ITEM_QUANTITY;
-                        CI.CART_PRICE = prod.PRODUCT_PRICE * cart.CART_ITEM_QUANTITY;
-                        CI.CATEGORY_ID = cart.CATEGORY_ID;
-                        CI.WISHLIST = false;
                         CI.ADDED_DATE = DateTime.Now;
                         CI.MODIFIED_DATE = DateTime.Now;
                         entity.TB_ECOMM_CART_ITEM.Add(CI);
@@ -260,7 +187,6 @@ namespace APIRepository.InterfacesImpl
             {
                     TB_ECOMM_CART_ITEM CI = entity.TB_ECOMM_CART_ITEM.Find(chkUser.CART_ITEM_ID);
                     CI.CART_ITEM_QUANTITY += cart.CART_ITEM_QUANTITY;
-                    CI.CART_PRICE += prod.PRODUCT_PRICE * cart.CART_ITEM_QUANTITY;
                     if (CI.CART_ITEM_QUANTITY <= 5)
                     {
                         int id = this.entity.SaveChanges();
@@ -286,41 +212,6 @@ namespace APIRepository.InterfacesImpl
             { Status = "Error", Message = "Invalid Data." };
         }
 
-        public ApiResponse updatecart(TB_ECOMM_CART_ITEM cart)
-        {
-            try
-            {
-                //var prod = entity.TB_ECOMM_PRODUCT.Find(cart.USER_ID);
-                //var chkUser = (from s in entity.TB_ECOMM_CART_ITEM where s.USER_ID == cart.USER_ID && s.PRODUCT_ID == cart.PRODUCT_ID select s).FirstOrDefault();
-                //if (chkUser != null)
-                //{
-                    TB_ECOMM_CART_ITEM CI= entity.TB_ECOMM_CART_ITEM.Find(cart.CART_ITEM_ID);
-                    CI.CART_ITEM_QUANTITY = cart.CART_ITEM_QUANTITY;
-                    CI.CART_PRICE = CI.TB_ECOMM_PRODUCT.PRODUCT_PRICE * cart.CART_ITEM_QUANTITY;
-                    if (CI.CART_ITEM_QUANTITY <= 5)
-                    {
-                        int id = this.entity.SaveChanges();
-                        return new ApiResponse { Status = "Success", Message = "Item Added to Cart." };
-                    }
-                    else
-                        return new ApiResponse { Status = "Alert", Message = "Maximum 5 Items Can Add." };
-                //}
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                {
-                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                    {
-                        throw new Exception("Error" + validationError.ErrorMessage);
-                    }
-                    throw new Exception("Error" + entityValidationErrors.ValidationErrors);
-                }
-                throw new Exception("Error" + ex.Message);
-            }
-            return new ApiResponse
-            { Status = "Error", Message = "Invalid Data." };
-        }
         public object deletecart(long ID)
         {
             try
@@ -337,46 +228,5 @@ namespace APIRepository.InterfacesImpl
                 throw new Exception("Error" + ex.Message);
             }
         }
-
-        public object deleteallcart(long UID)
-        {
-            try
-            {
-                var item = entity.TB_ECOMM_CART_ITEM.Where(a=> a.USER_ID==UID).ToList();
-                foreach(var items in item)
-                {
-                    entity.TB_ECOMM_CART_ITEM.Remove(items);
-                }
-                
-
-                int id = this.entity.SaveChanges();
-                return UID + " -Removed";
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error" + ex.Message);
-            }
-        }
-
-        public object deleteallcart(long UID,long catid)
-        {
-            try
-            {
-                var item = entity.TB_ECOMM_CART_ITEM.Where(a => a.USER_ID == UID && a.CATEGORY_ID==catid).ToList();
-                foreach (var items in item)
-                {
-                    entity.TB_ECOMM_CART_ITEM.Remove(items);
-                }
-
-
-                int id = this.entity.SaveChanges();
-                return UID + " -Removed";
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error" + ex.Message);
-            }
-        }
-
     }
 }

@@ -12,6 +12,8 @@ namespace APIRepository.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ECOMM_DEVEntities : DbContext
     {
@@ -27,23 +29,25 @@ namespace APIRepository.Models
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TB_ECOMM_ACTIVITY_STATE> TB_ECOMM_ACTIVITY_STATE { get; set; }
+        public virtual DbSet<TB_ECOMM_USERS> TB_ECOMM_USERS { get; set; }
+        public virtual DbSet<TB_USERS_ROLES> TB_USERS_ROLES { get; set; }
         public virtual DbSet<TB_ECOMM_ADDRESS> TB_ECOMM_ADDRESS { get; set; }
         public virtual DbSet<TB_ECOMM_CART_ITEM> TB_ECOMM_CART_ITEM { get; set; }
         public virtual DbSet<TB_ECOMM_CATEGORY> TB_ECOMM_CATEGORY { get; set; }
+        public virtual DbSet<TB_ECOMM_COUPON> TB_ECOMM_COUPON { get; set; }
+        public virtual DbSet<TB_ECOMM_PRODUCT> TB_ECOMM_PRODUCT { get; set; }
+        public virtual DbSet<TB_ECOMM_PRODUCT_DETAILS> TB_ECOMM_PRODUCT_DETAILS { get; set; }
+        public virtual DbSet<TB_ECOMM_SUB_CATEGORY> TB_ECOMM_SUB_CATEGORY { get; set; }
         public virtual DbSet<TB_ECOMM_CITY> TB_ECOMM_CITY { get; set; }
         public virtual DbSet<TB_ECOMM_COUNTRY> TB_ECOMM_COUNTRY { get; set; }
-        public virtual DbSet<TB_ECOMM_COUPON> TB_ECOMM_COUPON { get; set; }
         public virtual DbSet<TB_ECOMM_DELIVERY_TYPE> TB_ECOMM_DELIVERY_TYPE { get; set; }
         public virtual DbSet<TB_ECOMM_ORDER> TB_ECOMM_ORDER { get; set; }
         public virtual DbSet<TB_ECOMM_ORDER_ITEM> TB_ECOMM_ORDER_ITEM { get; set; }
         public virtual DbSet<TB_ECOMM_PICKUP_STORES> TB_ECOMM_PICKUP_STORES { get; set; }
-        public virtual DbSet<TB_ECOMM_PRODUCT> TB_ECOMM_PRODUCT { get; set; }
-        public virtual DbSet<TB_ECOMM_PRODUCT_DETAILS> TB_ECOMM_PRODUCT_DETAILS { get; set; }
-        public virtual DbSet<TB_ECOMM_SUB_CATEGORY> TB_ECOMM_SUB_CATEGORY { get; set; }
-        public virtual DbSet<TB_ECOMM_USERS> TB_ECOMM_USERS { get; set; }
-        public virtual DbSet<TB_USERS_ROLES> TB_USERS_ROLES { get; set; }
-        public virtual DbSet<TB_ECOMM_SIGNUP_CONDITION_MASTER> TB_ECOMM_SIGNUP_CONDITION_MASTER { get; set; }
-        public virtual DbSet<TB_ECOMM_CARD_DETAILS> TB_ECOMM_CARD_DETAILS { get; set; }
-        public virtual DbSet<TB_ECOMM_PAYMENT_STATUS_DETAILS> TB_ECOMM_PAYMENT_STATUS_DETAILS { get; set; }
+    
+        public virtual ObjectResult<SP_ITEMSLIST_Result> SP_ITEMSLIST()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ITEMSLIST_Result>("SP_ITEMSLIST");
+        }
     }
 }

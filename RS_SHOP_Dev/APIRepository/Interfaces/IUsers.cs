@@ -12,7 +12,7 @@ namespace APIRepository.Interfaces
     //Author : Rakshit
     public interface IUsers
     {
-        SignupResponse Create(SignUp signUp);
+        ApiResponse Create(SignUp signUp);
         ApiResponse Createsm(SmSignUp smSignUp);
         LoginResponse CheckLogin(TB_ECOMM_USERS login);
         List<SignUp> GetUsers();

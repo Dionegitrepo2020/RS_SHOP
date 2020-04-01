@@ -9,6 +9,7 @@ namespace APIRepository.Models.Custom
     {
         public TB_ECOMM_PRODUCT product { get; set; }
         public TB_ECOMM_PRODUCT_DETAILS productDetail { get; set; }
+        public TB_ECOMM_CATEGORY category { get; set; }
         public TB_ECOMM_SUB_CATEGORY subcategory { get; set; }
     }
 }

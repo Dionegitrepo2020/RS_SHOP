@@ -15,14 +15,13 @@ namespace APIRepository.Models
     public partial class TB_ECOMM_ORDER_ITEM
     {
         public long ORDER_ITEM_ID { get; set; }
-        public long ORDER_ID { get; set; }
+        public Nullable<long> ORDER_ID { get; set; }
         public Nullable<long> PRODUCT_ID { get; set; }
         public Nullable<long> PRODUCT_QUANTITY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
-        public Nullable<decimal> PRODUCT_AMOUNT { get; set; }
     
-        public virtual TB_ECOMM_PRODUCT TB_ECOMM_PRODUCT { get; set; }
         public virtual TB_ECOMM_ORDER TB_ECOMM_ORDER { get; set; }
+        public virtual TB_ECOMM_PRODUCT TB_ECOMM_PRODUCT { get; set; }
     }
 }

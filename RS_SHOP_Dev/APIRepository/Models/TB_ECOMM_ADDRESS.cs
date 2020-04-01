@@ -25,7 +25,6 @@ namespace APIRepository.Models
         public string FULL_NAME { get; set; }
         public string ADDRESS1 { get; set; }
         public string ADDRESS2 { get; set; }
-        public string COUNTRY { get; set; }
         public string POST_CODE { get; set; }
         public string CITY { get; set; }
         public string PHONE { get; set; }
