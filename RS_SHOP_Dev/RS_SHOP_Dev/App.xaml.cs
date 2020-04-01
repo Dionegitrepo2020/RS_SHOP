@@ -22,7 +22,6 @@ namespace RS_SHOP_Dev
         public static bool IsUserLoggedIn { get; set; }
         public App()
         {
-            //test comment
             InitializeComponent();
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             if (!IsUserLoggedIn)
