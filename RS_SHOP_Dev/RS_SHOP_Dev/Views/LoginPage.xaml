@@ -7,8 +7,7 @@
              BackgroundColor="White"
              xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls"
-             NavigationPage.BackButtonTitle="Back">
+             xmlns:view="clr-namespace:RS_SHOP_Dev.Controls">
     
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">

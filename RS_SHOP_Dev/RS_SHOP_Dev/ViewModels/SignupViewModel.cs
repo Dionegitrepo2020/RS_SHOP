@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Services;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models;
@@ -67,26 +68,24 @@ namespace RS_SHOP_Dev.ViewModels
 
         private async Task SignupApiAsync(string ConditionId)
         {
-            IsBusy = true;
-            // await _apiServices.SignUpApiService();
-
-            //  await PopupNavigation.Instance.PopAsync();
-
-            var SignupStatus = await _apiServices.SignUpApiService(SignupModel.FullName,
-                       SignupModel.Password, SignupModel.UserEmail, _dateOfBirth.ToString("yyyy-MM-dd"), ConditionId, SignupModel.ParentName, SignupModel.ParentID);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(SignupStatus);
-            var accessToken = jwtDynamic.Value<string>("Message");
-            if (!(accessToken == "User SuccessFully Saved."))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(accessToken));
-                //   await Application.Current.MainPage.DisplayAlert("", accessToken, "Ok");
-            }
-            else
-            {
+                IsBusy = true;
+                var SignupStatus = await _apiServices.SignUpApiService(SignupModel.FullName,
+                           SignupModel.Password, SignupModel.UserEmail, _dateOfBirth.ToString("yyyy-MM-dd"), ConditionId, SignupModel.ParentName, SignupModel.ParentID);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(SignupStatus);
+                var accessToken = jwtDynamic.Value<string>("Message");
+                if (!(accessToken == "User SuccessFully Saved."))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(accessToken));
+                }
+                else
+                {
 
-                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                    await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                }
+                IsBusy = false;
             }
-            IsBusy = false;
         }
     }
 }

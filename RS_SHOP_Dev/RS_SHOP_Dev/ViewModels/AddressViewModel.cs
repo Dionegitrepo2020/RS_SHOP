@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Services;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.ShipAddressModel;
@@ -171,7 +172,8 @@ namespace RS_SHOP_Dev.ViewModels
 
         public async Task RemoveAddressData(int address_ID)
         {
-            ShipAddressList = await _apiServicesAdd.RemoveAddressAsync(address_ID);
+            if (CrossConnectivity.Current.IsConnected)
+                ShipAddressList = await _apiServicesAdd.RemoveAddressAsync(address_ID);
         }
 
 
@@ -185,19 +187,22 @@ namespace RS_SHOP_Dev.ViewModels
             shipAddressModel.CITY = City;
             shipAddressModel.PHONE = Phone;
             shipAddressModel.IS_DEFAULT = IsTrue;
-
-            var ResultContent = await _apiServicesAdd.SaveShipAddAsync(shipAddressModel);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
-            var Message = jwtDynamic.Value<string>("Message");
-            if (Message.Equals("Address Saved."))
-                MessagingCenter.Send<App>((App)Application.Current, "OnCategoryCreated");
-            await PopupNavigation.Instance.PopAsync();
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                var ResultContent = await _apiServicesAdd.SaveShipAddAsync(shipAddressModel);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(ResultContent);
+                var Message = jwtDynamic.Value<string>("Message");
+                if (Message.Equals("Address Saved."))
+                    MessagingCenter.Send<App>((App)Application.Current, "OnCategoryCreated");
+                await PopupNavigation.Instance.PopAsync();
+            }
         }
 
         //
         public async Task LoadAddressList(string userId)
         {
-            ShipAddressList = await _apiServicesAdd.LoadShipAddAsync(userId);
+            if (CrossConnectivity.Current.IsConnected)
+                ShipAddressList = await _apiServicesAdd.LoadShipAddAsync(userId);
         }
 
         public void LoadAddressOnPopup(ShipAddressModel shipAddressModel)

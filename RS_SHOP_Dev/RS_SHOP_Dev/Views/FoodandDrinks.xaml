@@ -12,12 +12,12 @@
     
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout BackgroundColor="White" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" BackgroundColor="{StaticResource BgColor}" Image="search" ImageAlignment="Right" Focused="SearchBox_Focused"
-                                BorderColor="{StaticResource TextColor}"    
+            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" Image="search" ImageAlignment="Right" Focused="SearchBox_Focused"
+                                BorderColor="{StaticResource BgColor}"    
                                 HorizontalTextAlignment="Center"
                                 Placeholder="{tr:Translate FoodSearch}"
                                 PlaceholderColor="{StaticResource TextColor}"
-                                TextColor="{StaticResource TextColor}"/>
+                                TextColor="{StaticResource BgColor}"/>
             <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
                            AbsoluteLayout.LayoutFlags="PositionProportional"
                            AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"/>

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Plugin.FacebookClient;
 using Plugin.FacebookClient.Abstractions;
 using Plugin.GoogleClient;
@@ -99,7 +100,7 @@ namespace RS_SHOP_Dev.ViewModels
             set => SignupModel.ConfirmPassword = value;
         }
 
-       
+
 
         public string ParentName
         {
@@ -113,16 +114,12 @@ namespace RS_SHOP_Dev.ViewModels
             set => SignupModel.ParentID = value;
         }
 
-
-
         //Condition
         private string _ConditionId = "0";
-       // private string _ConditionId { get; set; }
+        // private string _ConditionId { get; set; }
         public string ConditionId
         {
-
             get { return _ConditionId; }
-
             set
             {
                 _ConditionId = value;
@@ -130,19 +127,16 @@ namespace RS_SHOP_Dev.ViewModels
             }
         }
 
-        private  DateTime _dateOfBirth { get; set; }
-        public  DateTime DateOfBirth
+        private DateTime _dateOfBirth { get; set; }
+        public DateTime DateOfBirth
         {
-
             get { return _dateOfBirth; }
-
             set
             {
                 _dateOfBirth = value;
                 OnPropertyChanged();
             }
         }
-
 
         public ICommand OnLoginWithGoogleCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
@@ -152,129 +146,115 @@ namespace RS_SHOP_Dev.ViewModels
         public UsersViewModel(Page page)
         {
             _page = page;
-          
             LoginInCommand = new Command(async () => await LoginAsync());
-          //  SignUpCommand = new Command(async () => await SignupAsync());
             OnLoginWithFacebookCommand = new Command(async () => await LoginFacebookAsync());
             OnLoginWithGoogleCommand = new Command<AuthNetwork>(async (data) => await LoginAsync(data));
             _googleClientManager = CrossGoogleClient.Current;
             IsLoggedIn = false;
-
-            //Reset Password
             ForgotPasswordCommand = new Command(async () => await ForgotSync());
         }
-
-       
 
         private async Task LoginAsync()
         {
             if (!ValidationHelper.IsFormValid(LoginModel, _page)) { return; }
             await LoginApiAsync();
-
         }
 
         private async Task LoginApiAsync()
         {
-            IsBusy = true;
-            var contents = await _apiServices.LoginAsync(LoginModel.Email, LoginModel.Password);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
-            Message = jwtDynamic.Value<string>("Message");
-            var UserId= jwtDynamic.Value<string>("User_Id");
-            if (!(Message == "Login Successfully"))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
+                IsBusy = true;
+                var contents = await _apiServices.LoginAsync(LoginModel.Email, LoginModel.Password);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
+                Message = jwtDynamic.Value<string>("Message");
+                var UserId = jwtDynamic.Value<string>("User_Id");
+                if (!(Message == "Login Successfully"))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
+                }
+                else
+                {
+                    App.IsUserLoggedIn = true;
+                    Application.Current.Properties["USER_ID"] = UserId;
+                    await Application.Current.MainPage.Navigation.PushAsync(new Home(0));
+                }
+                IsBusy = false;
             }
-            else
-            {
-                
-                App.IsUserLoggedIn = true;
-                Application.Current.Properties["USER_ID"] = UserId;
-                await Application.Current.MainPage.Navigation.PushAsync(new Home(0));
-            }
-            IsBusy = false;
         }
 
-        
         public async Task SignupAsync()
         {
             if (!ValidationHelper.IsFormValid(SignupModel, _page)) { return; }
-
             await SignupApiAsync(ConditionId);
-           
         }
-
 
         //Signup Change
         private async Task SignupApiAsync(string ConditionId)
         {
-           
-            IsBusy = true;
-
-            var SignupStatus = await _apiServices.RegistrationAsync1(SignupModel.FullName,
-                        SignupModel.Password, SignupModel.UserEmail, SignupModel.DOB.ToString(), ConditionId, SignupModel.ParentName, SignupModel.ParentID);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(SignupStatus);
-            var accessToken = jwtDynamic.Value<string>("Message");
-            if (!(accessToken == "User SuccessFully Saved."))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(accessToken));
-                //   await Application.Current.MainPage.DisplayAlert("", accessToken, "Ok");
+                IsBusy = true;
+                var SignupStatus = await _apiServices.RegistrationAsync1(SignupModel.FullName,
+                            SignupModel.Password, SignupModel.UserEmail, SignupModel.DOB.ToString(), ConditionId, SignupModel.ParentName, SignupModel.ParentID);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(SignupStatus);
+                var accessToken = jwtDynamic.Value<string>("Message");
+                if (!(accessToken == "User SuccessFully Saved."))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(accessToken));
+                    //   await Application.Current.MainPage.DisplayAlert("", accessToken, "Ok");
+                }
+                else
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                }
+                IsBusy = false;
             }
-            else
-            {
-
-                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
-            }
-            IsBusy = false;
         }
-
 
         async Task LoginFacebookAsync()
         {
             try
             {
-
-                if (_facebookService.IsLoggedIn)
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    _facebookService.Logout();
-                }
-
-                EventHandler<FBEventArgs<string>> userDataDelegate = null;
-
-                userDataDelegate = async (object sender, FBEventArgs<string> e) =>
-                {
-                    if (e == null) return;
-
-                    switch (e.Status)
+                    if (_facebookService.IsLoggedIn)
                     {
-                        case FacebookActionStatus.Completed:
-                            var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
-                            var socialLoginData = new NetworkAuthData
-                            {
-                                Email = facebookProfile.Email,
-                                Name = $"{facebookProfile.FirstName} {facebookProfile.LastName}",
-                                Id = facebookProfile.Id
-                            };
-                            SignupModel.FullName = $"{facebookProfile.FirstName} {facebookProfile.LastName}";
-                            SignupModel.UserEmail = facebookProfile.Email;
-                            var contents = await _apiServices.RegistrationAsync(SignupModel.FullName,"", SignupModel.UserEmail);
-                            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
-                            var UserId = jwtDynamic.Value<string>("USER_ID");
-                            App.IsUserLoggedIn = true;
-                            Application.Current.Properties["USER_ID"] = UserId;
-                            await App.Current.MainPage.Navigation.PushAsync(new Home(0));
-                            break;
-                        case FacebookActionStatus.Canceled:
-                            break;
+                        _facebookService.Logout();
                     }
-
-                    _facebookService.OnUserData -= userDataDelegate;
-                };
-
-                _facebookService.OnUserData += userDataDelegate;
-
-                string[] fbRequestFields = { "email", "first_name", "gender", "last_name" };
-                string[] fbPermisions = { "email" };
-                await _facebookService.RequestUserDataAsync(fbRequestFields, fbPermisions);
+                    EventHandler<FBEventArgs<string>> userDataDelegate = null;
+                    userDataDelegate = async (object sender, FBEventArgs<string> e) =>
+                    {
+                        if (e == null) return;
+                        switch (e.Status)
+                        {
+                            case FacebookActionStatus.Completed:
+                                var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
+                                var socialLoginData = new NetworkAuthData
+                                {
+                                    Email = facebookProfile.Email,
+                                    Name = $"{facebookProfile.FirstName} {facebookProfile.LastName}",
+                                    Id = facebookProfile.Id
+                                };
+                                SignupModel.FullName = $"{facebookProfile.FirstName} {facebookProfile.LastName}";
+                                SignupModel.UserEmail = facebookProfile.Email;
+                                var contents = await _apiServices.RegistrationAsync(SignupModel.FullName, "", SignupModel.UserEmail);
+                                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
+                                var UserId = jwtDynamic.Value<string>("USER_ID");
+                                App.IsUserLoggedIn = true;
+                                Application.Current.Properties["USER_ID"] = UserId;
+                                await App.Current.MainPage.Navigation.PushAsync(new Home(0));
+                                break;
+                            case FacebookActionStatus.Canceled:
+                                break;
+                        }
+                        _facebookService.OnUserData -= userDataDelegate;
+                    };
+                    _facebookService.OnUserData += userDataDelegate;
+                    string[] fbRequestFields = { "email", "first_name", "gender", "last_name" };
+                    string[] fbPermisions = { "email" };
+                    await _facebookService.RequestUserDataAsync(fbRequestFields, fbPermisions);
+                }
             }
             catch (Exception ex)
             {
@@ -284,7 +264,8 @@ namespace RS_SHOP_Dev.ViewModels
 
         async Task LoginAsync(AuthNetwork authNetwork)
         {
-            await LoginGoogleAsync(authNetwork);
+            if (CrossConnectivity.Current.IsConnected)
+                await LoginGoogleAsync(authNetwork);
         }
         async Task LoginGoogleAsync(AuthNetwork authNetwork)
         {
@@ -333,7 +314,7 @@ namespace RS_SHOP_Dev.ViewModels
                 SignupModel.FullName = $"{googleUser.Name}";
                 SignupModel.UserEmail = googleUser.Email;
                 SignupModel.Password = "";
-                var contents = await _apiServices.RegistrationAsync(SignupModel.FullName,"", SignupModel.UserEmail);
+                var contents = await _apiServices.RegistrationAsync(SignupModel.FullName, "", SignupModel.UserEmail);
                 JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
                 var UserId = jwtDynamic.Value<string>("USER_ID");
                 //IsLoggedIn = true;
@@ -350,9 +331,7 @@ namespace RS_SHOP_Dev.ViewModels
             {
                 await PopupNavigation.Instance.PushAsync(new LoginAlert(loginEventArgs.Message));
             }
-
             _googleClientManager.OnLogin -= OnLoginCompleted;
-
         }
 
         public void Logout()
@@ -373,40 +352,44 @@ namespace RS_SHOP_Dev.ViewModels
         {
             if (!ValidationHelper.IsFormValid(ForgotPasswordModel, _page)) { return; }
             await ForgotApiAsync();
-
         }
 
         private async Task ForgotApiAsync()
         {
-            
-            IsBusy = true;
-            var SendMail = await _apiServices.ForgotAsync(ForgotPasswordModel);
-            if (SendMail.Contains("Reset password link has been sent to your email id."))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(SendMail));
-                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                IsBusy = true;
+                var SendMail = await _apiServices.ForgotAsync(ForgotPasswordModel);
+                if (SendMail.Contains("Reset password link has been sent to your email id."))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(SendMail));
+                    await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                }
+                else
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert("Something went wrong."));
+                }
+                IsBusy = false;
             }
-            else
-            {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert("Something went wrong."));
-            }
-            IsBusy = false;
         }
 
         public async Task ResetPasswordAsync(PasswordResetModel passwordResetModel)
         {
-            IsBusy = true;
-            var Message = await _apiServices.PasswordResetAsync(passwordResetModel);
-            if (Message.Contains("New password updated successfully"))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
-                await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                IsBusy = true;
+                var Message = await _apiServices.PasswordResetAsync(passwordResetModel);
+                if (Message.Contains("New password updated successfully"))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
+                    await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+                }
+                else
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert("Something went wrong."));
+                }
+                IsBusy = false;
             }
-            else
-            {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert("Something went wrong."));
-            }
-            IsBusy = false;
         }
     }
 }

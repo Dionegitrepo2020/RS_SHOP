@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Services;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.DropdownModel;
@@ -77,8 +78,11 @@ namespace RS_SHOP_Dev.ViewModels
 
         public async Task UpdateCountryCity(string countryName, string cityName, string userId)
         {
-            await _apiServices.UpdateCountryAsync(countryName, userId);
-            await _apiServices.UpdateCityAsync(cityName, userId);
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                await _apiServices.UpdateCountryAsync(countryName, userId);
+                await _apiServices.UpdateCityAsync(cityName, userId);
+            }
         }
 
         public string CityName
@@ -134,28 +138,32 @@ namespace RS_SHOP_Dev.ViewModels
         public async void LoadCountryList()
         {
             //  IsBusy = true;
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "country/listallcountry/", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var countryList = JsonConvert.DeserializeObject<List<Root>>(result);
-
-                List = new ObservableCollection<Root>(countryList);
-
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "country/listallcountry/", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var countryList = JsonConvert.DeserializeObject<List<Root>>(result);
+                    List = new ObservableCollection<Root>(countryList);
+                }
             }
         }
 
 
         public async void LoadCityList(int item)
         {
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "country/listcountry/" + item + "", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var citylist = JsonConvert.DeserializeObject<List<Root>>(result);
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "country/listcountry/" + item + "", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var citylist = JsonConvert.DeserializeObject<List<Root>>(result);
 
-                CityList = new ObservableCollection<Root>(citylist);
+                    CityList = new ObservableCollection<Root>(citylist);
 
+                }
             }
         }
 

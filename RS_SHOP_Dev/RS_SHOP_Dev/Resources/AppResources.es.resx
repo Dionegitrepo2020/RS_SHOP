@@ -463,6 +463,9 @@
   <data name="Wallet_Time" xml:space="preserve">
     <value>Hora</value>
   </data>
+  <data name="Wallet_Title" xml:space="preserve">
+    <value>Billetera</value>
+  </data>
   <data name="Wallet_User" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>

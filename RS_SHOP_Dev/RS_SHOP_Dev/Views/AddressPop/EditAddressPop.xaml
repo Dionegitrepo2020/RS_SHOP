@@ -23,35 +23,33 @@
     </pages:PopupPage.Animation>
 
     <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" CornerRadius="15" Margin="20" BackgroundColor="White" HasShadow="True" >
-        <StackLayout Padding="5">
+        <StackLayout>
             <Label Text="Edit Shipping Address" TextColor="{StaticResource TextColor}" FontSize="20" FontAttributes="Bold" />
+            <ScrollView>
+                <StackLayout Padding="5">
 
-            <Entry Placeholder="Contact Name" Text="{Binding ContactName}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+                    <Entry Placeholder="Contact Name" Text="{Binding ContactName}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
 
-            <Entry Placeholder="Contact Number" Text="{Binding Phone}" TextColor="{StaticResource TextColor}"  HorizontalOptions="FillAndExpand" Keyboard="Numeric" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-            <!--<StackLayout Orientation="Horizontal">
-                <StackLayout Orientation="Horizontal">
-                    <Entry Text="+" IsEnabled="False" TextColor="{StaticResource TextColor}" FontSize="15"/>
-                    <Entry Placeholder="Code" Keyboard="Numeric" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+                    <Entry Placeholder="Contact Number" Text="{Binding Phone}" TextColor="{StaticResource TextColor}"  HorizontalOptions="FillAndExpand" Keyboard="Numeric" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+                    
+                    <Entry Placeholder="Street Name" Text="{Binding Address1}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+
+                    <Entry Placeholder="Number" Text="{Binding Address2}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+
+                    <Entry Placeholder="Country" Text="{Binding Country}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+
+                    <Entry Placeholder="City" Text="{Binding City}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+
+                    <Entry Placeholder="Code" Text="{Binding PostCode}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Default Shipping Address" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}"  YAlign="Center" XAlign="Center" />
+                        <Switch x:Name="ssSwitch" IsToggled="{Binding IsTrue}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+
+
                 </StackLayout>
-                <Entry Placeholder="Contact Number" Text="{Binding Phone}"  HorizontalOptions="FillAndExpand" Keyboard="Numeric" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-            </StackLayout>-->
-
-            <Entry Placeholder="Street Name" Text="{Binding Address1}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-
-            <Entry Placeholder="Number" Text="{Binding Address2}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-
-            <Entry Placeholder="Country" Text="{Binding Country}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-
-            <Entry Placeholder="City" Text="{Binding City}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-
-            <Entry Placeholder="Code" Text="{Binding PostCode}" TextColor="{StaticResource TextColor}" PlaceholderColor="{StaticResource TextColor}" FontSize="15"/>
-
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Default Shipping Address" HorizontalOptions="StartAndExpand" FontAttributes="Bold" FontSize="Small" TextColor="{StaticResource TextColor}"  YAlign="Center" XAlign="Center" />
-                <Switch x:Name="ssSwitch" IsToggled="{Binding IsTrue}" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
-            </StackLayout>
-
+            </ScrollView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Button Text="Cancel" Clicked="Address_Cancel" TextColor="{StaticResource TextColor}" BackgroundColor="White" HorizontalOptions="StartAndExpand" />
                 <Button Text="OK" Command="{Binding SaveShipAddress}" CommandParameter="{Binding .}" TextColor="{StaticResource TextColor}" BackgroundColor="White" HorizontalOptions="EndAndExpand" />

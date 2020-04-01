@@ -29,7 +29,7 @@ namespace RS_SHOP_Dev
             {
                 MainPage = new NavigationPage(new IntroPage())
                 {
-                    BarBackgroundColor = Color.SkyBlue,
+                    BarBackgroundColor = Color.White,
                     BarTextColor = Color.FromHex("#00c3ff"),
                 };
             }

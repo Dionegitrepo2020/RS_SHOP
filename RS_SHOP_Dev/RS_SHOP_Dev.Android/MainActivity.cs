@@ -54,6 +54,7 @@ namespace RS_SHOP_Dev.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Plugin.InputKit.Platforms.Droid.Config.Init(this,savedInstanceState);
             Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, "ca-app-pub-2380813622558954/8286981453");
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             //
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

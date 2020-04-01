@@ -1105,6 +1105,15 @@ namespace RS_SHOP_Dev.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wallet.
+        /// </summary>
+        internal static string Wallet_Title {
+            get {
+                return ResourceManager.GetString("Wallet_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Name.
         /// </summary>
         internal static string Wallet_User {

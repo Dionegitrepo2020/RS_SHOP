@@ -1,6 +1,7 @@
 ﻿using APIRepository.Models.Custom;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using Rg.Plugins.Popup.Services;
 using RS_SHOP_Dev.Helpers;
 using RS_SHOP_Dev.Models.SearchFilterModel;
@@ -64,45 +65,52 @@ namespace RS_SHOP_Dev.ViewModels
         public async Task LoadItems(string categ, string subcateg, string priceFrom, string priceTo)
         {
             IsBusy = true;
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "item/listallitem/" + categ + "/" + subcateg + "/" + priceFrom + "/" + priceTo + "", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var ProdList = JsonConvert.DeserializeObject<List<Products>>(result);
-                ProductsList = new ObservableCollection<Products>(ProdList);
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "item/listallitem/" + categ + "/" + subcateg + "/" + priceFrom + "/" + priceTo + "", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var ProdList = JsonConvert.DeserializeObject<List<Products>>(result);
+                    ProductsList = new ObservableCollection<Products>(ProdList);
+                }
             }
             IsBusy = false;
         }
 
         public async Task AddToCart(string userId, string prodId, int quanity,string Cat_Id)
         {
-            TB_ECOMM_CART_ITEM tB_ECOMM_CART_ITEM = new TB_ECOMM_CART_ITEM();
-            tB_ECOMM_CART_ITEM.USER_ID = Convert.ToInt64(userId);
-            tB_ECOMM_CART_ITEM.PRODUCT_ID = Convert.ToInt64(prodId);
-            tB_ECOMM_CART_ITEM.CART_ITEM_QUANTITY = quanity;
-            tB_ECOMM_CART_ITEM.CATEGORY_ID = Convert.ToInt64(Cat_Id);
-
-            var contents = await _apiServices.AddtocartService(tB_ECOMM_CART_ITEM);
-            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
-            var accessToken = jwtDynamic.Value<string>("Status");
-            var Message = jwtDynamic.Value<string>("Message");
-            if (!(accessToken == "Success"))
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
+                TB_ECOMM_CART_ITEM tB_ECOMM_CART_ITEM = new TB_ECOMM_CART_ITEM();
+                tB_ECOMM_CART_ITEM.USER_ID = Convert.ToInt64(userId);
+                tB_ECOMM_CART_ITEM.PRODUCT_ID = Convert.ToInt64(prodId);
+                tB_ECOMM_CART_ITEM.CART_ITEM_QUANTITY = quanity;
+                tB_ECOMM_CART_ITEM.CATEGORY_ID = Convert.ToInt64(Cat_Id);
+
+                var contents = await _apiServices.AddtocartService(tB_ECOMM_CART_ITEM);
+                JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(contents);
+                var accessToken = jwtDynamic.Value<string>("Status");
+                var Message = jwtDynamic.Value<string>("Message");
+                if (!(accessToken == "Success"))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginAlert(Message));
+                }
             }
-                //await Application.Current.MainPage.Navigation.PushAsync(new ProductCartPage());
-                //await Application.Current.MainPage.DisplayAlert("", Message, "Ok");
         }
 
         public async void SearchItems(string term, string categ_Id)
         {
             IsBusy = true;
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "item/searchsuggest/" + term + "/"+categ_Id, string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var ProdList = JsonConvert.DeserializeObject<List<SearchItems>>(result);
-                SearchList = new ObservableCollection<SearchItems>(ProdList);
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "item/searchsuggest/" + term + "/" + categ_Id, string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var ProdList = JsonConvert.DeserializeObject<List<SearchItems>>(result);
+                    SearchList = new ObservableCollection<SearchItems>(ProdList);
+                }
             }
             IsBusy = false;
         }
@@ -110,12 +118,15 @@ namespace RS_SHOP_Dev.ViewModels
         public async Task FindItemByIdAsync(int pRODUCT_ID)
         {
             IsBusy = true;
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "item/listallitem/" + pRODUCT_ID + "", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var ProdList = JsonConvert.DeserializeObject<List<Products>>(result);
-                ProductsList = new ObservableCollection<Products>(ProdList);
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "item/listallitem/" + pRODUCT_ID + "", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var ProdList = JsonConvert.DeserializeObject<List<Products>>(result);
+                    ProductsList = new ObservableCollection<Products>(ProdList);
+                }
             }
             IsBusy = false;
         }

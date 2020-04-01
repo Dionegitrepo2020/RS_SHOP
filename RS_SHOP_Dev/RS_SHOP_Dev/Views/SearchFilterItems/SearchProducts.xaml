@@ -10,7 +10,7 @@
              x:Class="RS_SHOP_Dev.Views.SearchFilterItems.SearchProducts">
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" BackgroundColor="{StaticResource BgColor}" ClearButtonVisibility="WhileEditing"
+            <customControls:BoxedEntry x:Name="SearchBox" Margin="20,5,20,0" ClearButtonVisibility="WhileEditing"
                                 BorderColor="{StaticResource TextColor}"    
                                 HorizontalTextAlignment="Center"
                                 Placeholder="{tr:Translate FoodSearch}"

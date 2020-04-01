@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using RS_SHOP_Dev.Helpers;
 using System;
 using System.Collections.Generic;
@@ -105,29 +106,33 @@ namespace RS_SHOP_Dev.ViewModels
 
         public async void LoadCountryList()
         {
-          //  IsBusy = true;
-            using (var client = new HttpClient())
+            //  IsBusy = true;
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "country/listallcountry/", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var countryList = JsonConvert.DeserializeObject<List<City>>(result);
-
-                CountryList = new ObservableCollection<City>(countryList);
-               
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "country/listallcountry/", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var countryList = JsonConvert.DeserializeObject<List<City>>(result);
+                    CountryList = new ObservableCollection<City>(countryList);
+                }
             }
         }
 
 
         public async void LoadCityList(int item)
         {
-            using (var client = new HttpClient())
+            if (CrossConnectivity.Current.IsConnected)
             {
-                var uri = new Uri(string.Format(Constants.BaseUrl + "country/listcountry/" + item + "", string.Empty));
-                var result = await client.GetStringAsync(uri);
-                var citylist = JsonConvert.DeserializeObject<List<City>>(result);
+                using (var client = new HttpClient())
+                {
+                    var uri = new Uri(string.Format(Constants.BaseUrl + "country/listcountry/" + item + "", string.Empty));
+                    var result = await client.GetStringAsync(uri);
+                    var citylist = JsonConvert.DeserializeObject<List<City>>(result);
 
-                CityList = new ObservableCollection<City>(citylist);
+                    CityList = new ObservableCollection<City>(citylist);
 
+                }
             }
         }
 

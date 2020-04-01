@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              xmlns:tr="clr-namespace:RS_SHOP_Dev.Helpers"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             x:Class="RS_SHOP_Dev.Views.FoodDrinks.FoodDrinkCheckout">
+             x:Class="RS_SHOP_Dev.Views.FoodDrinks.FoodDrinkCheckout"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout Margin="10" VerticalOptions="FillAndExpand">
             <StackLayout BackgroundColor="{StaticResource BgColor}" Margin="10">
