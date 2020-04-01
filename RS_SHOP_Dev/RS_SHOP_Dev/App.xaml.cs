@@ -23,8 +23,6 @@ namespace RS_SHOP_Dev
         public App()
         {
 
-            //comment by Prakash
-            
             InitializeComponent();
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             if (!IsUserLoggedIn)
