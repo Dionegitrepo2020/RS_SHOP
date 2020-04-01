@@ -18,11 +18,11 @@ namespace RS_SHOP_Dev
 {
     public partial class App : Application
     {
+
         private readonly LoginSignupService _apiServices = new LoginSignupService();
         public static bool IsUserLoggedIn { get; set; }
         public App()
         {
-            //test comment
             InitializeComponent();
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             if (!IsUserLoggedIn)
